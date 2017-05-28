@@ -116,7 +116,7 @@ class Note < Content
 
   def short_link
     path = redirect.from_path
-    "#{prefix} #{path}"
+    "#{prefix}/#{path}"
   end
 
   def prefix

@@ -41,12 +41,12 @@ describe Note, type: :model do
 
         context 'with a blog that have a custome url shortener' do
           let(:url_shortener) { 'shor.tl' }
-          it { expect(note.short_link).to eq("#{url_shortener} #{note.redirect.from_path}") }
+          it { expect(note.short_link).to eq("#{url_shortener}/#{note.redirect.from_path}") }
         end
 
         context 'with a blog that does not have a custome url shortener' do
           let(:url_shortener) { nil }
-          it { expect(note.short_link).to eq("mybaseurl.net #{note.redirect.from_path}") }
+          it { expect(note.short_link).to eq("mybaseurl.net/#{note.redirect.from_path}") }
         end
       end
     end
