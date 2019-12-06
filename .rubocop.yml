@@ -72,10 +72,6 @@ Rails/ApplicationRecord:
   Exclude:
     - 'db/migrate/*'
 
-# TODO: Re-enable once advice is more targeted
-Rails/BulkChangeTable:
-  Enabled: false
-
 # The manifest and i18n tasks do not need environment
 Rails/RakeEnvironment:
   Exclude:
