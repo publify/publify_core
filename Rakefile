@@ -24,11 +24,5 @@ task default: :spec
 load "lib/tasks/manifest.rake"
 task default: "manifest:check"
 
-namespace :i18n do
-  desc "Check translation health"
-  task :health do
-    `i18n-tasks health`
-    abort("Translation problems found") unless $CHILD_STATUS.success?
-  end
-end
+load "lib/tasks/i18n.rake"
 task default: "i18n:health"
