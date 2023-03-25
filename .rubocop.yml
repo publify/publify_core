@@ -1,3 +1,9 @@
+inherit_from: .rubocop_todo.yml
+
+inherit_mode:
+  merge:
+    - Exclude
+
 require:
   - rubocop-performance
   - rubocop-rails
@@ -5,9 +11,9 @@ require:
 
 AllCops:
   Exclude:
-  - 'bin/*'
-  - 'spec/dummy/bin/*'
-  - 'spec/dummy/db/schema.rb'
+    - 'bin/*'
+    - 'spec/dummy/bin/*'
+    - 'spec/dummy/db/schema.rb'
   NewCops: enable
   TargetRubyVersion: 2.5
 
@@ -176,5 +182,3 @@ Style/TrailingCommaInHashLiteral:
 # Allow small arrays of words with quotes
 Style/WordArray:
   MinSize: 4
-
-inherit_from: .rubocop_todo.yml
