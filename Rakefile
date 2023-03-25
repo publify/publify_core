@@ -23,6 +23,3 @@ task default: :spec
 
 load "lib/tasks/manifest.rake"
 task default: "manifest:check"
-
-load "lib/tasks/i18n.rake"
-task default: "i18n:health"
