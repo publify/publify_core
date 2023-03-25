@@ -62,6 +62,8 @@ jobs:
           ruby-version: 2.7
           bundler-cache: true
           rubygems: latest
+      - name: Run RuboCop
+        run: bundle exec rubocop -P
       - name: Check manifest
         run: bundle exec rake manifest:check
       - name: Check translations
