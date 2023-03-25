@@ -16,20 +16,13 @@ class Admin::FeedbackController < Admin::BaseController
     @feedback = scoped_feedback.paginated(params[:page], this_blog.admin_display_elements)
   end
 
-  def destroy
-    @record = Feedback.find params[:id]
-
-    unless @record.article.user_id == current_user.id
-      return redirect_to admin_feedback_index_url unless current_user.admin?
+  def edit
+    @comment = Comment.find(params[:id])
+    @article = @comment.article
+    unless @article.access_by? current_user
+      redirect_to admin_feedback_index_url
+      nil
     end
-
-    begin
-      @record.destroy
-      flash[:success] = I18n.t("admin.feedback.destroy.success")
-    rescue ActiveRecord::RecordNotFound
-      flash[:error] = I18n.t("admin.feedback.destroy.error")
-    end
-    redirect_to action: "article", id: @record.article.id
   end
 
   def create
@@ -47,15 +40,6 @@ class Admin::FeedbackController < Admin::BaseController
     redirect_to action: "article", id: @article.id
   end
 
-  def edit
-    @comment = Comment.find(params[:id])
-    @article = @comment.article
-    unless @article.access_by? current_user
-      redirect_to admin_feedback_index_url
-      nil
-    end
-  end
-
   def update
     comment = Comment.find(params[:id])
     unless comment.article.access_by? current_user
@@ -69,6 +53,22 @@ class Admin::FeedbackController < Admin::BaseController
     else
       redirect_to action: "edit", id: comment.id
     end
+  end
+
+  def destroy
+    @record = Feedback.find params[:id]
+
+    unless @record.article.user_id == current_user.id
+      return redirect_to admin_feedback_index_url unless current_user.admin?
+    end
+
+    begin
+      @record.destroy
+      flash[:success] = I18n.t("admin.feedback.destroy.success")
+    rescue ActiveRecord::RecordNotFound
+      flash[:error] = I18n.t("admin.feedback.destroy.error")
+    end
+    redirect_to action: "article", id: @record.article.id
   end
 
   def article
