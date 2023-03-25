@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
   s.add_dependency "nokogiri", ">= 1.12.5"
   s.add_dependency "psych", "~> 4.0"
   s.add_dependency "rack", ">= 2.2.3"
-  s.add_dependency "rails", "~> 6.1.4"
+  s.add_dependency "rails", ">= 6.1.4", "< 7.1.0"
   s.add_dependency "rails_autolink", "~> 1.1.0"
   s.add_dependency "rails-i18n", "~> 6.0.0"
   s.add_dependency "rails-timeago", "~> 2.0"
