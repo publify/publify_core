@@ -19,7 +19,3 @@ unless blog.sidebars.any?
   StaticSidebar.create!(active_position: 3, blog_id: blog.id)
   MetaSidebar.create!(active_position: 4, blog_id: blog.id)
 end
-
-unless File.directory?("#{::Rails.root}/public/files")
-  Dir.mkdir("#{::Rails.root}/public/files")
-end
