@@ -14,18 +14,6 @@ class SidebarRegistry
       registered_sidebars.sort
     end
 
-    def register_sidebar_directory(plugins_root, paths)
-      separator = plugins_root.include?("/") ? "/" : "\\"
-
-      Dir.glob(File.join(plugins_root, "*_sidebar")).select do |file|
-        plugin_name = file.split(separator).last
-        register_sidebar plugin_name.classify
-        # TODO: Move Sidebars to app/models, and views to app/views so this can
-        # be simplified.
-        paths << File.join(plugins_root, plugin_name, "lib")
-      end
-    end
-
     private
 
     def registered_sidebars
