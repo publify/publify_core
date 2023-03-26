@@ -13,9 +13,6 @@ class BaseController < ApplicationController
 
   def set_paths
     prepend_view_path this_blog.current_theme.view_path
-    Dir.glob(File.join(::Rails.root.to_s, "lib", "*_sidebar/app/views")).select do |file|
-      append_view_path file
-    end
   end
 
   def fire_triggers
