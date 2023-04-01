@@ -19,9 +19,9 @@ class PublifyApp
           available from the author's site, but here's a short summary:
 
           * **Paragraphs**: Start a new paragraph by skipping a line.
-          * **Italics**: Put text in *italics* by enclosing it in either \* or
-            \_: `*italics*` turns into *italics*.
-          * **Bold**: Put text in **bold** by enclosing it in two \*s:
+          * **Italics**: Put text in *italics* by enclosing it in either * or
+            _: `*italics*` turns into *italics*.
+          * **Bold**: Put text in **bold** by enclosing it in two *s:
             `**bold**` turns into **bold**.
           * **Pre-formatted text**: Enclosing a short block of text in
             backquotes (&#96;) displays it in a monospaced font and converts HTML
