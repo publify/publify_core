@@ -9,7 +9,7 @@ RSpec.describe "shared/_atom_header.atom.builder", type: :view do
 
   describe "with no items" do
     it "shows publify with the current version as the generator" do
-      xml = ::Builder::XmlMarkup.new
+      xml = Builder::XmlMarkup.new
       xml.foo do
         render partial: "shared/atom_header",
                formats: [:atom], handlers: [:builder],

@@ -35,5 +35,15 @@ RSpec.describe TagSidebar do
         expect(result.values).to eq [75, 75, 150]
       end
     end
+
+    it "clamps sizes if tag frequencies deviate a lot from the mean" do
+      create :article, keywords: "foo, bar"
+      create :article, keywords: "foo, baz"
+      create :article, keywords: "foo, qux"
+      create :article, keywords: "foo, quuz"
+
+      result = sidebar.sizes
+      expect(result.values.uniq).to contain_exactly (2.0 / 3.0 * 100), 200
+    end
   end
 end
