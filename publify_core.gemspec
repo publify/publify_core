@@ -57,7 +57,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "pry"
   s.add_development_dependency "rails-controller-testing", "~> 1.0.1"
   s.add_development_dependency "rspec-rails", "~> 6.0"
-  s.add_development_dependency "rubocop", "~> 1.35.0"
+  s.add_development_dependency "rubocop", "~> 1.48.1"
   s.add_development_dependency "rubocop-performance", "~> 1.14.3"
   s.add_development_dependency "rubocop-rails", "~> 2.18.0"
   s.add_development_dependency "rubocop-rspec", "~> 2.12.1"
