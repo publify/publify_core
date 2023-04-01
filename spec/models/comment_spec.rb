@@ -287,7 +287,7 @@ RSpec.describe Comment, type: :model do
           blog.comment_text_filter = filter
 
           ActiveSupport::Deprecation.silence do
-            assert comment.html(:body) !~ /<script>/
+            assert comment.html(:body).exclude?("<script>")
           end
         end
       end

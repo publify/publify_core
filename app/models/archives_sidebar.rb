@@ -10,7 +10,7 @@ class ArchivesSidebar < Sidebar
 
   def self.date_funcs
     @date_funcs ||=
-      if /SQLite3Adapter/.match?(Content.connection.class.name)
+      if Content.connection.class.name.include?("SQLite3Adapter")
         ["strftime('%Y', published_at) as year", "strftime('%m', published_at) as month"]
       else
         ["extract(year from published_at) as year",
