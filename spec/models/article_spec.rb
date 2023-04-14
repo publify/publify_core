@@ -900,7 +900,7 @@ RSpec.describe Article, type: :model do
       let(:article) { build(:article, keywords: "foo") }
 
       it { expect(article.tags.size).to eq(1) }
-      it { expect(article.tags.first).to be_kind_of(Tag) }
+      it { expect(article.tags.first).to be_a(Tag) }
       it { expect(article.tags.first.name).to eq("foo") }
     end
 
