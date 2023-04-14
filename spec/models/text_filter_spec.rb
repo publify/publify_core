@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe TextFilter do
+RSpec.describe TextFilter, type: :model do
   describe "#filter_text" do
     it "works for markdown" do
       filter = described_class.markdown

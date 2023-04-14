@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe ArchivesSidebar do
+RSpec.describe ArchivesSidebar, type: :model do
   let(:sidebar) { described_class.new }
 
   it "is included in the list of available sidebars" do
