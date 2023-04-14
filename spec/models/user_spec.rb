@@ -21,12 +21,12 @@ RSpec.describe User, type: :model do
 
   describe "#active_for_authentication?" do
     it "is true for users in the state 'active'" do
-      user = build :user, state: "active"
+      user = build(:user, state: "active")
       expect(user).to be_active_for_authentication
     end
 
     it "is false for users in the state 'inactive'" do
-      user = build :user, state: "inactive"
+      user = build(:user, state: "inactive")
       expect(user).not_to be_active_for_authentication
     end
   end
@@ -86,15 +86,15 @@ RSpec.describe User, type: :model do
     end
 
     it "does not allow duplicate logins when updating a user" do
-      create :user, login: "foo"
-      bar = create :user, login: "bar"
+      create(:user, login: "foo")
+      bar = create(:user, login: "bar")
 
       expect(bar).not_to allow_value("foo").for(:login)
     end
 
     it "does not allow duplicate emails when updating a user" do
-      create :user, email: "foo@foo.com"
-      bar = create :user, email: "bar@bar.com"
+      create(:user, email: "foo@foo.com")
+      bar = create(:user, email: "bar@bar.com")
 
       expect(bar).not_to allow_value("foo@foo.com").for(:email)
     end

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.feature "Drafting articles", type: :feature do
-  let(:admin) { create :user, :as_admin }
+  let(:admin) { create(:user, :as_admin) }
 
   before do
     load Rails.root.join("db/seeds.rb")

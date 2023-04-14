@@ -4,7 +4,7 @@ require "rails_helper"
 require "publify_core/testing_support/dns_mock"
 
 RSpec.describe Comment, type: :model do
-  let(:blog) { build_stubbed :blog }
+  let(:blog) { build_stubbed(:blog) }
 
   let(:published_article) { build_stubbed(:article, published_at: 1.hour.ago, blog: blog) }
 
@@ -56,7 +56,7 @@ RSpec.describe Comment, type: :model do
     end
 
     it "does not save when article comment window is closed" do
-      article = build :article, published_at: 1.year.ago
+      article = build(:article, published_at: 1.year.ago)
       article.blog.sp_article_auto_close = 30
       comment = build(:comment, author: "Old Spammer", body: "Old trackback body",
                                 article: article)
@@ -71,7 +71,7 @@ RSpec.describe Comment, type: :model do
     end
 
     it "saves a valid comment" do
-      c = build :comment
+      c = build(:comment)
       expect(c.save).to be_truthy
       expect(c.errors).to be_empty
     end
@@ -83,25 +83,25 @@ RSpec.describe Comment, type: :model do
     end
 
     it "generates guid" do
-      c = build :comment, guid: nil
+      c = build(:comment, guid: nil)
       c.save!
       expect(c.guid.size).to be > 15
     end
 
     it "preserves urls starting with https://" do
-      c = build :comment, url: "https://example.com/"
+      c = build(:comment, url: "https://example.com/")
       c.save
       expect(c.url).to eq("https://example.com/")
     end
 
     it "preserves urls starting with http://" do
-      c = build :comment, url: "http://example.com/"
+      c = build(:comment, url: "http://example.com/")
       c.save
       expect(c.url).to eq("http://example.com/")
     end
 
     it "prepends http:// to urls without protocol" do
-      c = build :comment, url: "example.com"
+      c = build(:comment, url: "example.com")
       c.save
       expect(c.url).to eq("http://example.com")
     end
@@ -196,7 +196,7 @@ RSpec.describe Comment, type: :model do
 
   describe "change state" do
     it "becomes unpublished if withdrawn" do
-      c = build :comment
+      c = build(:comment)
       expect(c).to be_published
       c.withdraw!
       expect(c).not_to be_published
@@ -213,7 +213,7 @@ RSpec.describe Comment, type: :model do
   end
 
   it "has good default filter" do
-    create :blog, text_filter: "markdown", comment_text_filter: "markdown"
+    create(:blog, text_filter: "markdown", comment_text_filter: "markdown")
     a = create(:comment)
     expect(a.default_text_filter.name).to eq "markdown"
   end

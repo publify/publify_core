@@ -8,8 +8,8 @@ RSpec.describe XmlController, type: :controller do
   end
 
   describe "#sitemap" do
-    let(:article) { create :article }
-    let(:tag) { create :tag }
+    let(:article) { create(:article) }
+    let(:tag) { create(:tag) }
 
     before do
       article.tags = [tag]

@@ -5,7 +5,7 @@ require "publify_core/testing_support/dns_mock"
 
 RSpec.describe Trackback, type: :model do
   describe "validations" do
-    let(:blog) { build_stubbed :blog }
+    let(:blog) { build_stubbed(:blog) }
     let(:trackback) { described_class.new }
 
     it "allows an article with open trackback window" do

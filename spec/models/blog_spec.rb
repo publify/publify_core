@@ -53,7 +53,7 @@ RSpec.describe Blog, type: :model do
 
   describe "The first blog" do
     before do
-      @blog = create :blog
+      @blog = create(:blog)
     end
 
     it "allows another blog to be created" do
@@ -229,7 +229,7 @@ RSpec.describe Blog, type: :model do
 
   describe "#humans" do
     context "default value" do
-      let(:blog) { create :blog }
+      let(:blog) { create(:blog) }
 
       it { expect(blog.humans).not_to be_nil }
     end

@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe ArticlesController, type: :controller do
   describe "#tag" do
     let!(:blog) { create(:blog) }
-    let!(:user) { create :user }
+    let!(:user) { create(:user) }
 
     it "redirects to TagsContoller#index" do
       get :tag
@@ -16,7 +16,7 @@ RSpec.describe ArticlesController, type: :controller do
 
   describe "#index" do
     let!(:blog) { create(:blog) }
-    let!(:user) { create :user }
+    let!(:user) { create(:user) }
 
     context "without any parameters" do
       let!(:article) { create(:article) }
@@ -129,7 +129,7 @@ RSpec.describe ArticlesController, type: :controller do
     render_views
 
     let!(:blog) { create(:blog) }
-    let!(:user) { create :user }
+    let!(:user) { create(:user) }
     let!(:matching_article) { create(:article, body: "public foobar") }
     let!(:not_matching_article) { create(:article, body: "barbaz") }
     let!(:protected_article) do
@@ -202,10 +202,10 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe "#archives" do
-    let(:blog) { create :blog }
+    let(:blog) { create(:blog) }
 
     context "for an archive with several articles" do
-      let!(:articles) { create_list :article, 3 }
+      let!(:articles) { create_list(:article, 3) }
 
       before do
         get "archives"

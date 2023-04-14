@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe Sidebar, type: :model do
   describe "#ordered_sidebars" do
-    let(:blog) { create :blog }
+    let(:blog) { create(:blog) }
 
     context "with several sidebars with different positions" do
       let(:search_sidebar) { SearchSidebar.new(staged_position: 2, blog: blog) }

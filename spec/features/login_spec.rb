@@ -11,7 +11,7 @@ RSpec.feature "Logging in", type: :feature do
       to_return(status: 200, body: "", headers: {})
     load Rails.root.join("db/seeds.rb")
     Blog.first.update blog_name: "Awesome!", base_url: "http://www.example.com/"
-    create :user, :as_admin, login: "admin", password: strong_password
+    create(:user, :as_admin, login: "admin", password: strong_password)
   end
 
   scenario "Admin logs in" do

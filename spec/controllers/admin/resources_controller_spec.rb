@@ -7,7 +7,7 @@ RSpec.describe Admin::ResourcesController, type: :controller do
 
   before do
     create(:blog)
-    admin = create :user, :as_admin
+    admin = create(:user, :as_admin)
     sign_in admin
   end
 

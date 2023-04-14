@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Admin::UsersController, type: :controller do
-  let!(:blog) { create :blog }
+  let!(:blog) { create(:blog) }
   let(:admin) { create(:user, :as_admin) }
   let(:publisher) { create(:user, :as_publisher) }
   let(:contributor) { create(:user, :as_contributor) }

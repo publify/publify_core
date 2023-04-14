@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "feedback/index.rss.builder", type: :view do
   describe "rendering feedback" do
-    let(:article) { build_stubbed :article }
+    let(:article) { build_stubbed(:article) }
     let(:comment) do
       build_stubbed(:comment,
                     article: article,

@@ -36,7 +36,7 @@ RSpec.describe Admin::RedirectsController, type: :controller do
       end
 
       it "renders properly with redirects present" do
-        create :redirect
+        create(:redirect)
         expect { get :index }.not_to raise_error
       end
     end

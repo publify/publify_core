@@ -33,7 +33,7 @@ RSpec.describe TagsController, type: :controller do
 
     describe "with some articles" do
       before do
-        @articles = create_list :article, 2
+        @articles = create_list(:article, 2)
         @tag.contents << @articles
       end
 
