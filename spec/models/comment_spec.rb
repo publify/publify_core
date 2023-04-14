@@ -233,7 +233,8 @@ RSpec.describe Comment, type: :model do
     let!(:presumed_spam_comment) { create(:comment, state: "presumed_spam") }
 
     it "returns all comment that not_spam" do
-      expect(described_class.not_spam).to match_array [ham_comment, presumed_spam_comment]
+      expect(described_class.not_spam).to contain_exactly(ham_comment,
+                                                          presumed_spam_comment)
     end
   end
 

@@ -21,7 +21,7 @@ RSpec.describe XmlController, type: :controller do
     end
 
     it "includes articles and tags as items" do
-      expect(assigns(:items)).to match_array [article, tag]
+      expect(assigns(:items)).to contain_exactly(article, tag)
     end
   end
 end

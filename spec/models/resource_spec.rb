@@ -22,7 +22,7 @@ RSpec.describe Resource, type: :model do
     end
 
     it "creates three image versions" do
-      expect(img_resource.upload.versions.keys).to match_array [:thumb, :medium, :avatar]
+      expect(img_resource.upload.versions.keys).to contain_exactly(:thumb, :medium, :avatar)
     end
 
     it "gives the correct url for the attachment" do

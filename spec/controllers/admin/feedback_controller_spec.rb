@@ -78,8 +78,8 @@ RSpec.describe Admin::FeedbackController, type: :controller do
         let(:params) { { only: "unapproved" } }
 
         it {
-          expect(assigns(:feedback)).to match_array([unapproved, presumed_ham,
-                                                     presumed_spam])
+          expect(assigns(:feedback)).to contain_exactly(unapproved, presumed_ham,
+                                                        presumed_spam)
         }
       end
 
@@ -98,7 +98,7 @@ RSpec.describe Admin::FeedbackController, type: :controller do
       context "presumed_ham" do
         let(:params) { { only: "presumed_ham" } }
 
-        it { expect(assigns(:feedback)).to match_array([unapproved, presumed_ham]) }
+        it { expect(assigns(:feedback)).to contain_exactly(unapproved, presumed_ham) }
       end
 
       context "with an empty page params" do
@@ -120,7 +120,7 @@ RSpec.describe Admin::FeedbackController, type: :controller do
           expect(response).to be_successful
           expect(response).to render_template("article")
           expect(assigns(:article)).to eq(article)
-          expect(assigns(:feedback)).to match_array [ham, spam]
+          expect(assigns(:feedback)).to contain_exactly(ham, spam)
         end
       end
 
@@ -137,7 +137,7 @@ RSpec.describe Admin::FeedbackController, type: :controller do
           expect(response).to be_successful
           expect(response).to render_template("article")
           expect(assigns(:article)).to eq(article)
-          expect(assigns(:feedback)).to match_array [spam]
+          expect(assigns(:feedback)).to eq [spam]
         end
       end
 
@@ -147,7 +147,7 @@ RSpec.describe Admin::FeedbackController, type: :controller do
           expect(response).to be_successful
           expect(response).to render_template("article")
           expect(assigns(:article)).to eq(article)
-          expect(assigns(:feedback)).to match_array [ham]
+          expect(assigns(:feedback)).to eq [ham]
         end
       end
 

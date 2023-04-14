@@ -296,7 +296,7 @@ RSpec.describe Article, type: :model do
 
       a = build(:article)
       users = a.interested_users
-      expect(users).to match_array [alice, henri]
+      expect(users).to contain_exactly(alice, henri)
     end
   end
 
@@ -819,7 +819,7 @@ RSpec.describe Article, type: :model do
       create(:article, published_at: Date.new(2010, 11, 23))
       create(:article, published_at: Date.new(2002, 4, 9))
       result = described_class.publication_months
-      expect(result).to match_array [["2010-11"], ["2002-04"]]
+      expect(result).to contain_exactly(["2010-11"], ["2002-04"])
     end
   end
 
