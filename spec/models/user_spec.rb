@@ -107,7 +107,8 @@ RSpec.describe User, type: :model do
 
   describe "#initialize" do
     it "accepts a settings field in its parameter hash" do
-      described_class.new("firstname" => "foo")
+      user = described_class.new("firstname" => "foo")
+      expect(user.firstname).to eq "foo"
     end
   end
 

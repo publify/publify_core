@@ -88,7 +88,8 @@ RSpec.describe Article, type: :model do
 
   describe "#initialize" do
     it "accepts a settings field in its parameter hash" do
-      blog.articles.build("password" => "foo")
+      article = blog.articles.build("password" => "foo")
+      expect(article.password).to eq "foo"
     end
   end
 
@@ -701,6 +702,7 @@ RSpec.describe Article, type: :model do
 
     it "do nothing with nil given" do
       article = build(:article)
+      expect(article).not_to receive(:save_attachment!)
       article.save_attachments!(nil)
     end
   end

@@ -5,7 +5,8 @@ require "rails_helper"
 RSpec.describe Blog, type: :model do
   describe "#initialize" do
     it "accepts a settings field in its parameter hash" do
-      described_class.new("blog_name" => "foo")
+      blog = described_class.new("blog_name" => "foo")
+      expect(blog.blog_name).to eq "foo"
     end
   end
 
