@@ -269,9 +269,8 @@ RSpec.describe Article, type: :model do
   end
 
   it "test_triggers_are_dependent" do
-    # TODO: Needs a fix for Rails ticket #5105: has_many: Dependent deleting
-    # does not work with STI
-    skip
+    # TODO: Dependent deleting does not work with STI
+    skip "dependent deleting does not work with STI"
     art = blog.articles.create!(title: "title", body: "body",
                                 published_at: 1.hour.from_now)
     expect(Trigger.count).to eq 1

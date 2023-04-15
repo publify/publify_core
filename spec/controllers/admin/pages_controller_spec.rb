@@ -78,7 +78,7 @@ RSpec.describe Admin::PagesController, type: :controller do
 
       it "creates a page published in the future without a redirect" do
         # TODO: published_at parameter is currently ignored
-        skip
+        skip "published_at parameter is currently ignored"
         post :create, params: { "page" => base_page(published_at: 1.hour.from_now.to_s) }
         expect(assigns(:page).redirect).to be_nil
       end
