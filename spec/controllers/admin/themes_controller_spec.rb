@@ -17,18 +17,18 @@ RSpec.describe Admin::ThemesController, type: :controller do
     end
 
     it "assigns @themes for the :index action" do
-      assert_response :success
+      expect(response).to be_successful
       expect(assigns(:themes)).not_to be_nil
     end
   end
 
   it "redirects to :index after the :switchto action" do
     post :switchto, params: { theme: "typographic" }
-    assert_response :redirect, action: "index"
+    expect(response).to redirect_to action: "index"
   end
 
   it "returns success for the :preview action" do
     get :preview, params: { theme: "plain" }
-    assert_response :success
+    expect(response).to be_successful
   end
 end

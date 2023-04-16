@@ -207,7 +207,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
         post :create,
              params: { article: { title: "another test", body: body, extended: extended } }
 
-        assert_response :redirect, action: "index"
+        expect(response).to redirect_to action: "index"
 
         new_article = Article.order(created_at: :desc).first
 
@@ -393,7 +393,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
         body = "another *markdown* test"
         put :update, params: { id: art_id,
                                article: { body: body, text_filter_name: "markdown" } }
-        assert_response :redirect, action: "show", id: art_id
+        expect(response).to redirect_to action: "index"
 
         article.reload
         expect(article.text_filter.name).to eq("markdown")
@@ -406,7 +406,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
         put :update, params: { "id" => article.id, "article" => {
           "body_and_extended" => "foo<!--more-->bar<!--more-->baz",
         } }
-        assert_response :redirect
+        expect(response).to redirect_to action: "index"
         article.reload
         expect(article.body).to eq("foo")
         expect(article.extended).to eq("bar<!--more-->baz")
@@ -416,7 +416,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
         put :update, params: { "id" => article.id, "article" => {
           "password" => "foobar",
         } }
-        assert_response :redirect
+        expect(response).to redirect_to action: "index"
         article.reload
         expect(article.password).to eq("foobar")
       end

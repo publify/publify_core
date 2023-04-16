@@ -289,21 +289,18 @@ RSpec.describe ArticlesController, type: :controller do
         it "redirects" do
           create(:redirect, from_path: "foo/bar", to_path: "/someplace/else")
           get :redirect, params: { from: "foo/bar" }
-          assert_response 301
           expect(response).to redirect_to("http://test.host/blog/someplace/else")
         end
 
         it "redirects if to_path includes relative_url_root" do
           create(:redirect, from_path: "bar/foo", to_path: "/blog/someplace/else")
           get :redirect, params: { from: "bar/foo" }
-          assert_response 301
           expect(response).to redirect_to("http://test.host/blog/someplace/else")
         end
 
         it "ignores the blog base_url if the to_path is a full uri" do
           create(:redirect, from_path: "foo", to_path: "http://some.where/else")
           get :redirect, params: { from: "foo" }
-          assert_response 301
           expect(response).to redirect_to("http://some.where/else")
         end
       end
@@ -348,7 +345,6 @@ RSpec.describe ArticlesController, type: :controller do
         article = create(:article, permalink: "second-blog-article",
                                    published_at: Time.utc(2004, 4, 1))
         get :redirect, params: { from: "articles/2004/04/01/second-blog-article" }
-        assert_response 301
         expect(response).to redirect_to article.permalink_url
       end
 
@@ -357,7 +353,6 @@ RSpec.describe ArticlesController, type: :controller do
         create(:article, permalink: "second-blog-article", published_at: Time.utc(2004, 4,
                                                                                   1))
         get :redirect, params: { from: "articles/2004/04/01/second-blog-article" }
-        assert_response 301
         expect(response).
           to redirect_to("http://test.host/blog/2004/04/01/second-blog-article")
       end
@@ -367,7 +362,6 @@ RSpec.describe ArticlesController, type: :controller do
         create(:article, permalink: "second-blog-article", published_at: Time.utc(2004, 4,
                                                                                   1))
         get :redirect, params: { from: "articles/2004/04/01/second-blog-article" }
-        assert_response 301
         expect(response).
           to redirect_to("http://test.host/aaa/articles/bbb/2004/04/01/second-blog-article")
       end

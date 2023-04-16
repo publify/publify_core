@@ -47,7 +47,7 @@ RSpec.describe Admin::RedirectsController, type: :controller do
       expect do
         post :create, params: { "redirect" => { from_path: "some/place",
                                                 to_path: "somewhere/else" } }
-        assert_response :redirect, action: "index"
+        expect(response).to redirect_to action: "index"
       end.to change(Redirect, :count)
     end
 
@@ -55,7 +55,7 @@ RSpec.describe Admin::RedirectsController, type: :controller do
       expect do
         post :create, params: { "redirect" => { from_path: "",
                                                 to_path: "somewhere/different" } }
-        assert_response :redirect, action: "index"
+        expect(response).to redirect_to action: "index"
       end.to change(Redirect, :count)
     end
   end
@@ -77,7 +77,7 @@ RSpec.describe Admin::RedirectsController, type: :controller do
       @test_id = create(:redirect).id
       post :update, params: { id: @test_id, redirect: { from_path: "somewhere/over",
                                                         to_path: "the/rainbow" } }
-      assert_response :redirect, action: "index"
+      expect(response).to redirect_to action: "index"
       expect(Redirect.count).to eq(1)
       expect(Redirect.first.from_path).to eq("somewhere/over")
       expect(Redirect.first.to_path).to eq("the/rainbow")
@@ -92,7 +92,7 @@ RSpec.describe Admin::RedirectsController, type: :controller do
 
     it "redirects to index" do
       post :destroy, params: { id: @test_id }
-      assert_response :redirect, action: "index"
+      expect(response).to redirect_to action: "index"
     end
 
     it "noes longer exist" do

@@ -51,7 +51,7 @@ RSpec.describe Admin::PostTypesController, type: :controller do
     it "updates a post_type and redirect to #index" do
       @test_id = create(:post_type).id
       post :update, params: { id: @test_id, post_type: { name: "another name" } }
-      assert_response :redirect, action: "index"
+      expect(response).to redirect_to action: "index"
       expect(PostType.count).to eq(1)
       expect(PostType.first.name).to eq("another name")
     end

@@ -7,7 +7,7 @@ RSpec.describe ThemeController, type: :controller do
 
   it "test_stylesheets" do
     get :stylesheets, params: { filename: "theme.css" }
-    assert_response :success
+    expect(response).to be_successful
     expect(@response.media_type).to eq "text/css"
     expect(@response.charset).to eq "utf-8"
     expect(@response.headers["Content-Disposition"]).
@@ -16,7 +16,7 @@ RSpec.describe ThemeController, type: :controller do
 
   it "test_javascripts" do
     get :javascripts, params: { filename: "theme.js" }
-    assert_response :success
+    expect(response).to be_successful
     expect(@response.media_type).to eq "text/javascript"
     expect(@response.charset).to eq "utf-8"
     expect(@response.headers["Content-Disposition"]).
