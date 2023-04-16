@@ -20,7 +20,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     it "renders a list of users" do
       get :index
-      assert_template "index"
+      expect(response).to render_template "index"
       expect(assigns(:users)).not_to be_nil
     end
 
@@ -41,7 +41,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     it "renders the new template" do
       get :new
-      assert_template "new"
+      expect(response).to render_template "new"
     end
   end
 
