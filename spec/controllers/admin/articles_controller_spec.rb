@@ -6,7 +6,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
   render_views
 
   before do
-    create :blog
+    create(:blog)
   end
 
   describe "index" do

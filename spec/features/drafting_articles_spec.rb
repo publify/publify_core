@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.feature "Drafting articles", type: :feature do
-  let(:admin) { create :user, :as_admin }
+  let(:admin) { create(:user, :as_admin) }
 
   before do
     load Rails.root.join("db/seeds.rb")
@@ -22,7 +22,7 @@ RSpec.feature "Drafting articles", type: :feature do
       click_button I18n.t("admin.articles.form.publish")
     end
 
-    find('a[href="/admin/articles/1/edit"]').click
+    click_link href: "/admin/articles/1/edit"
     fill_in :article_title, with: "This is the draft updated title"
     click_button I18n.t("admin.articles.form.save_as_draft")
 

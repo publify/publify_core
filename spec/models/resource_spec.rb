@@ -4,8 +4,8 @@ require "rails_helper"
 
 RSpec.describe Resource, type: :model do
   describe "#upload" do
-    let(:blog) { create :blog }
-    let(:resource) { create :resource, blog: blog }
+    let(:blog) { create(:blog) }
+    let(:resource) { create(:resource, blog: blog) }
     let(:img_resource) do
       described_class.create blog: blog,
                              upload: file_upload("testfile.png", "image/png")
@@ -22,7 +22,7 @@ RSpec.describe Resource, type: :model do
     end
 
     it "creates three image versions" do
-      expect(img_resource.upload.versions.keys).to match_array [:thumb, :medium, :avatar]
+      expect(img_resource.upload.versions.keys).to contain_exactly(:thumb, :medium, :avatar)
     end
 
     it "gives the correct url for the attachment" do

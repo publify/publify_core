@@ -25,7 +25,7 @@ RSpec.describe Admin::RedirectsController, type: :controller do
       create(:article)
       redirect = create(:redirect)
       get :index
-      expect(assigns(:redirects)).to match_array [redirect]
+      expect(assigns(:redirects)).to eq [redirect]
     end
 
     context "when rendering the view" do
@@ -36,7 +36,7 @@ RSpec.describe Admin::RedirectsController, type: :controller do
       end
 
       it "renders properly with redirects present" do
-        create :redirect
+        create(:redirect)
         expect { get :index }.not_to raise_error
       end
     end

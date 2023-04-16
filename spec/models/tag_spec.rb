@@ -114,7 +114,7 @@ RSpec.describe Tag, type: :model do
         let(:article) { create(:article, keywords: "foo") }
 
         it { expect(article.tags.size).to eq(1) }
-        it { expect(article.tags.first).to be_kind_of(described_class) }
+        it { expect(article.tags.first).to be_a(described_class) }
         it { expect(article.tags.first.name).to eq("foo") }
       end
 
@@ -122,7 +122,7 @@ RSpec.describe Tag, type: :model do
         let(:article) { create(:article, keywords: "lang:fr") }
 
         it { expect(article.tags.size).to eq(1) }
-        it { expect(article.tags.first).to be_kind_of(described_class) }
+        it { expect(article.tags.first).to be_a(described_class) }
         it { expect(article.tags.first.name).to eq("lang-fr") }
       end
 

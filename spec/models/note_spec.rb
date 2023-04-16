@@ -121,7 +121,7 @@ RSpec.describe Note, type: :model do
 
       context "with a more than 140 char note" do
         let(:note) do
-          create :note, body: <<~TXT
+          create(:note, body: <<~TXT)
             A big message that contains more than 140 char is not too
             hard to do. You only need to speak as a french guy, a lot to
             say nothing. And that is  probably the best way to write more
@@ -165,7 +165,7 @@ RSpec.describe Note, type: :model do
     end
 
     describe "twitter_message" do
-      let(:blog) { create :blog, base_url: "http://myblog.net" }
+      let(:blog) { create(:blog, base_url: "http://myblog.net") }
       let(:note) { create(:note, blog: blog, body: tweet) }
 
       context "with a short simple message" do

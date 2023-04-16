@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe ArticlesController, type: :controller do
   describe "#tag" do
     let!(:blog) { create(:blog) }
-    let!(:user) { create :user }
+    let!(:user) { create(:user) }
 
     it "redirects to TagsContoller#index" do
       get :tag
@@ -16,7 +16,7 @@ RSpec.describe ArticlesController, type: :controller do
 
   describe "#index" do
     let!(:blog) { create(:blog) }
-    let!(:user) { create :user }
+    let!(:user) { create(:user) }
 
     context "without any parameters" do
       let!(:article) { create(:article) }
@@ -129,7 +129,7 @@ RSpec.describe ArticlesController, type: :controller do
     render_views
 
     let!(:blog) { create(:blog) }
-    let!(:user) { create :user }
+    let!(:user) { create(:user) }
     let!(:matching_article) { create(:article, body: "public foobar") }
     let!(:not_matching_article) { create(:article, body: "barbaz") }
     let!(:protected_article) do
@@ -141,7 +141,7 @@ RSpec.describe ArticlesController, type: :controller do
 
       aggregate_failures do
         expect(response).to render_template(:search)
-        expect(assigns[:articles]).to match_array [matching_article, protected_article]
+        expect(assigns[:articles]).to contain_exactly(matching_article, protected_article)
         expect(response.body).to have_text "public foobar"
         expect(response.body).not_to have_text "protected foobar"
       end
@@ -202,10 +202,10 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe "#archives" do
-    let(:blog) { create :blog }
+    let(:blog) { create(:blog) }
 
     context "for an archive with several articles" do
-      let!(:articles) { create_list :article, 3 }
+      let!(:articles) { create_list(:article, 3) }
 
       before do
         get "archives"
@@ -488,7 +488,7 @@ RSpec.describe ArticlesController, type: :controller do
 
       it "shows a password form for the article" do
         get :redirect, params: { from: "secretive.html" }
-        expect(response.body).to have_selector('input[id="article_password"]', count: 1)
+        expect(response.body).to have_field :article_password
       end
 
       it "does not include the article body anywhere" do
@@ -506,14 +506,14 @@ RSpec.describe ArticlesController, type: :controller do
       post :check_password, xhr: true,
                             params: { article: { id: article.id,
                                                  password: article.password } }
-      expect(response.body).not_to have_selector('input[id="article_password"]')
+      expect(response.body).not_to have_field :article_password
     end
 
     it "shows password form when given incorrect password" do
       post :check_password, xhr: true,
                             params: { article: { id: article.id,
                                                  password: "wrong password" } }
-      expect(response.body).to have_selector('input[id="article_password"]')
+      expect(response.body).to have_field :article_password
     end
   end
 end

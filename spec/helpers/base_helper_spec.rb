@@ -33,7 +33,7 @@ RSpec.describe BaseHelper, type: :helper do
     end
 
     it "returns just the title for unpublished articles" do
-      article = build :unpublished_article
+      article = build(:unpublished_article)
       expect(link_to_permalink(article, "the-title")).to eq "the-title"
     end
   end
@@ -41,7 +41,7 @@ RSpec.describe BaseHelper, type: :helper do
   describe "#stop_index_robots?" do
     subject { helper.stop_index_robots?(blog) }
 
-    let(:blog) { build :blog }
+    let(:blog) { build(:blog) }
 
     context "default" do
       it { expect(subject).to be_falsey }
@@ -157,7 +157,7 @@ RSpec.describe BaseHelper, type: :helper do
     let(:original_html) { '<a href="http://myblog.net">my blog</a>'.html_safe }
 
     before do
-      @blog = create :blog
+      @blog = create(:blog)
     end
 
     it "with dofollowify disabled, links should be nofollowed" do
@@ -190,7 +190,7 @@ RSpec.describe BaseHelper, type: :helper do
   end
 
   describe "#render_sidebars" do
-    let(:blog) { create :blog }
+    let(:blog) { create(:blog) }
 
     before do
       allow(controller).to receive(:render_to_string).and_return "Rendered"

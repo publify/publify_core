@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "authors/show_atom_feed.atom.builder", type: :view do
   let!(:blog) { create(:blog) }
-  let(:author) { create :user }
+  let(:author) { create(:user) }
   let(:parsed_feed) { Feedjira.parse(rendered) }
 
   describe "with no items" do
@@ -25,9 +25,9 @@ RSpec.describe "authors/show_atom_feed.atom.builder", type: :view do
 
   describe "rendering articles (with some funny characters)" do
     before do
-      article1 = create :full_article, published_at: 1.minute.ago
+      article1 = create(:full_article, published_at: 1.minute.ago)
       article1.body = "&eacute;coute!"
-      article2 = create :full_article, published_at: 2.minutes.ago
+      article2 = create(:full_article, published_at: 2.minutes.ago)
       article2.body = "is 4 < 2? no!"
       assign(:author, author)
       assign(:articles, [article1, article2])

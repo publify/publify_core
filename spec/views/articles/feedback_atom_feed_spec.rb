@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "articles/feedback_atom_feed.atom.builder", type: :view do
-  let(:article) { create :article }
+  let(:article) { create(:article) }
   let(:parsed_feed) { Feedjira.parse(rendered) }
 
   describe "with one trackback" do

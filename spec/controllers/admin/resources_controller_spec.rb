@@ -7,7 +7,7 @@ RSpec.describe Admin::ResourcesController, type: :controller do
 
   before do
     create(:blog)
-    admin = create :user, :as_admin
+    admin = create(:user, :as_admin)
     sign_in admin
   end
 
@@ -129,7 +129,7 @@ RSpec.describe Admin::ResourcesController, type: :controller do
         post :upload, params: { upload: upload }
         result = assigns(:up)
         expect(result.errors[:upload]).
-          to match_array ["has MIME type mismatch", "can't be blank"]
+          to contain_exactly("has MIME type mismatch", "can't be blank")
       end
 
       it "sets the flash to failure" do
@@ -153,7 +153,7 @@ RSpec.describe Admin::ResourcesController, type: :controller do
         post :upload, params: { upload: upload }
         result = assigns(:up)
         expect(result.errors[:upload]).
-          to match_array ["has MIME type mismatch", "can't be blank"]
+          to contain_exactly("has MIME type mismatch", "can't be blank")
       end
 
       it "sets the flash to failure" do
@@ -177,7 +177,7 @@ RSpec.describe Admin::ResourcesController, type: :controller do
         post :upload, params: { upload: upload }
         result = assigns(:up)
         expect(result.errors[:upload]).
-          to match_array ["has MIME type mismatch", "can't be blank"]
+          to contain_exactly("has MIME type mismatch", "can't be blank")
       end
 
       it "sets the flash to failure" do
@@ -201,10 +201,8 @@ RSpec.describe Admin::ResourcesController, type: :controller do
         post :upload, params: { upload: upload }
         result = assigns(:up)
         expect(result.errors[:upload]).
-          to match_array [
-            %r{You are not allowed to upload text/html files},
-            "can't be blank",
-          ]
+          to contain_exactly(%r{You are not allowed to upload text/html files},
+                             "can't be blank")
       end
 
       it "sets the flash to failure" do
@@ -228,7 +226,7 @@ RSpec.describe Admin::ResourcesController, type: :controller do
         post :upload, params: { upload: upload }
         result = assigns(:up)
         expect(result.errors[:upload]).
-          to match_array ["has MIME type mismatch", "can't be blank"]
+          to contain_exactly("has MIME type mismatch", "can't be blank")
       end
 
       it "sets the flash to failure" do

@@ -17,7 +17,7 @@ RSpec.describe TagsController, type: :controller do
 
       specify { expect(response).to be_successful }
       specify { expect(response).to render_template("tags/index") }
-      specify { expect(assigns(:tags)).to match_array([@tag]) }
+      specify { expect(assigns(:tags)).to eq [@tag] }
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe TagsController, type: :controller do
 
     describe "with some articles" do
       before do
-        @articles = create_list :article, 2
+        @articles = create_list(:article, 2)
         @tag.contents << @articles
       end
 

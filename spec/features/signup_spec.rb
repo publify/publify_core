@@ -10,7 +10,7 @@ RSpec.feature "Signing up", type: :feature do
     Blog.first.update(blog_name: "Awesome!",
                       base_url: "http://www.example.com/",
                       allow_signup: 1)
-    create :user, :as_admin, login: "admin"
+    create(:user, :as_admin, login: "admin")
   end
 
   scenario "User signs up for an account" do

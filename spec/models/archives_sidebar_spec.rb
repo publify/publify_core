@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe ArchivesSidebar do
+RSpec.describe ArchivesSidebar, type: :model do
   let(:sidebar) { described_class.new }
 
   it "is included in the list of available sidebars" do
@@ -10,12 +10,12 @@ RSpec.describe ArchivesSidebar do
   end
 
   describe "#parse_request" do
-    before { build_stubbed :blog }
+    before { build_stubbed(:blog) }
 
     it "creates the correct data structure for each month" do
-      create :article, published_at: DateTime.new(2014, 3, 2).in_time_zone
-      create :article, published_at: DateTime.new(2015, 2, 2).in_time_zone
-      create :article, published_at: DateTime.new(2015, 2, 5).in_time_zone
+      create(:article, published_at: DateTime.new(2014, 3, 2).in_time_zone)
+      create(:article, published_at: DateTime.new(2015, 2, 2).in_time_zone)
+      create(:article, published_at: DateTime.new(2015, 2, 5).in_time_zone)
 
       sidebar.parse_request nil, nil
 

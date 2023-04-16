@@ -6,8 +6,8 @@ require "timecop"
 RSpec.describe Trigger, type: :model do
   describe ".post_action" do
     before do
-      create :blog
-      @page = create :page, state: "draft"
+      create(:blog)
+      @page = create(:page, state: "draft")
       expect(@page).not_to be_published
     end
 
@@ -41,8 +41,8 @@ RSpec.describe Trigger, type: :model do
 
   describe ".remove" do
     context "with several existing triggers" do
-      let!(:item) { create :content }
-      let!(:other_item) { create :content }
+      let!(:item) { create(:content) }
+      let!(:other_item) { create(:content) }
 
       let!(:trigger_item_foo) do
         described_class.create due_at: 1.day.from_now, pending_item: item,
@@ -60,12 +60,12 @@ RSpec.describe Trigger, type: :model do
       it "removes the trigger for the given item and condition" do
         described_class.remove item, trigger_method: "foo"
         expect(described_class.all).
-          to match_array([trigger_item_bar, trigger_other_item_foo])
+          to contain_exactly(trigger_item_bar, trigger_other_item_foo)
       end
 
       it "removes the triggers for the given item" do
         described_class.remove item
-        expect(described_class.all).to match_array([trigger_other_item_foo])
+        expect(described_class.all).to eq [trigger_other_item_foo]
       end
     end
   end

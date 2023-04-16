@@ -102,8 +102,10 @@ RSpec.describe Feedback, type: :model do
     let(:comment) { create(:comment) }
     let(:blog) { comment.blog }
 
-    it "works if the blog has no akismet key" do
+    it "does not contact akismet if the blog has no akismet key" do
+      verification = stub_request(:post, "https://rest.akismet.com/1.1/verify-key")
       comment.report_as_ham
+      expect(verification).not_to have_been_requested
     end
 
     it "works if the blog has an invalid akismet key" do

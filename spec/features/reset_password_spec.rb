@@ -6,7 +6,7 @@ RSpec.feature "Logging in", type: :feature do
   before do
     load Rails.root.join("db/seeds.rb")
     Blog.first.update blog_name: "Awesome!", base_url: "http://www.example.com/"
-    create :user, :as_admin, login: "admin", password: "Fo_rgEt-1m5e2"
+    create(:user, :as_admin, login: "admin", password: "Fo_rgEt-1m5e2")
   end
 
   scenario "Admin resets password" do

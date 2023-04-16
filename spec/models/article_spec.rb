@@ -88,7 +88,8 @@ RSpec.describe Article, type: :model do
 
   describe "#initialize" do
     it "accepts a settings field in its parameter hash" do
-      blog.articles.build("password" => "foo")
+      article = blog.articles.build("password" => "foo")
+      expect(article.password).to eq "foo"
     end
   end
 
@@ -177,7 +178,7 @@ RSpec.describe Article, type: :model do
   end
 
   describe "the html_urls method" do
-    let(:blog) { create :blog, text_filter: "none" }
+    let(:blog) { create(:blog, text_filter: "none") }
 
     before do
       @article = blog.articles.build
@@ -268,9 +269,8 @@ RSpec.describe Article, type: :model do
   end
 
   it "test_triggers_are_dependent" do
-    # TODO: Needs a fix for Rails ticket #5105: has_many: Dependent deleting
-    # does not work with STI
-    skip
+    # TODO: Dependent deleting does not work with STI
+    skip "dependent deleting does not work with STI"
     art = blog.articles.create!(title: "title", body: "body",
                                 published_at: 1.hour.from_now)
     expect(Trigger.count).to eq 1
@@ -296,7 +296,7 @@ RSpec.describe Article, type: :model do
 
       a = build(:article)
       users = a.interested_users
-      expect(users).to match_array [alice, henri]
+      expect(users).to contain_exactly(alice, henri)
     end
   end
 
@@ -400,7 +400,7 @@ RSpec.describe Article, type: :model do
   end
 
   describe "#html" do
-    let(:article) { build_stubbed :article }
+    let(:article) { build_stubbed(:article) }
 
     it "returns an html_safe string" do
       expect(article.html).to be_html_safe
@@ -624,10 +624,10 @@ RSpec.describe Article, type: :model do
   end
 
   describe "#published_comments" do
-    let(:article) { create :article }
+    let(:article) { create(:article) }
 
     it "does not include withdrawn comments" do
-      comment = create :published_comment, article: article
+      comment = create(:published_comment, article: article)
       article.reload
       expect(article.published_comments).to eq [comment]
       comment.withdraw!
@@ -636,18 +636,18 @@ RSpec.describe Article, type: :model do
     end
 
     it "sorts comments newest last" do
-      old_comment = create :published_comment, article: article, created_at: 2.days.ago
-      new_comment = create :published_comment, article: article, created_at: 1.day.ago
+      old_comment = create(:published_comment, article: article, created_at: 2.days.ago)
+      new_comment = create(:published_comment, article: article, created_at: 1.day.ago)
       article.reload
       expect(article.published_comments).to eq [old_comment, new_comment]
     end
   end
 
   describe "#published_trackbacks" do
-    let(:article) { create :article }
+    let(:article) { create(:article) }
 
     it "does not include withdrawn trackbacks" do
-      trackback = create :trackback, article: article
+      trackback = create(:trackback, article: article)
       article.reload
       expect(article.published_trackbacks).to eq [trackback]
       trackback.withdraw!
@@ -656,19 +656,19 @@ RSpec.describe Article, type: :model do
     end
 
     it "sorts trackbacks newest last" do
-      old_trackback = create :trackback, article: article, created_at: 2.days.ago
-      new_trackback = create :trackback, article: article, created_at: 1.day.ago
+      old_trackback = create(:trackback, article: article, created_at: 2.days.ago)
+      new_trackback = create(:trackback, article: article, created_at: 1.day.ago)
       article.reload
       expect(article.published_trackbacks).to eq [old_trackback, new_trackback]
     end
   end
 
   describe "#published_feedback" do
-    let(:article) { create :article }
+    let(:article) { create(:article) }
 
     it "does not include withdrawn comments or trackbacks" do
-      comment = create :published_comment, article: article
-      trackback = create :trackback, article: article
+      comment = create(:published_comment, article: article)
+      trackback = create(:trackback, article: article)
       article.reload
       expect(article.published_feedback).to eq [comment, trackback]
       comment.withdraw!
@@ -678,10 +678,10 @@ RSpec.describe Article, type: :model do
     end
 
     it "sorts feedback newest last" do
-      old_comment = create :published_comment, article: article, created_at: 4.days.ago
-      old_trackback = create :trackback, article: article, created_at: 3.days.ago
-      new_comment = create :published_comment, article: article, created_at: 2.days.ago
-      new_trackback = create :trackback, article: article, created_at: 1.day.ago
+      old_comment = create(:published_comment, article: article, created_at: 4.days.ago)
+      old_trackback = create(:trackback, article: article, created_at: 3.days.ago)
+      new_comment = create(:published_comment, article: article, created_at: 2.days.ago)
+      new_trackback = create(:trackback, article: article, created_at: 1.day.ago)
       article.reload
       expect(article.published_feedback).
         to eq [old_comment, old_trackback, new_comment, new_trackback]
@@ -701,6 +701,7 @@ RSpec.describe Article, type: :model do
 
     it "do nothing with nil given" do
       article = build(:article)
+      expect(article).not_to receive(:save_attachment!)
       article.save_attachments!(nil)
     end
   end
@@ -819,7 +820,7 @@ RSpec.describe Article, type: :model do
       create(:article, published_at: Date.new(2010, 11, 23))
       create(:article, published_at: Date.new(2002, 4, 9))
       result = described_class.publication_months
-      expect(result).to match_array [["2010-11"], ["2002-04"]]
+      expect(result).to contain_exactly(["2010-11"], ["2002-04"])
     end
   end
 
@@ -853,9 +854,9 @@ RSpec.describe Article, type: :model do
     end
 
     it "counts comments but not trackbacks" do
-      article = create :article
-      create :trackback, article: article
-      create_list :comment, 2, article: article
+      article = create(:article)
+      create(:trackback, article: article)
+      create_list(:comment, 2, article: article)
 
       expect(described_class.bestof.first.comment_count.to_i).to eq 2
     end
@@ -900,7 +901,7 @@ RSpec.describe Article, type: :model do
       let(:article) { build(:article, keywords: "foo") }
 
       it { expect(article.tags.size).to eq(1) }
-      it { expect(article.tags.first).to be_kind_of(Tag) }
+      it { expect(article.tags.first).to be_a(Tag) }
       it { expect(article.tags.first.name).to eq("foo") }
     end
 
@@ -969,23 +970,23 @@ RSpec.describe Article, type: :model do
       let(:auto_close_value) { 0 }
 
       it "does not allow comments for a draft article" do
-        art = build :article, state: "draft", blog: blog
+        art = build(:article, state: "draft", blog: blog)
         expect(art).to be_comments_closed
       end
 
       it "does not allow comments for an article that will be published in the future" do
-        art = build :article, state: "publication_pending",
-                              published_at: 1.day.from_now, blog: blog
+        art = build(:article, state: "publication_pending",
+                              published_at: 1.day.from_now, blog: blog)
         expect(art).to be_comments_closed
       end
 
       it "allows comments for a newly published article" do
-        art = build :article, published_at: 1.second.ago, blog: blog
+        art = build(:article, published_at: 1.second.ago, blog: blog)
         expect(art).not_to be_comments_closed
       end
 
       it "allows comments for a very old article" do
-        art = build :article, created_at: 1000.days.ago, blog: blog
+        art = build(:article, created_at: 1000.days.ago, blog: blog)
         expect(art).not_to be_comments_closed
       end
     end
@@ -994,12 +995,12 @@ RSpec.describe Article, type: :model do
       let(:auto_close_value) { 30 }
 
       it "allows comments for a recently published article" do
-        art = build :article, published_at: 29.days.ago, blog: blog
+        art = build(:article, published_at: 29.days.ago, blog: blog)
         expect(art).not_to be_comments_closed
       end
 
       it "does not allow comments for an old article" do
-        art = build :article, published_at: 31.days.ago, blog: blog
+        art = build(:article, published_at: 31.days.ago, blog: blog)
         expect(art).to be_comments_closed
       end
     end

@@ -7,12 +7,12 @@ RSpec.describe "articles/index_rss_feed.rss.builder", type: :view do
   let(:xml_entry) { Nokogiri::XML.parse(rendered).css("item").first }
 
   describe "rendering articles (with some funny characters)" do
-    let!(:blog) { create :blog }
+    let!(:blog) { create(:blog) }
 
     before do
-      article1 = create :full_article, published_at: 1.minute.ago
+      article1 = create(:full_article, published_at: 1.minute.ago)
       article1.body = "&eacute;coute!"
-      article2 = create :full_article, published_at: 2.minutes.ago
+      article2 = create(:full_article, published_at: 2.minutes.ago)
       article2.body = "is 4 < 2? no!"
       assign(:articles, [article1, article2])
       render
@@ -28,10 +28,10 @@ RSpec.describe "articles/index_rss_feed.rss.builder", type: :view do
   end
 
   describe "rendering a single article" do
-    let(:blog) { create :blog }
+    let(:blog) { create(:blog) }
 
     before do
-      @article = create :full_article, blog: blog
+      @article = create(:full_article, blog: blog)
       @article.body = "public info"
       @article.extended = "and more"
       assign(:articles, [@article])
@@ -66,7 +66,7 @@ RSpec.describe "articles/index_rss_feed.rss.builder", type: :view do
     end
 
     describe "on a blog that shows extended content in feeds" do
-      let(:blog) { create :blog, hide_extended_on_rss: false }
+      let(:blog) { create(:blog, hide_extended_on_rss: false) }
 
       before do
         render
@@ -78,7 +78,7 @@ RSpec.describe "articles/index_rss_feed.rss.builder", type: :view do
     end
 
     describe "on a blog that hides extended content in feeds" do
-      let(:blog) { create :blog, hide_extended_on_rss: true }
+      let(:blog) { create(:blog, hide_extended_on_rss: true) }
 
       it "shows only the body content if there is no excerpt" do
         render
@@ -96,8 +96,8 @@ RSpec.describe "articles/index_rss_feed.rss.builder", type: :view do
 
     describe "on a blog that has an RSS description set" do
       let(:blog) do
-        create :blog, rss_description: true,
-                      rss_description_text: "rss description"
+        create(:blog, rss_description: true,
+                      rss_description_text: "rss description")
       end
 
       before do
@@ -116,7 +116,7 @@ RSpec.describe "articles/index_rss_feed.rss.builder", type: :view do
 
   describe "rendering a password protected article" do
     before do
-      @article = create :full_article, blog: blog
+      @article = create(:full_article, blog: blog)
       @article.body = "shh .. it's a secret!"
       @article.extended = "even more secret!"
       allow(@article).to receive(:password).and_return("password")
@@ -125,7 +125,7 @@ RSpec.describe "articles/index_rss_feed.rss.builder", type: :view do
     end
 
     describe "on a blog that shows extended content in feeds" do
-      let(:blog) { create :blog, hide_extended_on_rss: false }
+      let(:blog) { create(:blog, hide_extended_on_rss: false) }
 
       it "shows only a link to the article" do
         expect(rendered_entry.summary).
@@ -140,7 +140,7 @@ RSpec.describe "articles/index_rss_feed.rss.builder", type: :view do
     end
 
     describe "on a blog that hides extended content in feeds" do
-      let(:blog) { create :blog, hide_extended_on_rss: true }
+      let(:blog) { create(:blog, hide_extended_on_rss: true) }
 
       it "shows only a link to the article" do
         expect(rendered_entry.summary).
@@ -156,10 +156,10 @@ RSpec.describe "articles/index_rss_feed.rss.builder", type: :view do
   end
 
   describe "rendering an article with a UTF-8 permalink" do
-    let(:blog) { create :blog }
+    let(:blog) { create(:blog) }
 
     before do
-      @article = create :full_article, blog: blog
+      @article = create(:full_article, blog: blog)
       @article.permalink = "ルビー"
       assign(:articles, [@article])
 

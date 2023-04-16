@@ -35,7 +35,7 @@ RSpec.describe Article::Builder, type: :model do
     context "with nil given" do
       let(:new_article) { factory.get_or_build_from(nil) }
 
-      it { expect(new_article).to be_kind_of(Article) }
+      it { expect(new_article).to be_a(Article) }
       it { expect(new_article.id).to be_nil }
       it { expect(new_article.allow_pings).to eq(blog.default_allow_pings) }
       it { expect(new_article.allow_comments).to eq(blog.default_allow_comments) }
