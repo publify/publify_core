@@ -440,12 +440,9 @@ RSpec.describe Admin::ArticlesController, type: :controller do
           end
 
           it "deletes all drafts" do
-            assert_raises ActiveRecord::RecordNotFound do
-              Article.find(draft.id)
-            end
-            assert_raises ActiveRecord::RecordNotFound do
-              Article.find(second_draft.id)
-            end
+            expect { Article.find(draft.id) }.to raise_error ActiveRecord::RecordNotFound
+            expect { Article.find(second_draft.id) }.
+              to raise_error ActiveRecord::RecordNotFound
           end
 
           it "keeps the original publication date" do
@@ -466,12 +463,9 @@ RSpec.describe Admin::ArticlesController, type: :controller do
           end
 
           it "deletes all drafts" do
-            assert_raises ActiveRecord::RecordNotFound do
-              Article.find(draft.id)
-            end
-            assert_raises ActiveRecord::RecordNotFound do
-              Article.find(second_draft.id)
-            end
+            expect { Article.find(draft.id) }.to raise_error ActiveRecord::RecordNotFound
+            expect { Article.find(second_draft.id) }.
+              to raise_error ActiveRecord::RecordNotFound
           end
 
           it "keeps the original publication date" do
