@@ -8,7 +8,7 @@ RSpec.describe Article, type: :model do
 
   it "test_content_fields" do
     a = blog.articles.build
-    assert_equal [:body, :extended], a.content_fields
+    expect(a.content_fields).to eq [:body, :extended]
   end
 
   describe "#permalink_url" do
@@ -115,29 +115,30 @@ RSpec.describe Article, type: :model do
     assert a.save
 
     a.tags << Tag.find(create(:tag).id)
-    assert_equal 1, a.tags.size
+    expect(a.tags.size).to eq 1
 
     b = described_class.find(a.id)
-    assert_equal 1, b.tags.size
+    expect(b.tags.size).to eq 1
   end
 
   it "test_permalink_with_title" do
     article = create(:article, permalink: "article-3", published_at: Time.utc(2004, 6, 1))
-    assert_equal(article, described_class.requested_article(year: 2004, month: 6, day: 1,
-                                                            title: "article-3"))
+    found = described_class.requested_article(year: 2004, month: 6, day: 1,
+                                              title: "article-3")
+    expect(found).to eq article
     not_found = described_class.requested_article year: 2005, month: "06", day: "01",
                                                   title: "article-5"
     expect(not_found).to be_nil
   end
 
   it "test_strip_title" do
-    assert_equal "article-3", "Article-3".to_url
-    assert_equal "article-3", "Article 3!?#".to_url
-    assert_equal "there-is-sex-in-my-violence", "There is Sex in my Violence!".to_url
-    assert_equal "article", "-article-".to_url
-    assert_equal "lorem-ipsum-dolor-sit-amet-consectetaur-adipisicing-elit",
-                 "Lorem ipsum dolor sit amet, consectetaur adipisicing elit".to_url
-    assert_equal "my-cats-best-friend", "My Cat's Best Friend".to_url
+    expect("Article-3".to_url).to eq "article-3"
+    expect("Article 3!?#".to_url).to eq "article-3"
+    expect("There is Sex in my Violence!".to_url).to eq "there-is-sex-in-my-violence"
+    expect("-article-".to_url).to eq "article"
+    expect("Lorem ipsum dolor sit amet, consectetaur adipisicing elit".to_url).
+      to eq "lorem-ipsum-dolor-sit-amet-consectetaur-adipisicing-elit"
+    expect("My Cat's Best Friend".to_url).to eq "my-cats-best-friend"
   end
 
   describe "#set_permalink" do
@@ -150,7 +151,7 @@ RSpec.describe Article, type: :model do
     it "strips html" do
       a = blog.articles.build(title: "This <i>is</i> a <b>test</b>", state: :published)
       a.set_permalink
-      assert_equal "this-is-a-test", a.permalink
+      expect(a.permalink).to eq "this-is-a-test"
     end
 
     it "does not escape multibyte characters" do
@@ -185,31 +186,31 @@ RSpec.describe Article, type: :model do
     it "extracts URLs from the generated body html" do
       @article.body = 'happy halloween <a href="http://www.example.com/public">with</a>'
       urls = @article.html_urls
-      assert_equal ["http://www.example.com/public"], urls
+      expect(urls).to eq ["http://www.example.com/public"]
     end
 
     it "onlies match the href attribute" do
       @article.body = '<a href="http://a/b">a</a> <a fhref="wrong">wrong</a>'
       urls = @article.html_urls
-      assert_equal ["http://a/b"], urls
+      expect(urls).to eq ["http://a/b"]
     end
 
     it "matches across newlines" do
       @article.body = "<a\nhref=\"http://foo/bar\">foo</a>"
       urls = @article.html_urls
-      assert_equal ["http://foo/bar"], urls
+      expect(urls).to eq ["http://foo/bar"]
     end
 
     it "matches with single quotes" do
       @article.body = "<a href='http://foo/bar'>foo</a>"
       urls = @article.html_urls
-      assert_equal ["http://foo/bar"], urls
+      expect(urls).to eq ["http://foo/bar"]
     end
 
     it "matches with no quotes" do
       @article.body = "<a href=http://foo/bar>foo</a>"
       urls = @article.html_urls
-      assert_equal ["http://foo/bar"], urls
+      expect(urls).to eq ["http://foo/bar"]
     end
   end
 
@@ -246,7 +247,7 @@ RSpec.describe Article, type: :model do
     art2 = create(:article)
     create(:tag, name: "foo", contents: [art1, art2])
     articles = Tag.find_by(name: "foo").published_contents
-    assert_equal 2, articles.size
+    expect(articles.size).to eq 2
   end
 
   it "test_future_publishing" do
@@ -256,7 +257,7 @@ RSpec.describe Article, type: :model do
 
     expect(art).to be_publication_pending
 
-    assert_equal 1, Trigger.count
+    expect(Trigger.count).to eq 1
     assert Trigger.where(pending_item_id: art.id).first
     assert !art.published?
     Timecop.freeze(4.seconds.from_now) do
@@ -272,20 +273,20 @@ RSpec.describe Article, type: :model do
     skip
     art = blog.articles.create!(title: "title", body: "body",
                                 published_at: 1.hour.from_now)
-    assert_equal 1, Trigger.count
+    expect(Trigger.count).to eq 1
     art.destroy
-    assert_equal 0, Trigger.count
+    expect(Trigger.count).to eq 0
   end
 
   it "test_destroy_file_upload_associations" do
     a = create(:article)
     create(:resource, content: a)
     create(:resource, content: a)
-    assert_equal 2, a.resources.size
+    expect(a.resources.size).to eq 2
     a.resources << create(:resource)
-    assert_equal 3, a.resources.size
+    expect(a.resources.size).to eq 3
     a.destroy
-    assert_equal 0, Resource.where(content_id: a.id).size
+    expect(Resource.where(content_id: a.id).size).to eq 0
   end
 
   describe "#interested_users" do
@@ -357,7 +358,7 @@ RSpec.describe Article, type: :model do
       it "has two items" do
         create(:article, extended: "extended talk")
         create(:article, extended: "Once uppon a time, an extended story")
-        assert_equal 2, described_class.search("extended").size
+        expect(described_class.search("extended").size).to eq 2
       end
     end
   end
@@ -429,28 +430,28 @@ RSpec.describe Article, type: :model do
 
     it "returns false for a fresh article if it allows pings" do
       a = create(:article, allow_pings: true)
-      assert_equal(false, a.pings_closed?)
+      expect(a.pings_closed?).to be false
     end
 
     it "returns true for a fresh article if it does not allow pings" do
       a = create(:article, allow_pings: false)
-      assert_equal(true, a.pings_closed?)
+      expect(a.pings_closed?).to be true
     end
 
     it "returns true for an old article even if it allows pings" do
       a = create(:article, published_at: 31.days.ago, allow_pings: true)
-      assert_equal(true, a.pings_closed?)
+      expect(a.pings_closed?).to be true
     end
 
     it "returns true for a draft article even if it allows pings" do
       a = create(:article, state: "draft", allow_pings: true)
-      assert_equal(true, a.pings_closed?)
+      expect(a.pings_closed?).to be true
     end
 
     it "returns true for a pending article even if it allows pings" do
       a = create(:article, state: "publication_pending", published_at: 1.day.from_now,
                            allow_pings: true)
-      assert_equal(true, a.pings_closed?)
+      expect(a.pings_closed?).to be true
     end
   end
 

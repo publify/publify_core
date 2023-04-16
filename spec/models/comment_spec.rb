@@ -46,13 +46,13 @@ RSpec.describe Comment, type: :model do
     it "saves good comment" do
       c = build(:comment, url: "http://www.google.de")
       assert c.save
-      assert_equal "http://www.google.de", c.url
+      expect(c.url).to eq "http://www.google.de"
     end
 
     it "saves spam comment" do
       c = build(:comment, body: 'test <a href="http://fakeurl.com">body</a>')
       assert c.save
-      assert_equal "http://fakeurl.com", c.url
+      expect(c.url).to eq "http://fakeurl.com"
     end
 
     it "does not save when article comment window is closed" do
@@ -191,7 +191,7 @@ RSpec.describe Comment, type: :model do
     article = build_stubbed(:article)
     comment = build_stubbed(:comment, article: article)
     assert comment.article
-    assert_equal article, comment.article
+    expect(comment.article).to eq article
   end
 
   describe "change state" do
@@ -215,7 +215,7 @@ RSpec.describe Comment, type: :model do
   it "has good default filter" do
     create :blog, text_filter: "markdown", comment_text_filter: "markdown"
     a = create(:comment)
-    assert_equal "markdown", a.default_text_filter.name
+    expect(a.default_text_filter.name).to eq "markdown"
   end
 
   describe "spam", integration: true do

@@ -164,14 +164,14 @@ RSpec.describe Admin::ArticlesController, type: :controller do
 
         post :create, params: { "article" => base_article }
 
-        assert_equal(1, emails.size)
-        assert_equal(u.email, emails.first.to[0])
+        expect(emails.size).to eq 1
+        expect(emails.first.to[0]).to eq u.email
       end
 
       it "creates an article with tags" do
         post :create, params: { "article" => base_article(keywords: "foo bar") }
         new_article = Article.last
-        assert_equal 2, new_article.tags.size
+        expect(new_article.tags.size).to eq 2
       end
 
       it "creates an article with a password" do
@@ -190,14 +190,14 @@ RSpec.describe Admin::ArticlesController, type: :controller do
         article = base_article(published_at: "February 17, 2011 08:47 PM GMT+0100 (CET)")
         post :create, params: { article: article }
         new_article = Article.last
-        assert_equal Time.utc(2011, 2, 17, 19, 47), new_article.published_at
+        expect(new_article.published_at).to eq Time.utc(2011, 2, 17, 19, 47)
       end
 
       it 'respects "GMT+0000 (UTC)" in :published_at' do
         article = base_article(published_at: "August 23, 2011 08:40 PM GMT+0000 (UTC)")
         post :create, params: { article: article }
         new_article = Article.last
-        assert_equal Time.utc(2011, 8, 23, 20, 40), new_article.published_at
+        expect(new_article.published_at).to eq Time.utc(2011, 8, 23, 20, 40)
       end
 
       it "creates a filtered article" do
