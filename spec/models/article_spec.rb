@@ -112,7 +112,7 @@ RSpec.describe Article, type: :model do
     a.user_id = 1
     a.body = "Foo"
     a.title = "Zzz"
-    assert a.save
+    a.save!
 
     a.tags << Tag.find(create(:tag).id)
     expect(a.tags.size).to eq 1
@@ -258,13 +258,13 @@ RSpec.describe Article, type: :model do
     expect(art).to be_publication_pending
 
     expect(Trigger.count).to eq 1
-    assert Trigger.where(pending_item_id: art.id).first
-    assert !art.published?
+    expect(Trigger.where(pending_item_id: art.id).first).not_to be_nil
+    expect(art).not_to be_published
     Timecop.freeze(4.seconds.from_now) do
       Trigger.fire
     end
     art.reload
-    assert art.published?
+    expect(art).to be_published
   end
 
   it "test_triggers_are_dependent" do
@@ -302,14 +302,14 @@ RSpec.describe Article, type: :model do
 
   it "test_withdrawal" do
     art = create(:article)
-    assert art.published?
-    assert !art.withdrawn?
+    expect(art).to be_published
+    expect(art).not_to be_withdrawn
     art.withdraw!
-    assert !art.published?
-    assert art.withdrawn?
+    expect(art).not_to be_published
+    expect(art).to be_withdrawn
     art.reload
-    assert !art.published?
-    assert art.withdrawn?
+    expect(art).not_to be_published
+    expect(art).to be_withdrawn
   end
 
   it "gets only ham not spam comment" do
@@ -970,23 +970,23 @@ RSpec.describe Article, type: :model do
 
       it "does not allow comments for a draft article" do
         art = build :article, state: "draft", blog: blog
-        assert art.comments_closed?
+        expect(art).to be_comments_closed
       end
 
       it "does not allow comments for an article that will be published in the future" do
         art = build :article, state: "publication_pending",
                               published_at: 1.day.from_now, blog: blog
-        assert art.comments_closed?
+        expect(art).to be_comments_closed
       end
 
       it "allows comments for a newly published article" do
         art = build :article, published_at: 1.second.ago, blog: blog
-        assert !art.comments_closed?
+        expect(art).not_to be_comments_closed
       end
 
       it "allows comments for a very old article" do
         art = build :article, created_at: 1000.days.ago, blog: blog
-        assert !art.comments_closed?
+        expect(art).not_to be_comments_closed
       end
     end
 
@@ -995,12 +995,12 @@ RSpec.describe Article, type: :model do
 
       it "allows comments for a recently published article" do
         art = build :article, published_at: 29.days.ago, blog: blog
-        assert !art.comments_closed?
+        expect(art).not_to be_comments_closed
       end
 
       it "does not allow comments for an old article" do
         art = build :article, published_at: 31.days.ago, blog: blog
-        assert art.comments_closed?
+        expect(art).to be_comments_closed
       end
     end
   end
