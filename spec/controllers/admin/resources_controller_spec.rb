@@ -17,8 +17,8 @@ RSpec.describe Admin::ResourcesController, type: :controller do
     end
 
     it "renders index template" do
-      assert_response :success
-      assert_template "index"
+      expect(response).to be_successful
+      expect(response).to render_template "index"
       expect(assigns(:resources)).not_to be_nil
     end
   end

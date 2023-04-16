@@ -45,14 +45,14 @@ RSpec.describe Comment, type: :model do
   describe "#save" do
     it "saves good comment" do
       c = build(:comment, url: "http://www.google.de")
-      assert c.save
-      assert_equal "http://www.google.de", c.url
+      c.save!
+      expect(c.url).to eq "http://www.google.de"
     end
 
     it "saves spam comment" do
       c = build(:comment, body: 'test <a href="http://fakeurl.com">body</a>')
-      assert c.save
-      assert_equal "http://fakeurl.com", c.url
+      c.save!
+      expect(c.url).to eq "http://fakeurl.com"
     end
 
     it "does not save when article comment window is closed" do
@@ -66,8 +66,8 @@ RSpec.describe Comment, type: :model do
 
     it "changes old comment" do
       c = build(:comment, body: "Comment body <em>italic</em> <strong>bold</strong>")
-      assert c.save
-      assert c.errors.empty?
+      c.save!
+      expect(c.errors).to be_empty
     end
 
     it "saves a valid comment" do
@@ -84,8 +84,8 @@ RSpec.describe Comment, type: :model do
 
     it "generates guid" do
       c = build :comment, guid: nil
-      assert c.save
-      assert c.guid.size > 15
+      c.save!
+      expect(c.guid.size).to be > 15
     end
 
     it "preserves urls starting with https://" do
@@ -165,9 +165,9 @@ RSpec.describe Comment, type: :model do
 
         comment.classify_content
 
-        assert !comment.published?
-        assert comment.presumed_spam?
-        assert !comment.status_confirmed?
+        expect(comment).not_to be_published
+        expect(comment).to be_presumed_spam
+        expect(comment).not_to be_status_confirmed
       end
 
       it "marks comment from known user as confirmed ham" do
@@ -180,9 +180,9 @@ RSpec.describe Comment, type: :model do
 
         comment.classify_content
 
-        assert comment.published?
-        assert comment.ham?
-        assert comment.status_confirmed?
+        expect(comment).to be_published
+        expect(comment).to be_ham
+        expect(comment).to be_status_confirmed
       end
     end
   end
@@ -190,18 +190,18 @@ RSpec.describe Comment, type: :model do
   it "has good relation" do
     article = build_stubbed(:article)
     comment = build_stubbed(:comment, article: article)
-    assert comment.article
-    assert_equal article, comment.article
+    expect(comment.article).not_to be_nil
+    expect(comment.article).to eq article
   end
 
   describe "change state" do
     it "becomes unpublished if withdrawn" do
       c = build :comment
-      assert c.published?
-      assert c.withdraw!
-      assert !c.published?
-      assert c.spam?
-      assert c.status_confirmed?
+      expect(c).to be_published
+      c.withdraw!
+      expect(c).not_to be_published
+      expect(c).to be_spam
+      expect(c).to be_status_confirmed
     end
 
     it "becomeses confirmed if withdrawn" do
@@ -215,7 +215,7 @@ RSpec.describe Comment, type: :model do
   it "has good default filter" do
     create :blog, text_filter: "markdown", comment_text_filter: "markdown"
     a = create(:comment)
-    assert_equal "markdown", a.default_text_filter.name
+    expect(a.default_text_filter.name).to eq "markdown"
   end
 
   describe "spam", integration: true do
@@ -287,7 +287,7 @@ RSpec.describe Comment, type: :model do
           blog.comment_text_filter = filter
 
           ActiveSupport::Deprecation.silence do
-            assert comment.html(:body).exclude?("<script>")
+            expect(comment.html(:body)).not_to include "<script>"
           end
         end
       end

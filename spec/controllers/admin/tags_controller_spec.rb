@@ -57,7 +57,7 @@ RSpec.describe Admin::TagsController, type: :controller do
     it "updates a tag and redirect to #index" do
       @test_id = create(:tag).id
       post :update, params: { id: @test_id, tag: { display_name: "another_name" } }
-      assert_response :redirect, action: "index"
+      expect(response).to redirect_to action: "index"
       expect(Tag.count).to eq(1)
       expect(Tag.find(@test_id).display_name).to eq("another_name")
     end

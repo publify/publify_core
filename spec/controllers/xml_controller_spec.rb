@@ -17,7 +17,7 @@ RSpec.describe XmlController, type: :controller do
     end
 
     it "is succesful" do
-      assert_response :success
+      expect(response).to be_successful
     end
 
     it "includes articles and tags as items" do

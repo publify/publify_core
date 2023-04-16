@@ -9,10 +9,10 @@ RSpec.describe PublifyApp::Textfilter::Markdown do
 
   it "applies markdown processing to the supplied text" do
     text = filter_text("*foo*")
-    assert_equal "<p><em>foo</em></p>", text
+    expect(text).to eq "<p><em>foo</em></p>"
 
     text = filter_text("foo\n\nbar")
-    assert_equal "<p>foo</p>\n<p>bar</p>", text
+    expect(text).to eq "<p>foo</p>\n<p>bar</p>"
   end
 
   it "does not apply smart quoting to the supplied text" do

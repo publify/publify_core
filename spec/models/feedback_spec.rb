@@ -141,13 +141,13 @@ RSpec.describe Feedback, type: :model do
           :ham
         end
       end
-      assert @comment.unclassified?
+      expect(@comment).to be_unclassified
       @comment.classify_content
-      assert @comment.published?
+      expect(@comment).to be_published
       @comment.save
       @comment = Comment.find(@comment.id)
       @comment.confirm_classification
-      assert @comment.published?
+      expect(@comment).to be_published
     end
 
     it "test_spam_all_the_way" do
@@ -156,26 +156,26 @@ RSpec.describe Feedback, type: :model do
           :spam
         end
       end
-      assert @comment.unclassified?
+      expect(@comment).to be_unclassified
       @comment.classify_content
-      assert !@comment.published?
-      assert @comment.save
-      assert !@comment.published?
+      expect(@comment).not_to be_published
+      @comment.save!
+      expect(@comment).not_to be_published
       @comment = Comment.find(@comment.id)
       @comment.confirm_classification
-      assert !@comment.published?
+      expect(@comment).not_to be_published
     end
 
     it "test_presumed_spam_marked_as_ham" do
       @comment[:state] = "presumed_spam"
       @comment.mark_as_ham
-      assert @comment.published?
+      expect(@comment).to be_published
     end
 
     it "test_presumed_ham_marked_as_spam" do
       @comment[:state] = "presumed_ham"
       @comment.mark_as_spam
-      assert !@comment.published?
+      expect(@comment).not_to be_published
     end
   end
 
