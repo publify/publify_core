@@ -17,7 +17,7 @@ RSpec.describe Admin::SidebarController, type: :controller do
       it "renders the sidebar configuration" do
         get :index
         expect(response).to render_template "index"
-        assert_select "div#sidebar-config"
+        expect(response.body).to have_css "div#sidebar-config"
       end
     end
   end
