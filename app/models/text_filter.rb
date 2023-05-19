@@ -17,8 +17,8 @@ class TextFilter
     @params = params
   end
 
-  def sanitize(*args, &blk)
-    self.class.sanitize(*args, &blk)
+  def sanitize(...)
+    self.class.sanitize(...)
   end
 
   def self.find_or_default(name)
