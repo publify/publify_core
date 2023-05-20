@@ -26,8 +26,8 @@ class TextFilter
   end
 
   def filter_text(text)
-    all_filters = TextFilterPlugin.
-      expand_filter_list([:macropre, markup, :macropost, filters].flatten)
+    all_filters = TextFilterPlugin
+      .expand_filter_list([:macropre, markup, :macropost, filters].flatten)
 
     all_filters.each do |filter|
       text = filter.filtertext(text)
@@ -37,8 +37,8 @@ class TextFilter
   end
 
   def help
-    help_filters = TextFilterPlugin.
-      expand_filter_list([markup, :macropre, :macropost, filters].flatten)
+    help_filters = TextFilterPlugin
+      .expand_filter_list([markup, :macropre, :macropost, filters].flatten)
 
     help_text = help_filters.map do |f|
       if f.help_text.blank?
@@ -52,8 +52,8 @@ class TextFilter
   end
 
   def commenthelp
-    help_filters = TextFilterPlugin.
-      expand_filter_list([markup, filters].flatten)
+    help_filters = TextFilterPlugin
+      .expand_filter_list([markup, filters].flatten)
 
     help_filters.map do |f|
       f.help_text.blank? ? "" : CommonMarker.render_html(f.help_text)

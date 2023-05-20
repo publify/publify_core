@@ -18,8 +18,8 @@ class ArticlesController < ContentController
                     else
                       this_blog.contents.published_at(params.values_at(:year, :month, :day))
                     end
-    @articles = articles_base.includes(:user, :resources, :tags).
-      where(type: wanted_types).page(params[:page]).per(limit)
+    @articles = articles_base.includes(:user, :resources, :tags)
+      .where(type: wanted_types).page(params[:page]).per(limit)
 
     respond_to do |format|
       format.html do
@@ -167,8 +167,8 @@ class ArticlesController < ContentController
         @comment = Comment.new
         @page_title = this_blog.article_title_template.to_title(@article, this_blog, params)
         if @article.password.blank?
-          @description = this_blog.article_desc_template.
-            to_title(@article, this_blog, params)
+          @description = this_blog.article_desc_template
+            .to_title(@article, this_blog, params)
         end
 
         @keywords = @article.tags.map(&:name).join(", ")

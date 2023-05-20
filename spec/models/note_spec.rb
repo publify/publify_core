@@ -36,18 +36,18 @@ RSpec.describe Note, type: :model do
 
       context "with a particular blog" do
         before do
-          allow_any_instance_of(Blog).
-            to receive(:custom_url_shortener).and_return(url_shortener)
-          allow_any_instance_of(Blog).
-            to receive(:base_url).and_return("http://mybaseurl.net")
+          allow_any_instance_of(Blog)
+            .to receive(:custom_url_shortener).and_return(url_shortener)
+          allow_any_instance_of(Blog)
+            .to receive(:base_url).and_return("http://mybaseurl.net")
         end
 
         context "with a blog that have a custome url shortener" do
           let(:url_shortener) { "shor.tl" }
 
           it {
-            expect(note.short_link).
-              to eq("#{url_shortener} #{note.redirect.from_path}")
+            expect(note.short_link)
+              .to eq("#{url_shortener} #{note.redirect.from_path}")
           }
         end
 
@@ -89,10 +89,10 @@ RSpec.describe Note, type: :model do
 
         context "with twitter configured for blog and user" do
           before do
-            expect_any_instance_of(Blog).
-              to receive(:has_twitter_configured?).and_return(true)
-            expect_any_instance_of(User).
-              to receive(:has_twitter_configured?).and_return(true)
+            expect_any_instance_of(Blog)
+              .to receive(:has_twitter_configured?).and_return(true)
+            expect_any_instance_of(User)
+              .to receive(:has_twitter_configured?).and_return(true)
           end
 
           it { expect(note.send_to_twitter).to be_falsey }
@@ -100,8 +100,8 @@ RSpec.describe Note, type: :model do
 
         context "with twitter not configured for blog" do
           before do
-            expect_any_instance_of(Blog).
-              to receive(:has_twitter_configured?).and_return(false)
+            expect_any_instance_of(Blog)
+              .to receive(:has_twitter_configured?).and_return(false)
           end
 
           it { expect(note.send_to_twitter).to be_falsey }
@@ -109,10 +109,10 @@ RSpec.describe Note, type: :model do
 
         context "with a twitter configured for blog but not user" do
           before do
-            expect_any_instance_of(Blog).
-              to receive(:has_twitter_configured?).and_return(true)
-            expect_any_instance_of(User).
-              to receive(:has_twitter_configured?).and_return(false)
+            expect_any_instance_of(Blog)
+              .to receive(:has_twitter_configured?).and_return(true)
+            expect_any_instance_of(User)
+              .to receive(:has_twitter_configured?).and_return(false)
           end
 
           it { expect(note.send_to_twitter).to be_falsey }
@@ -133,17 +133,17 @@ RSpec.describe Note, type: :model do
 
         before do
           expect(Twitter::REST::Client).to receive(:new).and_return(fake_twitter)
-          expect(fake_twitter).
-            to receive(:update).
-            and_raise(Twitter::Error::Forbidden.new("Status is over 140 characters."))
+          expect(fake_twitter)
+            .to receive(:update)
+            .and_raise(Twitter::Error::Forbidden.new("Status is over 140 characters."))
           expect_any_instance_of(Blog).to receive(:has_twitter_configured?).and_return(true)
           expect_any_instance_of(User).to receive(:has_twitter_configured?).and_return(true)
           note.send_to_twitter
         end
 
         it {
-          expect(note.errors.full_messages).
-            to eq(["Message Status is over 140 characters."])
+          expect(note.errors.full_messages)
+            .to eq(["Message Status is over 140 characters."])
         }
       end
     end
@@ -153,8 +153,8 @@ RSpec.describe Note, type: :model do
       let(:note) { build(:note, user: user, twitter_id: "12345678901234") }
 
       it {
-        expect(note.twitter_url).
-          to eq("https://twitter.com/#{note.user.twitter}/status/#{note.twitter_id}")
+        expect(note.twitter_url)
+          .to eq("https://twitter.com/#{note.user.twitter}/status/#{note.twitter_id}")
       }
     end
 
@@ -296,26 +296,26 @@ RSpec.describe Note, type: :model do
 
       it "links markdown links only once" do
         note = create(:note, body: "A test tweet with [a markdown link](https://link.com)")
-        expect(note.html).
-          to eq "<p>A test tweet with <a href=\"https://link.com\">a markdown link</a></p>"
+        expect(note.html)
+          .to eq "<p>A test tweet with <a href=\"https://link.com\">a markdown link</a></p>"
       end
 
       it "does not link a @mention inside a markdown link" do
         note = create(:note, body: "A test tweet with [a @mention inside](https://link.com)")
-        expect(note.html).
-          to eq '<p>A test tweet with <a href="https://link.com">a @mention inside</a></p>'
+        expect(note.html)
+          .to eq '<p>A test tweet with <a href="https://link.com">a @mention inside</a></p>'
       end
 
       it "does not link hashtags inside markdown links" do
         note = create(:note, body: "A test tweet with [a #markdown link](https://link.com)")
-        expect(note.html).
-          to eq '<p>A test tweet with <a href="https://link.com">a #markdown link</a></p>'
+        expect(note.html)
+          .to eq '<p>A test tweet with <a href="https://link.com">a #markdown link</a></p>'
       end
 
       it "does not re-link URL anchors" do
         note = create(:note, body: "A https://link.com#foo")
-        expect(note.html).
-          to eq "<p>A <a href=\"https://link.com#foo\">https://link.com#foo</a></p>"
+        expect(note.html)
+          .to eq "<p>A <a href=\"https://link.com#foo\">https://link.com#foo</a></p>"
       end
     end
   end

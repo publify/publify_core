@@ -66,8 +66,8 @@ RSpec.describe NotesController, type: :controller do
       let(:permalink) { "thistagdoesnotexist" }
 
       it "raises RecordNotFound" do
-        expect { get :show, params: { permalink: permalink } }.
-          to raise_error ActiveRecord::RecordNotFound
+        expect { get :show, params: { permalink: permalink } }
+          .to raise_error ActiveRecord::RecordNotFound
       end
     end
   end

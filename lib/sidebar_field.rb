@@ -51,8 +51,8 @@ class SidebarField
 
   class TextAreaField < self
     def input_html(sidebar)
-      html_options = { "rows" => "10", "class" => "form-control" }.
-        update(options.stringify_keys)
+      html_options = { "rows" => "10", "class" => "form-control" }
+        .update(options.stringify_keys)
       text_area_tag(input_name(sidebar), current_value(sidebar), html_options)
     end
   end

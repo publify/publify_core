@@ -57,9 +57,9 @@ RSpec.describe Admin::SeoController, type: :controller do
       it { expect(blog.reload.permalink_format).not_to eq(format) }
 
       it {
-        expect(flash[:error]).
-          to eq(I18n.t("admin.settings.update.error",
-                       messages: I18n.t("errors.permalink_need_a_title")))
+        expect(flash[:error])
+          .to eq(I18n.t("admin.settings.update.error",
+                        messages: I18n.t("errors.permalink_need_a_title")))
       }
     end
   end

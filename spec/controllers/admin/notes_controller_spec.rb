@@ -14,7 +14,7 @@ RSpec.describe Admin::NotesController, type: :controller do
 
   context "with a blog" do
     describe "index" do
-      let!(:notes) { [create(:note), create(:note)] }
+      let!(:notes) { create_list(:note, 2) }
 
       before { get :index }
 

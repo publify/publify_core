@@ -5,6 +5,8 @@ inherit_mode:
     - Exclude
 
 require:
+  - rubocop-capybara
+  - rubocop-factory_bot
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
@@ -20,20 +22,13 @@ AllCops:
 Rails:
   Enabled: true
 
-# We have duplication due to extra logic in the Gemfile
-Bundler/DuplicatedGem:
-  Enabled: false
-
 # Put development dependencies in the gemspec so rubygems.org knows about them
 Gemspec/DevelopmentDependencies:
   EnforcedStyle: gemspec
 
+# Make BeginEndAlignment behavior match EndAlignment
 Layout/BeginEndAlignment:
   EnforcedStyleAlignWith: begin
-
-# Place . on the previous line
-Layout/DotPosition:
-  EnforcedStyle: trailing
 
 # Spaces in strings with line continuations go at the beginning of the line.
 Layout/LineContinuationLeadingSpace:

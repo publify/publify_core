@@ -20,8 +20,8 @@ RSpec.describe Article, type: :model do
 
       it "includes the full blog url" do
         article.publish
-        expect(article.permalink_url(nil, false)).
-          to eq "#{blog.base_url}/2004/06/01/article-3"
+        expect(article.permalink_url(nil, false))
+          .to eq "#{blog.base_url}/2004/06/01/article-3"
       end
     end
 
@@ -33,8 +33,8 @@ RSpec.describe Article, type: :model do
 
       it "includes just the blog root path" do
         article.publish
-        expect(article.permalink_url(nil, true)).
-          to eq "#{blog.root_path}/2004/06/01/article-3"
+        expect(article.permalink_url(nil, true))
+          .to eq "#{blog.root_path}/2004/06/01/article-3"
       end
     end
 
@@ -48,8 +48,8 @@ RSpec.describe Article, type: :model do
 
       it "escapes the multibyte characters" do
         article.publish
-        expect(article.permalink_url(nil, true)).
-          to eq("#{blog.root_path}/2004/06/01/%E3%83%AB%E3%83%93%E3%83%BC")
+        expect(article.permalink_url(nil, true))
+          .to eq("#{blog.root_path}/2004/06/01/%E3%83%AB%E3%83%93%E3%83%BC")
       end
     end
 
@@ -61,8 +61,8 @@ RSpec.describe Article, type: :model do
 
       it "escapes the space as '%20', not as '+'" do
         article.publish
-        expect(article.permalink_url(nil, true)).
-          to eq("#{blog.root_path}/2004/06/01/hello%20there")
+        expect(article.permalink_url(nil, true))
+          .to eq("#{blog.root_path}/2004/06/01/hello%20there")
       end
     end
 
@@ -74,8 +74,8 @@ RSpec.describe Article, type: :model do
 
       it "does not escape the plus" do
         article.publish
-        expect(article.permalink_url(nil, true)).
-          to eq("#{blog.root_path}/2004/06/01/one+two")
+        expect(article.permalink_url(nil, true))
+          .to eq("#{blog.root_path}/2004/06/01/one+two")
       end
     end
 
@@ -137,8 +137,8 @@ RSpec.describe Article, type: :model do
     expect("Article 3!?#".to_url).to eq "article-3"
     expect("There is Sex in my Violence!".to_url).to eq "there-is-sex-in-my-violence"
     expect("-article-".to_url).to eq "article"
-    expect("Lorem ipsum dolor sit amet, consectetaur adipisicing elit".to_url).
-      to eq "lorem-ipsum-dolor-sit-amet-consectetaur-adipisicing-elit"
+    expect("Lorem ipsum dolor sit amet, consectetaur adipisicing elit".to_url)
+      .to eq "lorem-ipsum-dolor-sit-amet-consectetaur-adipisicing-elit"
     expect("My Cat's Best Friend".to_url).to eq "my-cats-best-friend"
   end
 
@@ -410,16 +410,16 @@ RSpec.describe Article, type: :model do
   describe "#comment_url" do
     it "renders complete url of comment" do
       article = build_stubbed(:article, id: 123)
-      expect(article.comment_url).
-        to eq("#{blog.root_path}/comments?article_id=#{article.id}")
+      expect(article.comment_url)
+        .to eq("#{blog.root_path}/comments?article_id=#{article.id}")
     end
   end
 
   describe "#preview_comment_url" do
     it "renders complete url of comment" do
       article = build_stubbed(:article, id: 123)
-      expect(article.preview_comment_url).
-        to eq("#{blog.root_path}/comments/preview?article_id=#{article.id}")
+      expect(article.preview_comment_url)
+        .to eq("#{blog.root_path}/comments/preview?article_id=#{article.id}")
     end
   end
 
@@ -473,20 +473,20 @@ RSpec.describe Article, type: :model do
     end
 
     it "returns all content for the year if only year sent" do
-      expect(described_class.published_at_like(2.years.ago.strftime("%Y")).map(&:id).sort).
-        to eq([@article_two_year_ago.id, @article_2_two_year_ago.id].sort)
+      expect(described_class.published_at_like(2.years.ago.strftime("%Y")).map(&:id).sort)
+        .to eq([@article_two_year_ago.id, @article_2_two_year_ago.id].sort)
     end
 
     it "returns all content for the month if year and month sent" do
-      result = described_class.published_at_like(4.months.ago.strftime("%Y-%m")).
-        map(&:id).sort
-      expect(result).
-        to eq([@article_four_months_ago.id, @article_2_four_months_ago.id].sort)
+      result = described_class.published_at_like(4.months.ago.strftime("%Y-%m"))
+        .map(&:id).sort
+      expect(result)
+        .to eq([@article_four_months_ago.id, @article_2_four_months_ago.id].sort)
     end
 
     it "returns all content on this date if date send" do
-      result = described_class.published_at_like(2.months.ago.strftime("%Y-%m-%d")).
-        map(&:id).sort
+      result = described_class.published_at_like(2.months.ago.strftime("%Y-%m-%d"))
+        .map(&:id).sort
       expect(result).to eq([@article_two_month_ago.id].sort)
     end
   end
@@ -683,8 +683,8 @@ RSpec.describe Article, type: :model do
       new_comment = create(:published_comment, article: article, created_at: 2.days.ago)
       new_trackback = create(:trackback, article: article, created_at: 1.day.ago)
       article.reload
-      expect(article.published_feedback).
-        to eq [old_comment, old_trackback, new_comment, new_trackback]
+      expect(article.published_feedback)
+        .to eq [old_comment, old_trackback, new_comment, new_trackback]
     end
   end
 

@@ -31,13 +31,13 @@ class Article < Content
   scope :pending, -> { where(state: "publication_pending").order(default_order) }
 
   scope :bestof, lambda {
-    joins(:feedback).
-      where("feedback.type" => "Comment",
-            "contents.state" => "published").
-      group("contents.id").
-      select("contents.*, count(feedback.id) as comment_count").
-      order("comment_count DESC").
-      limit(5)
+    joins(:feedback)
+      .where("feedback.type" => "Comment",
+             "contents.state" => "published")
+      .group("contents.id")
+      .select("contents.*, count(feedback.id) as comment_count")
+      .order("comment_count DESC")
+      .limit(5)
   }
 
   setting :password, :string, ""
@@ -140,13 +140,13 @@ class Article < Content
   end
 
   def next
-    Article.where("published_at > ?", published_at).order("published_at asc").
-      limit(1).first
+    Article.where("published_at > ?", published_at).order("published_at asc")
+      .limit(1).first
   end
 
   def previous
-    Article.where("published_at < ?", published_at).order("published_at desc").
-      limit(1).first
+    Article.where("published_at < ?", published_at).order("published_at desc")
+      .limit(1).first
   end
 
   def publication_month

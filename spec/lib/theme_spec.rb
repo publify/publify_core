@@ -30,8 +30,8 @@ RSpec.describe Theme, type: :model do
 
   describe ".find_all" do
     let(:theme_directories) do
-      Dir.glob(PublifyCore::Engine.instance.root.join("themes/[a-zA-Z0-9]*")).
-        select { |dir| File.readable? "#{dir}/about.markdown" }
+      Dir.glob(PublifyCore::Engine.instance.root.join("themes/[a-zA-Z0-9]*"))
+        .select { |dir| File.readable? "#{dir}/about.markdown" }
     end
 
     it "finds all the installed themes" do

@@ -48,8 +48,8 @@ RSpec.describe Admin::ResourcesController, type: :controller do
       let(:upload) { file_upload("testfile.txt", "text/plain") }
 
       it "creates a new Resource" do
-        expect { post :upload, params: { upload: upload } }.
-          to change(Resource, :count).by(1)
+        expect { post :upload, params: { upload: upload } }
+          .to change(Resource, :count).by(1)
       end
 
       it "sets the content type to text/plain" do
@@ -70,8 +70,8 @@ RSpec.describe Admin::ResourcesController, type: :controller do
       let(:upload) { file_upload("testfile.png", "image/png") }
 
       it "creates a new Resource" do
-        expect { post :upload, params: { upload: upload } }.
-          to change(Resource, :count).by(1)
+        expect { post :upload, params: { upload: upload } }
+          .to change(Resource, :count).by(1)
       end
 
       it "sets the content type correctly" do
@@ -92,8 +92,8 @@ RSpec.describe Admin::ResourcesController, type: :controller do
       let(:upload) { file_upload("testfile.jpg", "image/jpeg") }
 
       it "creates a new Resource" do
-        expect { post :upload, params: { upload: upload } }.
-          to change(Resource, :count).by(1)
+        expect { post :upload, params: { upload: upload } }
+          .to change(Resource, :count).by(1)
       end
 
       it "strips EXIF data" do
@@ -121,15 +121,15 @@ RSpec.describe Admin::ResourcesController, type: :controller do
       let(:upload) { file_upload("exploit.svg", "image/svg") }
 
       it "does not create a new image Resource" do
-        expect { post :upload, params: { upload: upload } }.
-          not_to change(Resource, :count)
+        expect { post :upload, params: { upload: upload } }
+          .not_to change(Resource, :count)
       end
 
       it "does not attempt to process the image" do
         post :upload, params: { upload: upload }
         result = assigns(:up)
-        expect(result.errors[:upload]).
-          to contain_exactly("has MIME type mismatch", "can't be blank")
+        expect(result.errors[:upload])
+          .to contain_exactly("has MIME type mismatch", "can't be blank")
       end
 
       it "sets the flash to failure" do
@@ -145,15 +145,15 @@ RSpec.describe Admin::ResourcesController, type: :controller do
       let(:upload) { file_upload("testfile.txt", "image/png") }
 
       it "does not create a new fake image Resource" do
-        expect { post :upload, params: { upload: upload } }.
-          not_to change(Resource, :count)
+        expect { post :upload, params: { upload: upload } }
+          .not_to change(Resource, :count)
       end
 
       it "does not attempt to process a new fake image Resource" do
         post :upload, params: { upload: upload }
         result = assigns(:up)
-        expect(result.errors[:upload]).
-          to contain_exactly("has MIME type mismatch", "can't be blank")
+        expect(result.errors[:upload])
+          .to contain_exactly("has MIME type mismatch", "can't be blank")
       end
 
       it "sets the flash to failure" do
@@ -169,15 +169,15 @@ RSpec.describe Admin::ResourcesController, type: :controller do
       let(:upload) { file_upload("fakepng.png", "image/png") }
 
       it "does not create a new fake image Resource" do
-        expect { post :upload, params: { upload: upload } }.
-          not_to change(Resource, :count)
+        expect { post :upload, params: { upload: upload } }
+          .not_to change(Resource, :count)
       end
 
       it "does not attempt to process a new fake image Resource" do
         post :upload, params: { upload: upload }
         result = assigns(:up)
-        expect(result.errors[:upload]).
-          to contain_exactly("has MIME type mismatch", "can't be blank")
+        expect(result.errors[:upload])
+          .to contain_exactly("has MIME type mismatch", "can't be blank")
       end
 
       it "sets the flash to failure" do
@@ -193,16 +193,16 @@ RSpec.describe Admin::ResourcesController, type: :controller do
       let(:upload) { file_upload("just_some.html", "text/html") }
 
       it "does not create a new Resource" do
-        expect { post :upload, params: { upload: upload } }.
-          not_to change(Resource, :count)
+        expect { post :upload, params: { upload: upload } }
+          .not_to change(Resource, :count)
       end
 
       it "warns the user they can't upload this type of file" do
         post :upload, params: { upload: upload }
         result = assigns(:up)
-        expect(result.errors[:upload]).
-          to contain_exactly(%r{You are not allowed to upload text/html files},
-                             "can't be blank")
+        expect(result.errors[:upload])
+          .to contain_exactly(%r{You are not allowed to upload text/html files},
+                              "can't be blank")
       end
 
       it "sets the flash to failure" do
@@ -218,15 +218,15 @@ RSpec.describe Admin::ResourcesController, type: :controller do
       let(:upload) { file_upload("just_some.html", "text/plain") }
 
       it "does not create a new Resource" do
-        expect { post :upload, params: { upload: upload } }.
-          not_to change(Resource, :count)
+        expect { post :upload, params: { upload: upload } }
+          .not_to change(Resource, :count)
       end
 
       it "warns the user they can't upload this type of file" do
         post :upload, params: { upload: upload }
         result = assigns(:up)
-        expect(result.errors[:upload]).
-          to contain_exactly("has MIME type mismatch", "can't be blank")
+        expect(result.errors[:upload])
+          .to contain_exactly("has MIME type mismatch", "can't be blank")
       end
 
       it "sets the flash to failure" do
@@ -240,8 +240,8 @@ RSpec.describe Admin::ResourcesController, type: :controller do
 
     context "when uploading nothing" do
       it "does not create a new Resource" do
-        expect { post :upload }.
-          not_to change(Resource, :count)
+        expect { post :upload }
+          .not_to change(Resource, :count)
       end
 
       it "sets the flash to failure" do

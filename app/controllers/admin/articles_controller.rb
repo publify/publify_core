@@ -7,8 +7,8 @@ module Admin; end
 class Admin::ArticlesController < Admin::BaseController
   def index
     @search = params[:search] || {}
-    @articles = this_blog.articles.search_with(@search).page(params[:page]).
-      per(this_blog.admin_display_elements)
+    @articles = this_blog.articles.search_with(@search).page(params[:page])
+      .per(this_blog.admin_display_elements)
 
     if request.xhr?
       respond_to do |format|
@@ -171,20 +171,20 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def update_params
-    params.
-      require(:article).
-      permit(:allow_comments,
-             :allow_pings,
-             :body,
-             :body_and_extended,
-             :draft,
-             :extended,
-             :password,
-             :permalink,
-             :published_at,
-             :text_filter_name,
-             :title,
-             :keywords)
+    params
+      .require(:article)
+      .permit(:allow_comments,
+              :allow_pings,
+              :body,
+              :body_and_extended,
+              :draft,
+              :extended,
+              :password,
+              :permalink,
+              :published_at,
+              :text_filter_name,
+              :title,
+              :keywords)
   end
 
   def default_text_filter

@@ -20,9 +20,9 @@ RSpec.describe "articles/feedback_rss_feed.rss.builder", type: :view do
     end
 
     it "renders the correct RSS partials" do
-      expect(view).
-        to render_template(partial: "shared/_rss_item_trackback", count: 1).
-        and render_template(partial: "shared/_rss_item_comment", count: 1)
+      expect(view)
+        .to render_template(partial: "shared/_rss_item_trackback", count: 1)
+        .and render_template(partial: "shared/_rss_item_comment", count: 1)
     end
 
     it "links to the article url" do

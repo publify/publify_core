@@ -21,15 +21,15 @@ RSpec.describe Comment, type: :model do
     it "requires article comment window to be open" do
       article = Article.new(blog: blog, allow_comments: true)
 
-      expect(comment).not_to allow_value(article).for(:article).
-        with_message("Comments are closed")
+      expect(comment).not_to allow_value(article).for(:article)
+        .with_message("Comments are closed")
     end
 
     it "requires article to be open to comments" do
       article = Article.new(blog: blog, allow_comments: false)
 
-      expect(comment).not_to allow_value(article).for(:article).
-        with_message("Article is not open for comments")
+      expect(comment).not_to allow_value(article).for(:article)
+        .with_message("Article is not open for comments")
     end
   end
 
@@ -37,8 +37,8 @@ RSpec.describe Comment, type: :model do
     let(:comment) { build_stubbed(:comment) }
 
     it "renders permalink to comment in public part" do
-      expect(comment.permalink_url).
-        to eq("#{comment.article.permalink_url}#comment-#{comment.id}")
+      expect(comment.permalink_url)
+        .to eq("#{comment.article.permalink_url}#comment-#{comment.id}")
     end
   end
 

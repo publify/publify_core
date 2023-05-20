@@ -59,8 +59,8 @@ RSpec.describe Trigger, type: :model do
 
       it "removes the trigger for the given item and condition" do
         described_class.remove item, trigger_method: "foo"
-        expect(described_class.all).
-          to contain_exactly(trigger_item_bar, trigger_other_item_foo)
+        expect(described_class.all)
+          .to contain_exactly(trigger_item_bar, trigger_other_item_foo)
       end
 
       it "removes the triggers for the given item" do
