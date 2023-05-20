@@ -570,9 +570,9 @@ RSpec.describe Admin::ArticlesController, type: :controller do
     end
 
     before do
-      create(:tag, name: "foo", contents: [create(:article)])
-      create(:tag, name: "bazz", contents: [create(:article)])
-      create(:tag, name: "bar", contents: [create(:article)])
+      create(:tag, name: "foo", contents: create_list(:article, 1))
+      create(:tag, name: "bazz", contents: create_list(:article, 1))
+      create(:tag, name: "bar", contents: create_list(:article, 1))
     end
 
     it "returns foo for keywords fo" do
