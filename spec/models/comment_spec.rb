@@ -250,16 +250,16 @@ RSpec.describe Comment, type: :model do
 
   describe "last_published", integration: true do
     let(:date) { DateTime.new(2012, 12, 23, 12, 47).in_time_zone }
-    let!(:comment_1) { create(:comment, body: "1", created_at: date + 1.day) }
-    let!(:comment_4) { create(:comment, body: "4", created_at: date + 4.days) }
-    let!(:comment_2) { create(:comment, body: "2", created_at: date + 2.days) }
-    let!(:comment_6) { create(:comment, body: "6", created_at: date + 6.days) }
-    let!(:comment_3) { create(:comment, body: "3", created_at: date + 3.days) }
-    let!(:comment_5) { create(:comment, body: "5", created_at: date + 5.days) }
 
-    it "respond only 5 last_published" do
-      expect(described_class.last_published).to eq([comment_6, comment_5, comment_4,
-                                                    comment_3, comment_2])
+    let!(:comments) do
+      (1..6).map do |num|
+        create(:comment, body: "Comment #{num}", created_at: date + num.days)
+      end
+    end
+
+    it "returns the last 5 published comments" do
+      expect(described_class.last_published.map(&:body))
+        .to eq ["Comment 6", "Comment 5", "Comment 4", "Comment 3", "Comment 2"]
     end
   end
 

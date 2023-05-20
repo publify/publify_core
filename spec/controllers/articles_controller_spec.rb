@@ -51,35 +51,35 @@ RSpec.describe ArticlesController, type: :controller do
     end
 
     context "for feeds" do
-      let!(:article1) { create(:article, created_at: 1.day.ago) }
-      let!(:article2) { create(:article, published_at: "2004-04-01 12:00:00") }
+      let!(:new_article) { create(:article, created_at: 1.day.ago) }
+      let!(:old_article) { create(:article, published_at: "2004-04-01 12:00:00") }
 
-      let(:trackback) { create(:trackback, article: article1, published_at: 1.day.ago) }
+      let(:trackback) { create(:trackback, article: new_article, published_at: 1.day.ago) }
 
       specify "/articles.atom => an atom feed" do
         get "index", params: { format: "atom" }
         expect(response).to be_successful
         expect(response).to render_template("index_atom_feed", layout: false)
-        expect(assigns(:articles)).to eq([article1, article2])
+        expect(assigns(:articles)).to eq([new_article, old_article])
       end
 
       specify "/articles.rss => an RSS 2.0 feed" do
         get "index", params: { format: "rss" }
         expect(response).to be_successful
         expect(response).to render_template("index_rss_feed", layout: false)
-        expect(assigns(:articles)).to eq([article1, article2])
+        expect(assigns(:articles)).to eq([new_article, old_article])
       end
 
       specify "atom feed for archive should be valid" do
         get "index", params: { year: 2004, month: 4, format: "atom" }
         expect(response).to render_template("index_atom_feed", layout: false)
-        expect(assigns(:articles)).to eq([article2])
+        expect(assigns(:articles)).to eq([old_article])
       end
 
       specify "RSS feed for archive should be valid" do
         get "index", params: { year: 2004, month: 4, format: "rss" }
         expect(response).to render_template("index_rss_feed", layout: false)
-        expect(assigns(:articles)).to eq([article2])
+        expect(assigns(:articles)).to eq([old_article])
       end
     end
 
@@ -417,7 +417,7 @@ RSpec.describe ArticlesController, type: :controller do
           expect(response).to render_template("articles/read")
         end
 
-        it "assigns article1 to @article" do
+        it "assigns article to @article" do
           expect(assigns(:article)).to eq(article)
         end
 
