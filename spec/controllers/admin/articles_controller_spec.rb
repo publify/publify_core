@@ -58,8 +58,8 @@ RSpec.describe Admin::ArticlesController, type: :controller do
       it "returns all states when called with a bad state" do
         get :index, params: { search: { state: "3vI1 1337 h4x0r" } }
 
-        expect(assigns(:articles).sort).
-          to eq([article, pending_article, draft_article].sort)
+        expect(assigns(:articles).sort)
+          .to eq([article, pending_article, draft_article].sort)
       end
     end
   end
@@ -343,8 +343,8 @@ RSpec.describe Admin::ArticlesController, type: :controller do
       it "correctly converts multi-word tags" do
         a = create(:article, keywords: '"foo bar", baz')
         get :edit, params: { id: a.id }
-        expect(response.body).
-          to have_selector("input[id=article_keywords][value='baz, \"foo bar\"']")
+        expect(response.body)
+          .to have_selector("input[id=article_keywords][value='baz, \"foo bar\"']")
       end
     end
 
@@ -441,8 +441,8 @@ RSpec.describe Admin::ArticlesController, type: :controller do
 
           it "deletes all drafts" do
             expect { Article.find(draft.id) }.to raise_error ActiveRecord::RecordNotFound
-            expect { Article.find(second_draft.id) }.
-              to raise_error ActiveRecord::RecordNotFound
+            expect { Article.find(second_draft.id) }
+              .to raise_error ActiveRecord::RecordNotFound
           end
 
           it "keeps the original publication date" do
@@ -464,8 +464,8 @@ RSpec.describe Admin::ArticlesController, type: :controller do
 
           it "deletes all drafts" do
             expect { Article.find(draft.id) }.to raise_error ActiveRecord::RecordNotFound
-            expect { Article.find(second_draft.id) }.
-              to raise_error ActiveRecord::RecordNotFound
+            expect { Article.find(second_draft.id) }
+              .to raise_error ActiveRecord::RecordNotFound
           end
 
           it "keeps the original publication date" do

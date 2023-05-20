@@ -11,8 +11,8 @@ RSpec.describe "Admin::Themes", type: :request do
 
   describe "GET /admin/themes/switchto" do
     it "is not available" do
-      expect { get switchto_admin_themes_path(theme: "bootstrap-2") }.
-        to raise_error ActiveRecord::RecordNotFound
+      expect { get switchto_admin_themes_path(theme: "bootstrap-2") }
+        .to raise_error ActiveRecord::RecordNotFound
     end
   end
 

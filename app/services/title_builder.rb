@@ -75,8 +75,8 @@ class TitleBuilder
     format << "%B " if params[:month]
     format << "%Y" if params[:year]
 
-    string.gsub("%date%", Time.zone.local(*params.values_at(:year, :month, :day)).
-      strftime(format))
+    string.gsub("%date%", Time.zone.local(*params.values_at(:year, :month, :day))
+      .strftime(format))
   end
 
   def parse_page(_string, params)

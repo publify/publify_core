@@ -31,10 +31,6 @@ Gemspec/DevelopmentDependencies:
 Layout/BeginEndAlignment:
   EnforcedStyleAlignWith: begin
 
-# Place . on the previous line
-Layout/DotPosition:
-  EnforcedStyle: trailing
-
 # Spaces in strings with line continuations go at the beginning of the line.
 Layout/LineContinuationLeadingSpace:
   EnforcedStyle: leading

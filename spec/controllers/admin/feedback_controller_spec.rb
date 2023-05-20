@@ -126,9 +126,9 @@ RSpec.describe Admin::FeedbackController, type: :controller do
 
       it "includes hidden article id field in bulkops form" do
         get :article, params: { id: article.id }
-        expect(response.body).
-          to have_css("form[action='/admin/feedback/bulkops'] input[name=article_id]",
-                      visible: :hidden)
+        expect(response.body)
+          .to have_css("form[action='/admin/feedback/bulkops'] input[name=article_id]",
+                       visible: :hidden)
       end
 
       it "sees only spam feedback on one article" do

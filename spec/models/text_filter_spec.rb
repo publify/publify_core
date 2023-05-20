@@ -40,8 +40,8 @@ RSpec.describe TextFilter, type: :model do
     end
 
     it "works for the 'markdown' filter" do
-      expect(described_class.markdown.commenthelp).
-        to start_with(
+      expect(described_class.markdown.commenthelp)
+        .to start_with(
           "<p><a href=\"http://daringfireball.net/projects/markdown/\">Markdown</a>" \
           " is a simple")
     end

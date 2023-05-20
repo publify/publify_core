@@ -18,15 +18,15 @@ RSpec.describe Trackback, type: :model do
     it "requires article trackback window to be open" do
       article = Article.new(blog: blog, allow_pings: true)
 
-      expect(trackback).not_to allow_value(article).for(:article).
-        with_message("Trackbacks are closed")
+      expect(trackback).not_to allow_value(article).for(:article)
+        .with_message("Trackbacks are closed")
     end
 
     it "requires article to be open to trackback" do
       article = Article.new(blog: blog, allow_pings: false)
 
-      expect(trackback).not_to allow_value(article).for(:article).
-        with_message("Article is not open for trackbacks")
+      expect(trackback).not_to allow_value(article).for(:article)
+        .with_message("Article is not open for trackbacks")
     end
   end
 
@@ -62,8 +62,8 @@ RSpec.describe Trackback, type: :model do
     end
 
     it "Trackbacks with a spammy link in the excerpt should be rejected" do
-      tb = article.trackbacks.
-        build(ham_params.merge(excerpt: '<a href="http://chinaaircatering.com">spam</a>'))
+      tb = article.trackbacks
+        .build(ham_params.merge(excerpt: '<a href="http://chinaaircatering.com">spam</a>'))
       tb.classify_content
       expect(tb).to be_spammy
     end

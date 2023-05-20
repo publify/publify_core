@@ -270,8 +270,8 @@ RSpec.describe ArticlesController, type: :controller do
           create(:blog, base_url: "http://test.host")
           create(:user)
           create(:redirect)
-          expect { get :redirect, params: { from: "something/that/isnt/there" } }.
-            to raise_error ActiveRecord::RecordNotFound
+          expect { get :redirect, params: { from: "something/that/isnt/there" } }
+            .to raise_error ActiveRecord::RecordNotFound
         end
       end
 
@@ -353,8 +353,8 @@ RSpec.describe ArticlesController, type: :controller do
         create(:article, permalink: "second-blog-article", published_at: Time.utc(2004, 4,
                                                                                   1))
         get :redirect, params: { from: "articles/2004/04/01/second-blog-article" }
-        expect(response).
-          to redirect_to("http://test.host/blog/2004/04/01/second-blog-article")
+        expect(response)
+          .to redirect_to("http://test.host/blog/2004/04/01/second-blog-article")
       end
 
       it "redirects to article with articles in url_root" do
@@ -362,8 +362,8 @@ RSpec.describe ArticlesController, type: :controller do
         create(:article, permalink: "second-blog-article", published_at: Time.utc(2004, 4,
                                                                                   1))
         get :redirect, params: { from: "articles/2004/04/01/second-blog-article" }
-        expect(response).
-          to redirect_to("http://test.host/aaa/articles/bbb/2004/04/01/second-blog-article")
+        expect(response)
+          .to redirect_to("http://test.host/aaa/articles/bbb/2004/04/01/second-blog-article")
       end
 
       it "should not redirect to an article from another blog"
@@ -385,8 +385,8 @@ RSpec.describe ArticlesController, type: :controller do
 
         context "try redirect to an unknown location" do
           it "raises RecordNotFound" do
-            expect { get :redirect, params: { from: "#{article.permalink}/foo/bar" } }.
-              to raise_error ActiveRecord::RecordNotFound
+            expect { get :redirect, params: { from: "#{article.permalink}/foo/bar" } }
+              .to raise_error ActiveRecord::RecordNotFound
           end
         end
 
@@ -473,8 +473,8 @@ RSpec.describe ArticlesController, type: :controller do
       end
 
       it "does not find the article if the url does not match the fixed component" do
-        expect { get :redirect, params: { from: "bar/#{article.permalink}" } }.
-          to raise_error ActiveRecord::RecordNotFound
+        expect { get :redirect, params: { from: "bar/#{article.permalink}" } }
+          .to raise_error ActiveRecord::RecordNotFound
       end
     end
 

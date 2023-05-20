@@ -5,11 +5,11 @@ require "rails_helper"
 RSpec.describe PublifyTextfilter::MarkdownSmartquotes do
   it "applies markdown processing to the supplied text" do
     aggregate_failures do
-      expect(described_class.filtertext("*foo*")).
-        to eq "<p><em>foo</em></p>"
+      expect(described_class.filtertext("*foo*"))
+        .to eq "<p><em>foo</em></p>"
 
-      expect(described_class.filtertext("foo\n\nbar")).
-        to eq "<p>foo</p>\n<p>bar</p>"
+      expect(described_class.filtertext("foo\n\nbar"))
+        .to eq "<p>foo</p>\n<p>bar</p>"
     end
   end
 

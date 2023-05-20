@@ -39,11 +39,11 @@ class Tag < ApplicationRecord
   end
 
   def self.find_all_with_content_counters
-    Tag.joins(:contents).
-      where(contents: { state: "published" }).
-      select(*Tag.column_names, "COUNT(contents_tags.content_id) as content_counter").
-      group(*Tag.column_names).
-      order("content_counter DESC").limit(1000)
+    Tag.joins(:contents)
+      .where(contents: { state: "published" })
+      .select(*Tag.column_names, "COUNT(contents_tags.content_id) as content_counter")
+      .group(*Tag.column_names)
+      .order("content_counter DESC").limit(1000)
   end
 
   def self.find_with_char(char)
@@ -51,8 +51,8 @@ class Tag < ApplicationRecord
   end
 
   def self.collection_to_string(tags)
-    tags.map(&:display_name).sort.
-      map { |name| name.include?(" ") ? "\"#{name}\"" : name }.join ", "
+    tags.map(&:display_name).sort
+      .map { |name| name.include?(" ") ? "\"#{name}\"" : name }.join ", "
   end
 
   def published_contents

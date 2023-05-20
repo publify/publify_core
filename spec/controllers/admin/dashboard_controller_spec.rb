@@ -6,8 +6,8 @@ RSpec.describe Admin::DashboardController, type: :controller do
   render_views
 
   before do
-    stub_request(:get, "http://www.google.com/search?output=rss&q=link:test.host&tbm=blg").
-      to_return(status: 200, body: "", headers: {})
+    stub_request(:get, "http://www.google.com/search?output=rss&q=link:test.host&tbm=blg")
+      .to_return(status: 200, body: "", headers: {})
   end
 
   describe "test admin profile" do
@@ -44,15 +44,15 @@ RSpec.describe Admin::DashboardController, type: :controller do
     end
 
     it "has a link to user's article listing" do
-      expect(response.body).
-        to have_link("no article written by you",
-                     href: "/admin/articles?search%5Buser_id%5D=#{@henri.id}")
+      expect(response.body)
+        .to have_link("no article written by you",
+                      href: "/admin/articles?search%5Buser_id%5D=#{@henri.id}")
     end
 
     it "has a link to drafts" do
-      expect(response.body).
-        to have_link("no draft",
-                     href: "/admin/articles?search%5Bstate%5D=drafts")
+      expect(response.body)
+        .to have_link("no draft",
+                      href: "/admin/articles?search%5Bstate%5D=drafts")
     end
 
     it "has a link to pages" do
@@ -114,9 +114,9 @@ RSpec.describe Admin::DashboardController, type: :controller do
     end
 
     it "has a link to user's article listing" do
-      expect(response.body).
-        to have_link("no article written by you",
-                     href: "/admin/articles?search%5Buser_id%5D=#{@rene.id}")
+      expect(response.body)
+        .to have_link("no article written by you",
+                      href: "/admin/articles?search%5Buser_id%5D=#{@rene.id}")
     end
 
     it "has a link to total comments" do
@@ -173,9 +173,9 @@ RSpec.describe Admin::DashboardController, type: :controller do
     end
 
     it "does not have a link to user's article listing" do
-      expect(response.body).
-        not_to have_link("Your posts:",
-                         href: "/admin/articles?search%5Buser_id%5D=#{@gerard.id}")
+      expect(response.body)
+        .not_to have_link("Your posts:",
+                          href: "/admin/articles?search%5Buser_id%5D=#{@gerard.id}")
     end
 
     it "does not have a link to categories" do
@@ -194,9 +194,9 @@ RSpec.describe Admin::DashboardController, type: :controller do
     end
 
     it "does not have a link to Spam queue" do
-      expect(response.body).
-        not_to have_link("no unconfirmed",
-                         href: "/admin/feedback?only=unapproved")
+      expect(response.body)
+        .not_to have_link("no unconfirmed",
+                          href: "/admin/feedback?only=unapproved")
     end
   end
 end

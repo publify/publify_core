@@ -83,8 +83,8 @@ RSpec.describe TagsController, type: :controller do
 
     describe "without articles" do
       it "raises RecordNotFound" do
-        expect { get "show", params: { id: "foo" } }.
-          to raise_error ActiveRecord::RecordNotFound
+        expect { get "show", params: { id: "foo" } }
+          .to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
@@ -92,8 +92,8 @@ RSpec.describe TagsController, type: :controller do
   describe "showing a non-existant tag" do
     it "signals not found" do
       create(:blog)
-      expect { get "show", params: { id: "thistagdoesnotexist" } }.
-        to raise_error ActiveRecord::RecordNotFound
+      expect { get "show", params: { id: "thistagdoesnotexist" } }
+        .to raise_error ActiveRecord::RecordNotFound
     end
   end
 

@@ -26,8 +26,8 @@ class ArchivesSidebar < Sidebar
     # DB-specific code.
     date_funcs = self.class.date_funcs
 
-    article_counts = Article.published.select("count(*) as count", *date_funcs).
-      group(:year, :month).reorder("year desc", "month desc").limit(count.to_i)
+    article_counts = Article.published.select("count(*) as count", *date_funcs)
+      .group(:year, :month).reorder("year desc", "month desc").limit(count.to_i)
 
     @archives = article_counts.map do |entry|
       month = entry.month.to_i

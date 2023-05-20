@@ -167,9 +167,9 @@ RSpec.describe User, type: :model do
       let(:user) { create(:user, nickname: nil, firstname: "Robert", lastname: "Redford") }
 
       it {
-        expect(user.display_names).
-          to eq([user.login, user.firstname, user.lastname,
-                 "#{user.firstname} #{user.lastname}"])
+        expect(user.display_names)
+          .to eq([user.login, user.firstname, user.lastname,
+                  "#{user.firstname} #{user.lastname}"])
       }
     end
   end

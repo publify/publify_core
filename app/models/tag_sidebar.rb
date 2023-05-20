@@ -7,8 +7,8 @@ class TagSidebar < Sidebar
   setting :maximum_tags, 20
 
   def tags
-    @tags ||= Tag.find_all_with_content_counters.
-      take(maximum_tags.to_i).sort_by(&:name)
+    @tags ||= Tag.find_all_with_content_counters
+      .take(maximum_tags.to_i).sort_by(&:name)
   end
 
   def sizes

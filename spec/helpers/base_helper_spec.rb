@@ -18,8 +18,8 @@ RSpec.describe BaseHelper, type: :helper do
       end
 
       it {
-        expect(link_to_permalink(article, "title")).
-          to eq("<a href=\"#{article.permalink_url}\">title</a>")
+        expect(link_to_permalink(article, "title"))
+          .to eq("<a href=\"#{article.permalink_url}\">title</a>")
       }
     end
 
@@ -27,8 +27,8 @@ RSpec.describe BaseHelper, type: :helper do
       let(:article) { build(:article, permalink: "ルビー") }
 
       it {
-        expect(link_to_permalink(article, "title")).
-          to include("%E3%83%AB%E3%83%93%E3%83%BC")
+        expect(link_to_permalink(article, "title"))
+          .to include("%E3%83%AB%E3%83%93%E3%83%BC")
       }
     end
 
@@ -105,8 +105,8 @@ RSpec.describe BaseHelper, type: :helper do
 
     it "returns a link to the reply's user if no URL is given" do
       reply = { "user" => { "name" => "truc", "entities" => {} } }
-      expect(get_reply_context_url(reply)).
-        to eq '<a href="https://twitter.com/truc">truc</a>'
+      expect(get_reply_context_url(reply))
+        .to eq '<a href="https://twitter.com/truc">truc</a>'
     end
   end
 
@@ -122,17 +122,17 @@ RSpec.describe BaseHelper, type: :helper do
 
     it "returns a link with the creation date and time" do
       Time.use_zone "UTC" do
-        expect(get_reply_context_twitter_link(reply)).
-          to eq '<a href="https://twitter.com/a_screen_name/status/123456789">' \
-                "23/01/2014 at 13h47</a>"
+        expect(get_reply_context_twitter_link(reply))
+          .to eq '<a href="https://twitter.com/a_screen_name/status/123456789">' \
+                 "23/01/2014 at 13h47</a>"
       end
     end
 
     it "displays creation date and time in the current time zone" do
       Time.use_zone "Tokyo" do
-        expect(get_reply_context_twitter_link(reply)).
-          to eq '<a href="https://twitter.com/a_screen_name/status/123456789">' \
-                "23/01/2014 at 22h47</a>"
+        expect(get_reply_context_twitter_link(reply))
+          .to eq '<a href="https://twitter.com/a_screen_name/status/123456789">' \
+                 "23/01/2014 at 22h47</a>"
       end
     end
   end
@@ -141,15 +141,15 @@ RSpec.describe BaseHelper, type: :helper do
     it "with dofollowify disabled, links should be nofollowed" do
       this_blog.dofollowify = false
 
-      expect(nofollowified_link_to("my blog", "http://myblog.net")).
-        to eq '<a rel="nofollow" href="http://myblog.net">my blog</a>'
+      expect(nofollowified_link_to("my blog", "http://myblog.net"))
+        .to eq '<a rel="nofollow" href="http://myblog.net">my blog</a>'
     end
 
     it "with dofollowify enabled, links should be nofollowed" do
       this_blog.dofollowify = true
 
-      expect(nofollowified_link_to("my blog", "http://myblog.net")).
-        to eq '<a href="http://myblog.net">my blog</a>'
+      expect(nofollowified_link_to("my blog", "http://myblog.net"))
+        .to eq '<a href="http://myblog.net">my blog</a>'
     end
   end
 
@@ -229,8 +229,8 @@ RSpec.describe BaseHelper, type: :helper do
       it "use #{spec} format from blog to render date" do
         create(:blog, date_format: spec)
         article = build(:article)
-        expect(display_date(article.published_at)).
-          to eq(article.published_at.strftime(spec))
+        expect(display_date(article.published_at))
+          .to eq(article.published_at.strftime(spec))
       end
     end
   end

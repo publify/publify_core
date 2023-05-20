@@ -44,8 +44,8 @@ RSpec.describe "articles/index_rss_feed.rss.builder", type: :view do
 
     it "has a link to the article's comment section" do
       render
-      expect(xml_entry.css("comments").first.content).
-        to eq("#{@article.permalink_url}#comments")
+      expect(xml_entry.css("comments").first.content)
+        .to eq("#{@article.permalink_url}#comments")
     end
 
     it "has a creator entry" do
@@ -128,10 +128,10 @@ RSpec.describe "articles/index_rss_feed.rss.builder", type: :view do
       let(:blog) { create(:blog, hide_extended_on_rss: false) }
 
       it "shows only a link to the article" do
-        expect(rendered_entry.summary).
-          to eq "<p>This article is password protected. Please" \
-                " <a href='#{@article.permalink_url}'>fill in your password</a>" \
-                " to read it</p>"
+        expect(rendered_entry.summary)
+          .to eq "<p>This article is password protected. Please" \
+                 " <a href='#{@article.permalink_url}'>fill in your password</a>" \
+                 " to read it</p>"
       end
 
       it "does not show any secret bits anywhere" do
@@ -143,10 +143,10 @@ RSpec.describe "articles/index_rss_feed.rss.builder", type: :view do
       let(:blog) { create(:blog, hide_extended_on_rss: true) }
 
       it "shows only a link to the article" do
-        expect(rendered_entry.summary).
-          to eq "<p>This article is password protected. Please" \
-                " <a href='#{@article.permalink_url}'>fill in your password</a>" \
-                " to read it</p>"
+        expect(rendered_entry.summary)
+          .to eq "<p>This article is password protected. Please" \
+                 " <a href='#{@article.permalink_url}'>fill in your password</a>" \
+                 " to read it</p>"
       end
 
       it "does not show any secret bits anywhere" do

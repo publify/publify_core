@@ -12,8 +12,8 @@ RSpec.describe "Admin::Dashboard", type: :request do
   describe "GET /admin" do
     it "tells the browser not to cache" do
       get admin_dashboard_path
-      expect(response.headers["Cache-Control"]).
-        to eq "private, no-cache, max-age=0, must-revalidate, no-store"
+      expect(response.headers["Cache-Control"])
+        .to eq "private, no-cache, max-age=0, must-revalidate, no-store"
     end
   end
 end
