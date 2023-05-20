@@ -24,6 +24,10 @@ Rails:
 Bundler/DuplicatedGem:
   Enabled: false
 
+# Put development dependencies in the gemspec so rubygems.org knows about them
+Gemspec/DevelopmentDependencies:
+  EnforcedStyle: gemspec
+
 Layout/BeginEndAlignment:
   EnforcedStyleAlignWith: begin
 
