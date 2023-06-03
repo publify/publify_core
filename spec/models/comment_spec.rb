@@ -218,7 +218,7 @@ RSpec.describe Comment, type: :model do
     expect(a.default_text_filter.name).to eq "markdown"
   end
 
-  describe "spam", integration: true do
+  describe "spam" do
     let!(:comment) { create(:comment, state: "spam") }
     let!(:ham_comment) { create(:comment, state: "ham") }
 
@@ -227,7 +227,7 @@ RSpec.describe Comment, type: :model do
     end
   end
 
-  describe "not_spam", integration: true do
+  describe "not_spam" do
     let!(:comment) { create(:comment, state: "spam") }
     let!(:ham_comment) { create(:comment, state: "ham") }
     let!(:presumed_spam_comment) { create(:comment, state: "presumed_spam") }
@@ -238,7 +238,7 @@ RSpec.describe Comment, type: :model do
     end
   end
 
-  describe "presumed_spam", integration: true do
+  describe "presumed_spam" do
     let!(:comment) { create(:comment, state: "spam") }
     let!(:ham_comment) { create(:comment, state: "ham") }
     let!(:presumed_spam_comment) { create(:comment, state: "presumed_spam") }
@@ -248,7 +248,7 @@ RSpec.describe Comment, type: :model do
     end
   end
 
-  describe "last_published", integration: true do
+  describe "last_published" do
     let(:date) { DateTime.new(2012, 12, 23, 12, 47).in_time_zone }
 
     let!(:comments) do
