@@ -1,42 +1,72 @@
 # Changelog
 
-## Unreleased
+## 10.0.0 / 2023-06-25
 
-* Upgrade to Rails 6.0
-* Drop support for Ruby 2.4
-* Update dependencies
-* Remove `dynamic_form` dependency
-* Remove support for Textile as a text format
-* Replace BlueCloth with CommonMarker for Markdown processing
+### Updated dependencies
+
+* Upgrade to Rails 6.1 and Ruby 2.7 to 3.2
+  [publify#987](https://github.com/publify/publify/pull/987),
+  [publify#1014](https://github.com/publify/publify/pull/1014),
+  [publify_core#71](https://github.com/publify/publify_core/pull/71), and
+  [publify_core#78](https://github.com/publify/publify_core/pull/78)
+* Update various other dependencies (various pull requests)
+
+### Breaking changes
+
+* Remove support for Textile as a text format [publify#1001](https://github.com/publify/publify/pull/1001)
+
+### Other changes
+
+* Improve feedback listings [publify#1005](https://github.com/publify/publify/pull/1005)
+* Link to article from article feedback admin page [publify#1007](https://github.com/publify/publify/pull/1007)
+* Link to blog from admin menu [publify#1008](https://github.com/publify/publify/pull/1008)
+* Handle markdown links in notes correctly [publify#1009](https://github.com/publify/publify/pull/1009)
+* Make notes twitterfilter robust [publify#1010](https://github.com/publify/publify/pull/1010)
+* Miscellaneous admin fixes [publify#1012](https://github.com/publify/publify/pull/1012)
+* Add arabic language to the project [publify#1060](https://github.com/publify/publify/pull/1060) by [ahmedhamid13](https://github.com/ahmedhamid13)
+
+### Internal changes
+
+* Remove use of 'notextile' [publify#1002](https://github.com/publify/publify/pull/1002)
+* Remove `TextFilter.filter_text` in favor of `#filter_text` [publify#1003](https://github.com/publify/publify/pull/1003)
+* Replace BlueCloth with CommonMarker for Markdown processing [publify#810](https://github.com/publify/publify/pull/810)
+* Rename Admin::ContentController to Admin::ArticlesController [publify#1004](https://github.com/publify/publify/pull/1004)
+* Remove unneeded wrapping elements from admin layout [publify#1006](https://github.com/publify/publify/pull/1006)
+* Split the factories into individual files [publify#1031](https://github.com/publify/publify/pull/1031) by [VictorPS](https://github.com/VictorPS)
+* Ensure `auto_link` helper is loaded on time [publify#1040](https://github.com/publify/publify/pull/1040)
+* Remove `sitealizer` table [publify#1089](https://github.com/publify/publify/pull/1089) by [SupriyaMedankar](https://github.com/SupriyaMedankar)
+* Remove itunes fields from resources [publify#1092](https://github.com/publify/publify/pull/1092) by [SupriyaMedankar](https://github.com/SupriyaMedankar)
+* Remove `page_caches` table [publify#1090](https://github.com/publify/publify/pull/1090) by [SupriyaMedankar](https://github.com/SupriyaMedankar)
+* Remove obsolete Sidebar code [publify#58](https://github.com/publify/publify/pull/58)
 
 ## 9.2.10 / 2023-01-08
 
-* Bump Rails version to 5.2.8.1 [#1070](https://github.com/publify/publify/pull/1070)
-* Limit length of settings values [#1072](https://github.com/publify/publify/pull/1072)
-* Require login to stay unique when updating a User [#1073](https://github.com/publify/publify/pull/1073)
-* Validate lengths of string attributes [#1077](https://github.com/publify/publify/pull/1077)
-* Strip EXIF data from resource uploads [#1078](https://github.com/publify/publify/pull/1078)
-* Require user passwords to be strong [#1086](https://github.com/publify/publify/pull/1086)
+* Bump Rails version to 5.2.8.1 [publify#1070](https://github.com/publify/publify/pull/1070)
+* Limit length of settings values [publify#1072](https://github.com/publify/publify/pull/1072)
+* Require login to stay unique when updating a User [publify#1073](https://github.com/publify/publify/pull/1073)
+* Validate lengths of string attributes [publify#1077](https://github.com/publify/publify/pull/1077)
+* Strip EXIF data from resource uploads [publify#1078](https://github.com/publify/publify/pull/1078)
+* Require user passwords to be strong [publify#1086](https://github.com/publify/publify/pull/1086)
 
 ## 9.2.9 / 2022-05-22
 
-* Fix admin article access control [#1065](https://github.com/publify/publify/pull/1065)
-* Refuse html files as resources even if declared to be plain text [#1066](https://github.com/publify/publify/pull/1066)
+* Fix admin article access control [publify#1065](https://github.com/publify/publify/pull/1065)
+* Refuse html files as resources even if declared to be plain text [publify#1066](https://github.com/publify/publify/pull/1066)
 
 ## 9.2.8 / 2022-05-14
 
-* Fix password protected article reveal [#1049](https://github.com/publify/publify/pull/1049)
-* Disallow comments on draft articles [#1048](https://github.com/publify/publify/pull/1048)
-* Clean up Feedback validation [#1051](https://github.com/publify/publify/pull/1051)
-* Disallow images in comments [#1054](https://github.com/publify/publify/pull/1054)
-* Fix password reset process [#1055](https://github.com/publify/publify/pull/1055)
-* Hide bodies of password-protected articles in search results [#1057](https://github.com/publify/publify/pull/1057)
-* Provide correct `article_id` input in bulkops form [#1058](https://github.com/publify/publify/pull/1058)
-* Do not create article meta description for password-protected articles [#1061](https://github.com/publify/publify/pull/1061)
+* Fix password protected article reveal [publify#1049](https://github.com/publify/publify/pull/1049)
+* Disallow comments on draft articles [publify#1048](https://github.com/publify/publify/pull/1048)
+* Clean up Feedback validation [publify#1051](https://github.com/publify/publify/pull/1051)
+* Disallow images in comments [publify#1054](https://github.com/publify/publify/pull/1054)
+* Fix password reset process [publify#1055](https://github.com/publify/publify/pull/1055)
+* Hide bodies of password-protected articles in search results [publify#1057](https://github.com/publify/publify/pull/1057)
+* Provide correct `article_id` input in bulkops form [publify#1058](https://github.com/publify/publify/pull/1058)
+* Do not create article meta description for password-protected articles [publify#1061](https://github.com/publify/publify/pull/1061)
 
 ## 9.2.7 / 2022-02-07
 
-* Fix setting the article password from the Admin [#1044](https://github.com/publify/publify/pull/1044)
+* Fix setting the article password from the Admin [publify#1044](https://github.com/publify/publify/pull/1044)
 
 ## 9.2.6 / 2022-01-07
 
@@ -66,7 +96,7 @@ Additionally, it includes the following changes:
 ## 9.2.3 / 2021-05-22
 
 * Bump Rails dependency to 5.2.6
-* Replace mimemagic with marcel
+* Replace mimemagic with marcel [publify#996](https://github.com/publify/publify/pull/996)
 
 ## 9.2.2 / 2021-03-21
 
