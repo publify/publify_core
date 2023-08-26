@@ -226,7 +226,8 @@ RSpec.describe Admin::ResourcesController, type: :controller do
         post :upload, params: { upload: upload }
         result = assigns(:up)
         expect(result.errors[:upload])
-          .to contain_exactly("has MIME type mismatch", "can't be blank")
+          .to contain_exactly(%r{You are not allowed to upload text/html files},
+                              "can't be blank")
       end
 
       it "sets the flash to failure" do
