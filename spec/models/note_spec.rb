@@ -10,7 +10,7 @@ RSpec.describe Note, type: :model do
       it { expect(build(:note)).to be_valid }
       it { expect(build(:note).redirect).to be_blank }
       it { expect(create(:note).redirect).not_to be_blank }
-      it { expect(build(:note, body: nil)).to be_invalid }
+      it { expect(build(:note, body: nil)).not_to be_valid }
 
       it "with a nil body, return default error message" do
         note = build(:note, body: nil)
@@ -21,7 +21,7 @@ RSpec.describe Note, type: :model do
       context "with an existing note" do
         let(:existing_note) { create(:note) }
 
-        it { expect(build(:note, guid: existing_note.guid)).to be_invalid }
+        it { expect(build(:note, guid: existing_note.guid)).not_to be_valid }
       end
     end
 

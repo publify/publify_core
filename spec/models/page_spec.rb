@@ -27,7 +27,7 @@ RSpec.describe Page, type: :model do
     context "with an existing page name" do
       let!(:page) { create(:page, name: "page_one") }
 
-      it { expect(build(:page, name: page.name)).to be_invalid }
+      it { expect(build(:page, name: page.name)).not_to be_valid }
     end
 
     context "without name" do
@@ -35,11 +35,11 @@ RSpec.describe Page, type: :model do
     end
 
     context "without body" do
-      it { expect(build(:page, body: nil)).to be_invalid }
+      it { expect(build(:page, body: nil)).not_to be_valid }
     end
 
     context "without title" do
-      it { expect(build(:page, title: nil)).to be_invalid }
+      it { expect(build(:page, title: nil)).not_to be_valid }
     end
   end
 
