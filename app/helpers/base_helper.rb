@@ -138,7 +138,7 @@ module BaseHelper
         v = v.chomp
         # trim the same number of spaces from the beginning of each line
         # this way plugins can indent nicely without making ugly source output
-        spaces = /\A[ \t]*/.match(v)[0].gsub(/\t/, "  ")
+        spaces = /\A[ \t]*/.match(v)[0].gsub("\t", "  ")
         # add 2 spaces to line up with the assumed position of the surrounding tags
         v.gsub!(/^#{spaces}/, "  ")
       end
