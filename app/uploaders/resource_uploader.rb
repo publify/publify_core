@@ -57,11 +57,9 @@ class ResourceUploader < CarrierWave::Uploader::Base
   end
 
   def check_content_type!(new_file)
-    detected_type = if image? new_file
-                      file_content_content_type(new_file)
-                    else
-                      file_content_type(new_file)
-                    end
+    return unless image? new_file
+
+    detected_type = file_content_content_type(new_file)
     if detected_type != new_file.content_type
       raise CarrierWave::IntegrityError, "has MIME type mismatch"
     end
@@ -71,9 +69,5 @@ class ResourceUploader < CarrierWave::Uploader::Base
 
   def file_content_content_type(new_file)
     Marcel::MimeType.for Pathname.new(new_file.path)
-  end
-
-  def file_content_type(new_file)
-    Marcel::MimeType.for Pathname.new(new_file.path), name: new_file.filename
   end
 end
