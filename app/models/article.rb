@@ -174,8 +174,7 @@ class Article < Content
 
     if params[:title]
       req_params[:permalink] = CGI.escape(params[:title])
-      article = published.find_by(req_params)
-      return article if article
+      published.find_by(req_params)
     end
   end
 
