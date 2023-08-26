@@ -201,7 +201,7 @@ class ArticlesController < ContentController
     case from
     when /^.*\.rss$/
       request.format = "rss"
-      from = from.gsub(/\.rss/, "")
+      from = from.gsub(/\.rss$/, "")
     when /^.*\.atom$/
       request.format = "atom"
       from = from.gsub(/\.atom$/, "")
