@@ -131,12 +131,12 @@ class TextFilterPlugin::Macro < TextFilterPlugin
     attributes = {}
 
     string.gsub(/([^ =]+="[^"]*")/) do |match|
-      key, value = match.split(/=/, 2)
+      key, value = match.split("=", 2)
       attributes[key] = value.delete('"')
     end
 
     string.gsub(/([^ =]+='[^']*')/) do |match|
-      key, value = match.split(/=/, 2)
+      key, value = match.split("=", 2)
       attributes[key] = value.delete("'")
     end
 
