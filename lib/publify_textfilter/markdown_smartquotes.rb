@@ -4,7 +4,7 @@ require "text_filter_plugin"
 require "publify_textfilter_markdown"
 
 module PublifyTextfilter
-  class MarkdownSmartquotes < PublifyApp::Textfilter::Markdown
+  class MarkdownSmartquotes < PublifyTextfilter::Markdown
     plugin_display_name "Markdown with smart quotes"
     plugin_description "Markdown markup language from" \
                        ' <a href="http://daringfireball.com/">Daring Fireball</a>' \

@@ -6,9 +6,9 @@ RSpec.describe TextFilterPlugin do
   describe ".available_filters" do
     subject { described_class.available_filters }
 
-    it { is_expected.to include(PublifyApp::Textfilter::Markdown) }
-    it { is_expected.to include(PublifyApp::Textfilter::Smartypants) }
-    it { is_expected.to include(PublifyApp::Textfilter::Twitterfilter) }
+    it { is_expected.to include(PublifyTextfilter::Markdown) }
+    it { is_expected.to include(PublifyTextfilter::Smartypants) }
+    it { is_expected.to include(PublifyTextfilter::Twitterfilter) }
     it { is_expected.not_to include(TextFilterPlugin::Markup) }
     it { is_expected.not_to include(TextFilterPlugin::Macro) }
     it { is_expected.not_to include(TextFilterPlugin::MacroPre) }
@@ -18,9 +18,9 @@ RSpec.describe TextFilterPlugin do
   describe ".macro_filters" do
     subject { described_class.macro_filters }
 
-    it { is_expected.not_to include(PublifyApp::Textfilter::Markdown) }
-    it { is_expected.not_to include(PublifyApp::Textfilter::Smartypants) }
-    it { is_expected.not_to include(PublifyApp::Textfilter::Twitterfilter) }
+    it { is_expected.not_to include(PublifyTextfilter::Markdown) }
+    it { is_expected.not_to include(PublifyTextfilter::Smartypants) }
+    it { is_expected.not_to include(PublifyTextfilter::Twitterfilter) }
     it { is_expected.not_to include(TextFilterPlugin::Markup) }
     it { is_expected.not_to include(TextFilterPlugin::Macro) }
     it { is_expected.not_to include(TextFilterPlugin::MacroPre) }
