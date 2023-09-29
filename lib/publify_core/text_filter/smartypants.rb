@@ -2,7 +2,7 @@
 
 require "rubypants"
 
-module PublifyTextfilter
+module PublifyCore::TextFilter
   class Smartypants < TextFilterPlugin::PostProcess
     plugin_display_name "Smartypants"
     plugin_description "Converts HTML to use typographically correct quotes and dashes"

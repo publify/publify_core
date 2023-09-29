@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PublifyTextfilter::MarkdownSmartquotes do
+RSpec.describe PublifyCore::TextFilter::MarkdownSmartquotes do
   it "applies markdown processing to the supplied text" do
     aggregate_failures do
       expect(described_class.filtertext("*foo*"))

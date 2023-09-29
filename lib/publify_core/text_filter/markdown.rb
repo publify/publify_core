@@ -3,7 +3,7 @@
 require "text_filter_plugin"
 require "commonmarker"
 
-module PublifyTextfilter
+module PublifyCore::TextFilter
   class Markdown < TextFilterPlugin::Markup
     plugin_display_name "Markdown"
     plugin_description "Markdown markup language from" \

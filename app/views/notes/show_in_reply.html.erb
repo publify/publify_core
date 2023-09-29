@@ -5,7 +5,7 @@
         <%= image_tag(@reply['user']['profile_image_url'], class: 'alignleft', alt: @reply['user']['name']) %>
       <% end %>
       <strong><%= get_reply_context_url(@reply) %></strong>
-      <p><%= nofollowify_links(PublifyTextfilter::Twitterfilter.filtertext(@reply['text'])) %></p>
+      <p><%= nofollowify_links(PublifyCore::TextFilter::Twitterfilter.filtertext(@reply['text'])) %></p>
       <p>
       <small>
         <%= get_reply_context_twitter_link(@reply) %>

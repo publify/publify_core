@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PublifyTextfilter::Markdown do
+RSpec.describe PublifyCore::TextFilter::Markdown do
   def filter_text(text)
     described_class.filtertext(text)
   end
