@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "text_filter_plugin"
-require "publify_textfilter_markdown"
+require "publify_textfilter/markdown"
 
 module PublifyTextfilter
   class MarkdownSmartquotes < PublifyTextfilter::Markdown
