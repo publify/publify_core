@@ -114,9 +114,7 @@ RSpec/ExpectInHook:
 # Include: **/*_spec*rb*, **/spec/**/*
 RSpec/FilePath:
   Exclude:
-    - 'spec/helpers/author_helper_spec.rb'
     - 'spec/lib/transforms_spec.rb'
-    - 'spec/models/article/factory_spec.rb'
 
 # Configuration parameters: AssignmentOnly.
 RSpec/InstanceVariable:
@@ -173,6 +171,12 @@ RSpec/RepeatedExample:
 RSpec/ScatteredSetup:
   Exclude:
     - 'spec/controllers/admin/articles_controller_spec.rb'
+
+# Configuration parameters: Include, CustomTransform, IgnoreMethods, IgnoreMetadata.
+# Include: **/*_spec.rb
+RSpec/SpecFilePathFormat:
+  Exclude:
+    - 'spec/lib/transforms_spec.rb'
 
 RSpec/StubbedMock:
   Exclude:
