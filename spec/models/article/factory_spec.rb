@@ -2,10 +2,10 @@
 
 require "rails_helper"
 
-RSpec.describe Article::Builder, type: :model do
+RSpec.describe Article::Factory, type: :model do
   let(:blog) { create(:blog) }
   let(:user) { create(:user) }
-  let(:factory) { Article::Factory.new(blog, user) }
+  let(:factory) { described_class.new(blog, user) }
 
   describe "#default" do
     let(:new_article) { factory.default }
