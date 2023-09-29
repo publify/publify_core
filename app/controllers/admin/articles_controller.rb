@@ -93,7 +93,7 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def auto_complete_for_article_keywords
-    @items = Tag.select(:display_name).order(:display_name).map(&:display_name)
+    @items = Tag.order(:display_name).pluck(:display_name)
     render json: @items
   end
 
