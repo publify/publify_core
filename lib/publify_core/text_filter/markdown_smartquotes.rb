@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require "text_filter_plugin"
-require "publify_textfilter_markdown"
+require "publify_core/text_filter/markdown"
 
-module PublifyTextfilter
-  class MarkdownSmartquotes < PublifyApp::Textfilter::Markdown
+module PublifyCore::TextFilter
+  class MarkdownSmartquotes < PublifyCore::TextFilter::Markdown
     plugin_display_name "Markdown with smart quotes"
     plugin_description "Markdown markup language from" \
                        ' <a href="http://daringfireball.com/">Daring Fireball</a>' \

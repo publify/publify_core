@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PublifyApp::Textfilter::Twitterfilter do
+RSpec.describe PublifyCore::TextFilter::Twitterfilter do
   describe ".filtertext" do
     it "replaces a hashtag with a proper URL to Twitter search" do
       text = described_class.filtertext("A test tweet with a #hashtag")

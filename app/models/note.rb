@@ -44,7 +44,7 @@ class Note < Content
   end
 
   def html_postprocess(field, html)
-    super(field, PublifyApp::Textfilter::Twitterfilter.filtertext(html))
+    super(field, PublifyCore::TextFilter::Twitterfilter.filtertext(html))
   end
 
   def truncate(message, length)
