@@ -344,7 +344,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
         a = create(:article, keywords: '"foo bar", baz')
         get :edit, params: { id: a.id }
         expect(response.body)
-          .to have_selector("input[id=article_keywords][value='baz, \"foo bar\"']")
+          .to have_css("input[id=article_keywords][value='baz, \"foo bar\"']")
       end
     end
 
