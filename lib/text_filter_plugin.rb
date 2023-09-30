@@ -13,10 +13,8 @@ class TextFilterPlugin
   def self.inherited(sub)
     super
 
-    if sub.to_s.start_with?("Plugin", "PublifyCore::TextFilter")
-      name = sub.short_name
-      @@filter_map[name] = sub
-    end
+    name = sub.short_name
+    @@filter_map[name] = sub
   end
 
   def self.filter_map
