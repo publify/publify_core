@@ -4,7 +4,9 @@ require "text_filter_plugin"
 require "commonmarker"
 
 module PublifyCore::TextFilter
-  class Markdown < TextFilterPlugin::Markup
+  class Markdown < TextFilterPlugin
+    include TextFilterPlugin::Markup
+
     plugin_display_name "Markdown"
     plugin_description "Markdown markup language from" \
                        ' <a href="http://daringfireball.com/">Daring Fireball</a>'

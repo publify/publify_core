@@ -13,10 +13,8 @@ class TextFilterPlugin
   def self.inherited(sub)
     super
 
-    if sub.to_s.start_with?("Plugin", "PublifyCore::TextFilter")
-      name = sub.short_name
-      @@filter_map[name] = sub
-    end
+    name = sub.short_name
+    @@filter_map[name] = sub
   end
 
   def self.filter_map
@@ -118,16 +116,16 @@ class TextFilterPlugin
   end
 end
 
-class TextFilterPlugin::PostProcess < TextFilterPlugin
+module TextFilterPlugin::PostProcess
   def self.filter_type
     "postprocess"
   end
 end
 
-class TextFilterPlugin::Macro < TextFilterPlugin
+module TextFilterPlugin::MacroMethods
   # Utility function -- hand it a XML string like <a href="foo" title="bar">
   # and it'll give you back { "href" => "foo", "title" => "bar" }
-  def self.attributes_parse(string)
+  def attributes_parse(string)
     attributes = {}
 
     string.gsub(/([^ =]+="[^"]*")/) do |match|
@@ -143,7 +141,7 @@ class TextFilterPlugin::Macro < TextFilterPlugin
     attributes
   end
 
-  def self.filtertext(text)
+  def filtertext(text)
     regex1 = %r{<publify:#{short_name}(?:[ \t][^>]*)?/>}
     regex2 = %r{<publify:#{short_name}([ \t][^>]*)?>(.*?)</publify:#{short_name}>}m
 
@@ -157,20 +155,40 @@ class TextFilterPlugin::Macro < TextFilterPlugin
   end
 end
 
-class TextFilterPlugin::MacroPre < TextFilterPlugin::Macro
-  def self.filter_type
-    "macropre"
+module TextFilterPlugin::MacroPre
+  def self.included(base)
+    base.extend ClassMethods
+    base.extend TextFilterPlugin::MacroMethods
+  end
+
+  module ClassMethods
+    def filter_type
+      "macropre"
+    end
   end
 end
 
-class TextFilterPlugin::MacroPost < TextFilterPlugin::Macro
-  def self.filter_type
-    "macropost"
+module TextFilterPlugin::MacroPost
+  def self.included(base)
+    base.extend ClassMethods
+    base.extend TextFilterPlugin::MacroMethods
+  end
+
+  module ClassMethods
+    def filter_type
+      "macropost"
+    end
   end
 end
 
-class TextFilterPlugin::Markup < TextFilterPlugin
-  def self.filter_type
-    "markup"
+module TextFilterPlugin::Markup
+  def self.included(base)
+    base.extend ClassMethods
+  end
+
+  module ClassMethods
+    def filter_type
+      "markup"
+    end
   end
 end
