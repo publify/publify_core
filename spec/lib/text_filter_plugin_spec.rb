@@ -4,27 +4,20 @@ require "rails_helper"
 
 RSpec.describe TextFilterPlugin do
   describe ".available_filters" do
-    subject { described_class.available_filters }
-
-    it { is_expected.to include(PublifyCore::TextFilter::Markdown) }
-    it { is_expected.to include(PublifyCore::TextFilter::Smartypants) }
-    it { is_expected.to include(PublifyCore::TextFilter::Twitterfilter) }
-    it { is_expected.not_to include(TextFilterPlugin::Markup) }
-    it { is_expected.not_to include(TextFilterPlugin::Macro) }
-    it { is_expected.not_to include(TextFilterPlugin::MacroPre) }
-    it { is_expected.not_to include(TextFilterPlugin::MacroPost) }
+    it "lists only directly usable filters" do
+      expect(described_class.available_filters).to contain_exactly(
+        PublifyCore::TextFilter::None,
+        PublifyCore::TextFilter::Markdown,
+        PublifyCore::TextFilter::Smartypants,
+        PublifyCore::TextFilter::MarkdownSmartquotes,
+        PublifyCore::TextFilter::Twitterfilter)
+    end
   end
 
   describe ".macro_filters" do
-    subject { described_class.macro_filters }
-
-    it { is_expected.not_to include(PublifyCore::TextFilter::Markdown) }
-    it { is_expected.not_to include(PublifyCore::TextFilter::Smartypants) }
-    it { is_expected.not_to include(PublifyCore::TextFilter::Twitterfilter) }
-    it { is_expected.not_to include(TextFilterPlugin::Markup) }
-    it { is_expected.not_to include(TextFilterPlugin::Macro) }
-    it { is_expected.not_to include(TextFilterPlugin::MacroPre) }
-    it { is_expected.not_to include(TextFilterPlugin::MacroPost) }
+    it "lists no filters" do
+      expect(described_class.macro_filters).to be_empty
+    end
   end
 
   describe described_class::Macro do
