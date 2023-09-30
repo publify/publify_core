@@ -5,7 +5,9 @@ require "html/pipeline"
 require "html/pipeline/hashtag/hashtag_filter"
 
 module PublifyCore::TextFilter
-  class Twitterfilter < TextFilterPlugin::PostProcess
+  class Twitterfilter < TextFilterPlugin
+    include TextFilterPlugin::PostProcess
+
     plugin_display_name "HTML Filter"
     plugin_description "Strip HTML tags"
 
