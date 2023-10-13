@@ -80,7 +80,7 @@ class Article < Content
   def set_permalink
     return if draft? || permalink.present?
 
-    self.permalink = title.to_permalink
+    self.permalink = PublifyCore::TextTransformer.to_permalink(title)
   end
 
   def has_child?

@@ -82,7 +82,10 @@ class Note < Content
   end
 
   def set_permalink
-    self.permalink = "#{id}-#{body.to_permalink[0..79]}" if permalink.blank?
+    if permalink.blank?
+      base_permalink = PublifyCore::TextTransformer.to_permalink(body)[0..79]
+      self.permalink = "#{id}-#{base_permalink}"
+    end
     save
   end
 
