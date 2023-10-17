@@ -22,6 +22,3 @@ module PublifyCore
 end
 
 String.include PublifyCore::StringExt
-
-deprecator = ActiveSupport::Deprecation.new("10.1", "PublifyCore")
-deprecator.deprecate_methods PublifyCore::StringExt, :to_permalink, :to_url
