@@ -18,7 +18,7 @@ module PublifyCore
         string = string.tr(key.join, value)
       end
       string = string.tr("'", "-")
-      string.gsub(/<[^>]*>/, "").to_url
+      to_url(string.gsub(/<[^>]*>/, ""))
     end
 
     # Returns a-string-with-dashes when passed 'a string with dashes'.

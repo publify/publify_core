@@ -14,6 +14,20 @@ RSpec.describe PublifyCore::TextTransformer do
     it "gives a proper space-less, trimmed URL" do
       expect(described_class.to_url(" this is  a sentence ")).to eq("this-is-a-sentence")
     end
+
+    it "test_strip_title" do
+      aggregate_failures do
+        expect(described_class.to_url("Article-3")).to eq "article-3"
+        expect(described_class.to_url("Article 3!?#")).to eq "article-3"
+        expect(described_class.to_url("There is Sex in my Violence!"))
+          .to eq "there-is-sex-in-my-violence"
+        expect(described_class.to_url("-article-")).to eq "article"
+        expect(described_class.to_url("Lorem ipsum dolor sit amet," \
+                                      " consectetaur adipisicing elit"))
+          .to eq "lorem-ipsum-dolor-sit-amet-consectetaur-adipisicing-elit"
+        expect(described_class.to_url("My Cat's Best Friend")).to eq "my-cats-best-friend"
+      end
+    end
   end
 
   describe "strip_html" do

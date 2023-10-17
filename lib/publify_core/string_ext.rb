@@ -7,8 +7,6 @@ module PublifyCore
       PublifyCore::TextTransformer.to_permalink(self)
     end
 
-    # Returns a-string-with-dashes when passed 'a string with dashes'.
-    # All special chars are stripped in the process
     def to_url
       PublifyCore::TextTransformer.to_url(self)
     end
@@ -26,4 +24,4 @@ end
 String.include PublifyCore::StringExt
 
 deprecator = ActiveSupport::Deprecation.new("10.1", "PublifyCore")
-deprecator.deprecate_methods PublifyCore::StringExt, :to_permalink
+deprecator.deprecate_methods PublifyCore::StringExt, :to_permalink, :to_url

@@ -132,16 +132,6 @@ RSpec.describe Article, type: :model do
     expect(not_found).to be_nil
   end
 
-  it "test_strip_title" do
-    expect("Article-3".to_url).to eq "article-3"
-    expect("Article 3!?#".to_url).to eq "article-3"
-    expect("There is Sex in my Violence!".to_url).to eq "there-is-sex-in-my-violence"
-    expect("-article-".to_url).to eq "article"
-    expect("Lorem ipsum dolor sit amet, consectetaur adipisicing elit".to_url)
-      .to eq "lorem-ipsum-dolor-sit-amet-consectetaur-adipisicing-elit"
-    expect("My Cat's Best Friend".to_url).to eq "my-cats-best-friend"
-  end
-
   describe "#set_permalink" do
     it "works for simple cases" do
       a = blog.articles.build(title: "Article 3!", state: :published)
