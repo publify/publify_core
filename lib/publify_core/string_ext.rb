@@ -3,8 +3,6 @@
 # FIXME: Replace with helpers and/or methods provided by Rails
 module PublifyCore
   module StringExt
-    deprecate :to_permalink
-
     def to_permalink
       PublifyCore::TextTransformer.to_permalink(self)
     end
@@ -26,3 +24,6 @@ module PublifyCore
 end
 
 String.include PublifyCore::StringExt
+
+deprecator = ActiveSupport::Deprecation.new("10.1", "PublifyCore")
+deprecator.deprecate_methods PublifyCore::StringExt, :to_permalink
