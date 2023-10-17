@@ -3,16 +3,22 @@
 require "rails_helper"
 
 RSpec.describe PublifyCore::StringExt do
+  include ActiveSupport::Testing::Deprecation
+
   describe "#to_permalink" do
     it "builds a nice permalink from an accentuated string" do
-      expect("L'été s'ra chaud, l'été s'ra chaud".to_permalink)
-        .to eq("l-ete-s-ra-chaud-l-ete-s-ra-chaud")
+      assert_deprecated(/to_permalink/, PublifyCore.deprecator) do
+        expect("L'été s'ra chaud, l'été s'ra chaud".to_permalink)
+          .to eq("l-ete-s-ra-chaud-l-ete-s-ra-chaud")
+      end
     end
   end
 
   describe "to_url" do
     it "gives a proper space-less, trimmed URL" do
-      expect(" this is  a sentence ".to_url).to eq("this-is-a-sentence")
+      assert_deprecated(/to_url/, PublifyCore.deprecator) do
+        expect(" this is  a sentence ".to_url).to eq("this-is-a-sentence")
+      end
     end
   end
 
