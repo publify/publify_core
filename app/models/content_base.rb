@@ -55,7 +55,7 @@ module ContentBase
              html(:all)
            end
 
-    text = text.strip_html
+    text = PublifyCore::TextTransformer.strip_html(text)
 
     text.slice(0, length) +
       (text.length > length ? "..." : "")

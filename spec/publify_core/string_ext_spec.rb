@@ -24,11 +24,15 @@ RSpec.describe PublifyCore::StringExt do
 
   describe "strip_html" do
     it "renders text only" do
-      expect("<a href='http://myblog.com'>my blog</a>".strip_html).to eq("my blog")
+      assert_deprecated(/strip_html/, PublifyCore.deprecator) do
+        expect("<a href='http://myblog.com'>my blog</a>".strip_html).to eq("my blog")
+      end
     end
 
     it "does not remove a > from a numeric comparison" do
-      expect("5 < 6 > 4".strip_html).to eq("5 < 6 > 4")
+      assert_deprecated(/strip_html/, PublifyCore.deprecator) do
+        expect("5 < 6 > 4".strip_html).to eq("5 < 6 > 4")
+      end
     end
   end
 end
