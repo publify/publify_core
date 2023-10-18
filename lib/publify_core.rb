@@ -13,6 +13,7 @@ require "publify_core/text_filter/markdown"
 require "publify_core/text_filter/markdown_smartquotes"
 require "publify_core/text_filter/smartypants"
 require "publify_core/text_filter/twitterfilter"
+require "publify_core/string_ext"
 
 require "carrierwave"
 require "jquery-rails"
@@ -30,7 +31,6 @@ require "sidebar_registry"
 require "spam_protection"
 require "text_filter_plugin"
 require "theme"
-require "transforms"
 
 module PublifyCore
   Theme.register_themes File.join(Engine.root, "themes")

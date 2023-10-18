@@ -421,6 +421,7 @@ lib/publify_core.rb
 lib/publify_core/content_text_helpers.rb
 lib/publify_core/engine.rb
 lib/publify_core/lang.rb
+lib/publify_core/string_ext.rb
 lib/publify_core/testing_support/dns_mock.rb
 lib/publify_core/testing_support/factories/articles.rb
 lib/publify_core/testing_support/factories/blogs.rb
@@ -461,7 +462,6 @@ lib/tasks/manifest.rake
 lib/tasks/publify_core_tasks.rake
 lib/text_filter_plugin.rb
 lib/theme.rb
-lib/transforms.rb
 themes/plain/about.markdown
 themes/plain/javascripts/theme.js
 themes/plain/preview.png
