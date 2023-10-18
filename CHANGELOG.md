@@ -37,7 +37,7 @@
 * Remove `sitealizer` table [publify#1089](https://github.com/publify/publify/pull/1089) by [SupriyaMedankar](https://github.com/SupriyaMedankar)
 * Remove itunes fields from resources [publify#1092](https://github.com/publify/publify/pull/1092) by [SupriyaMedankar](https://github.com/SupriyaMedankar)
 * Remove `page_caches` table [publify#1090](https://github.com/publify/publify/pull/1090) by [SupriyaMedankar](https://github.com/SupriyaMedankar)
-* Remove obsolete Sidebar code [publify#58](https://github.com/publify/publify/pull/58)
+* Remove obsolete Sidebar code [publify_core#58](https://github.com/publify/publify_core/pull/58)
 
 ## 9.2.10 / 2023-01-08
 
