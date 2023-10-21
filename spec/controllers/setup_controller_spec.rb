@@ -7,6 +7,8 @@ RSpec.describe SetupController, type: :controller do
 
   describe "#index" do
     describe "when blog is not configured" do
+      render_views
+
       before do
         # Set up database similar to result of db:setup
         Blog.create
@@ -14,6 +16,10 @@ RSpec.describe SetupController, type: :controller do
       end
 
       specify { expect(response).to render_template("index") }
+
+      it "does not show the default blog name in the form" do
+        expect(response.body).to have_css "input#blog_blog_name[value='']"
+      end
     end
 
     describe "when a blog is configured and has some users" do

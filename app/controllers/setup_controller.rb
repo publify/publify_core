@@ -5,6 +5,7 @@ class SetupController < BaseController
   layout "accounts"
 
   def index
+    this_blog.blog_name = ""
     @user = User.new
   end
 
