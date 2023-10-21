@@ -6,8 +6,8 @@ require "html/pipeline/hashtag/hashtag_filter"
 
 module PublifyCore::TextFilter
   class Twitterfilter < TextFilterPlugin::PostProcess
-    plugin_display_name "HTML Filter"
-    plugin_description "Strip HTML tags"
+    plugin_display_name "Twitter Filter"
+    plugin_description "Convert hashtags and mentions to links"
 
     class TwitterHashtagFilter < HTML::Pipeline::HashtagFilter
       def initialize(text)
