@@ -114,9 +114,15 @@ class TextFilterPlugin
   def self.logger
     @logger ||= ::Rails.logger || Logger.new($stdout)
   end
+
+  def self.abstract_filter!
+    @@filter_map.delete short_name
+  end
 end
 
-module TextFilterPlugin::PostProcess
+class TextFilterPlugin::PostProcess < TextFilterPlugin
+  abstract_filter!
+
   def self.filter_type
     "postprocess"
   end
@@ -155,40 +161,28 @@ module TextFilterPlugin::MacroMethods
   end
 end
 
-module TextFilterPlugin::MacroPre
-  def self.included(base)
-    base.extend ClassMethods
-    base.extend TextFilterPlugin::MacroMethods
-  end
+class TextFilterPlugin::MacroPre < TextFilterPlugin
+  abstract_filter!
+  extend TextFilterPlugin::MacroMethods
 
-  module ClassMethods
-    def filter_type
-      "macropre"
-    end
+  def self.filter_type
+    "macropre"
   end
 end
 
-module TextFilterPlugin::MacroPost
-  def self.included(base)
-    base.extend ClassMethods
-    base.extend TextFilterPlugin::MacroMethods
-  end
+class TextFilterPlugin::MacroPost < TextFilterPlugin
+  abstract_filter!
+  extend TextFilterPlugin::MacroMethods
 
-  module ClassMethods
-    def filter_type
-      "macropost"
-    end
+  def self.filter_type
+    "macropost"
   end
 end
 
-module TextFilterPlugin::Markup
-  def self.included(base)
-    base.extend ClassMethods
-  end
+class TextFilterPlugin::Markup < TextFilterPlugin
+  abstract_filter!
 
-  module ClassMethods
-    def filter_type
-      "markup"
-    end
+  def self.filter_type
+    "markup"
   end
 end

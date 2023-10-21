@@ -3,9 +3,7 @@
 require "rubypants"
 
 module PublifyCore::TextFilter
-  class Smartypants < TextFilterPlugin
-    include TextFilterPlugin::PostProcess
-
+  class Smartypants < TextFilterPlugin::PostProcess
     plugin_display_name "Smartypants"
     plugin_description "Converts HTML to use typographically correct quotes and dashes"
 
