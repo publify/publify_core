@@ -1,5 +1,16 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2" id="error-message-page">
+    <% if this_blog.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= t("errors.template.header", model: 'blog', count: this_blog.errors.count) %></h2>
+        <p><%= t("errors.template.body") %></p>
+        <ul>
+          <% this_blog.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
     <% if @user.errors.any? %>
       <div id="error_explanation">
         <h2><%= t("errors.template.header", model: 'blog', count: @user.errors.count) %></h2>

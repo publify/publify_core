@@ -64,4 +64,11 @@ RSpec.feature "Blog setup", type: :feature do
 
     expect(page).to have_text I18n.t!("accounts.confirm.success")
   end
+
+  scenario "setup fails due to missing blog name" do
+    visit "/setup"
+    click_button I18n.t!("generic.save")
+
+    expect(page).to have_text "Blog name can't be blank"
+  end
 end
