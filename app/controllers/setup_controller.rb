@@ -17,10 +17,10 @@ class SetupController < BaseController
                      nickname: "Publify Admin")
     @user.name = @user.login
 
-    unless this_blog.save && @user.save
-      redirect_to setup_url
-      return
-    end
+    return redirect_to setup_url unless this_blog.valid? && @user.valid?
+
+    this_blog.save!
+    @user.save!
 
     sign_in @user
 
