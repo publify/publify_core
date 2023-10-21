@@ -18,9 +18,9 @@ RSpec.feature "Blog setup", type: :feature do
     expect(page).to have_text I18n.t!("setup.index.welcome_to_your_blog_setup")
 
     # Set up the blog
-    fill_in :setting_blog_name, with: "Awesome blog"
-    fill_in :setting_email, with: "foo@bar.com"
-    fill_in :setting_password, with: strong_password
+    fill_in :blog_blog_name, with: "Awesome blog"
+    fill_in :user_email, with: "foo@bar.com"
+    fill_in :user_password, with: strong_password
     click_button I18n.t!("generic.save")
 
     # Confirm set up success
@@ -49,14 +49,19 @@ RSpec.feature "Blog setup", type: :feature do
     expect(User.first.email).to eq "foo@bar.com"
   end
 
-  scenario "setup fails due to password weakness" do
+  scenario "setup fails at first due to password weakness" do
     visit "/setup"
-    fill_in :setting_blog_name, with: "Awesome blog"
-    fill_in :setting_email, with: "foo@bar.com"
-    fill_in :setting_password, with: "not-strong"
+    fill_in :blog_blog_name, with: "Awesome blog"
+    fill_in :user_email, with: "foo@bar.com"
+    fill_in :user_password, with: "not-strong"
     click_button I18n.t!("generic.save")
 
     expect(page)
       .to have_text "Password not strong enough. It scored 2. It must score at least 4."
+
+    fill_in :user_password, with: strong_password
+    click_button I18n.t!("generic.save")
+
+    expect(page).to have_text I18n.t!("accounts.confirm.success")
   end
 end

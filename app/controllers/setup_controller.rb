@@ -9,14 +9,12 @@ class SetupController < BaseController
   end
 
   def create
-    this_blog.blog_name = params[:setting][:blog_name]
+    this_blog.blog_name = blog_params[:blog_name]
     this_blog.base_url = blog_base_url
 
-    @user = User.new(login: "admin",
-                     email: params[:setting][:email],
-                     password: params[:setting][:password],
-                     text_filter_name: this_blog.text_filter,
-                     nickname: "Publify Admin")
+    @user = User.new(user_params.merge(login: "admin",
+                                       text_filter_name: this_blog.text_filter,
+                                       nickname: "Publify Admin"))
     @user.name = @user.login
 
     return render :index unless this_blog.valid? && @user.valid?
@@ -37,6 +35,14 @@ class SetupController < BaseController
   end
 
   private
+
+  def blog_params
+    params.require(:blog).permit(:blog_name)
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password)
+  end
 
   def create_first_post(user)
     this_blog.articles.build(title: I18n.t("setup.article.title"),
