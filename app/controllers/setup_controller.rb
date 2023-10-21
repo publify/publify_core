@@ -4,7 +4,9 @@ class SetupController < BaseController
   before_action :check_config
   layout "accounts"
 
-  def index; end
+  def index
+    @user = User.new
+  end
 
   def create
     this_blog.blog_name = params[:setting][:blog_name]
@@ -17,7 +19,7 @@ class SetupController < BaseController
                      nickname: "Publify Admin")
     @user.name = @user.login
 
-    return redirect_to setup_url unless this_blog.valid? && @user.valid?
+    return render :index unless this_blog.valid? && @user.valid?
 
     this_blog.save!
     @user.save!

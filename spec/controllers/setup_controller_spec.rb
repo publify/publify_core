@@ -69,7 +69,7 @@ RSpec.describe SetupController, type: :controller do
           post :create, params: { setting: { blog_name: "", email: "foo@bar.net",
                                              password: strong_password } }
           aggregate_failures do
-            expect(response).to redirect_to(action: "index")
+            expect(response).to render_template "index"
             expect(blog.reload).not_to be_configured
           end
         end
@@ -78,7 +78,7 @@ RSpec.describe SetupController, type: :controller do
           post :create, params: { setting: { blog_name: "Foo", email: "",
                                              password: strong_password } }
           aggregate_failures do
-            expect(response).to redirect_to(action: "index")
+            expect(response).to render_template "index"
             expect(blog.reload).not_to be_configured
           end
         end
@@ -87,7 +87,7 @@ RSpec.describe SetupController, type: :controller do
           post :create, params: { setting: { blog_name: "Foo", email: "foo@bar.net",
                                              password: "" } }
           aggregate_failures do
-            expect(response).to redirect_to(action: "index")
+            expect(response).to render_template "index"
             expect(blog.reload).not_to be_configured
           end
         end
@@ -96,7 +96,7 @@ RSpec.describe SetupController, type: :controller do
           post :create, params: { setting: { blog_name: "Foo", email: "foo@bar.net",
                                              password: "foo123bar" } }
           aggregate_failures do
-            expect(response).to redirect_to(action: "index")
+            expect(response).to render_template "index"
             expect(blog.reload).not_to be_configured
           end
         end

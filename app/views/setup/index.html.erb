@@ -1,3 +1,19 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2" id="error-message-page">
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= t("errors.template.header", model: 'blog', count: @user.errors.count) %></h2>
+        <p><%= t("errors.template.body") %></p>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <%= form_tag action: 'index' do %>
   <div class='alert alert-info'>
     <small><%= t('.welcome_to_your_blog_setup', publify: link_to('Publify', 'https://publify.github.io/')) %></small>
