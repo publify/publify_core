@@ -13,9 +13,9 @@
 blog = Blog.first || Blog.create!
 
 unless blog.sidebars.any?
-  PageSidebar.create!(active_position: 0, staged_position: 0, blog_id: blog.id)
-  TagSidebar.create!(active_position: 1, blog_id: blog.id)
-  ArchivesSidebar.create!(active_position: 2, blog_id: blog.id)
-  StaticSidebar.create!(active_position: 3, blog_id: blog.id)
-  MetaSidebar.create!(active_position: 4, blog_id: blog.id)
+  PageSidebar.create!(active_position: 0, staged_position: 0, blog: blog)
+  TagSidebar.create!(active_position: 1, blog: blog)
+  ArchivesSidebar.create!(active_position: 2, blog: blog)
+  StaticSidebar.create!(active_position: 3, blog: blog)
+  MetaSidebar.create!(active_position: 4, blog: blog)
 end

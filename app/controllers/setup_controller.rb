@@ -4,23 +4,24 @@ class SetupController < BaseController
   before_action :check_config
   layout "accounts"
 
-  def index; end
+  def index
+    this_blog.blog_name = ""
+    @user = User.new
+  end
 
   def create
-    this_blog.blog_name = params[:setting][:blog_name]
+    this_blog.blog_name = blog_params[:blog_name]
     this_blog.base_url = blog_base_url
 
-    @user = User.new(login: "admin",
-                     email: params[:setting][:email],
-                     password: params[:setting][:password],
-                     text_filter_name: this_blog.text_filter,
-                     nickname: "Publify Admin")
+    @user = User.new(user_params.merge(login: "admin",
+                                       text_filter_name: this_blog.text_filter,
+                                       nickname: "Publify Admin"))
     @user.name = @user.login
 
-    unless this_blog.save && @user.save
-      redirect_to setup_url
-      return
-    end
+    return render :index unless this_blog.valid? && @user.valid?
+
+    this_blog.save!
+    @user.save!
 
     sign_in @user
 
@@ -35,6 +36,14 @@ class SetupController < BaseController
   end
 
   private
+
+  def blog_params
+    params.require(:blog).permit(:blog_name)
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password)
+  end
 
   def create_first_post(user)
     this_blog.articles.build(title: I18n.t("setup.article.title"),

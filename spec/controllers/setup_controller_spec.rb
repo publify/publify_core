@@ -6,14 +6,20 @@ RSpec.describe SetupController, type: :controller do
   let(:strong_password) { "fhnehnhfiiuh" }
 
   describe "#index" do
-    describe "when no blog is configured" do
+    describe "when blog is not configured" do
+      render_views
+
       before do
-        # Set up database similar to result of seeding
-        @blog = Blog.create
+        # Set up database similar to result of db:setup
+        Blog.create
         get "index"
       end
 
       specify { expect(response).to render_template("index") }
+
+      it "does not show the default blog name in the form" do
+        expect(response.body).to have_css "input#blog_blog_name[value='']"
+      end
     end
 
     describe "when a blog is configured and has some users" do
@@ -27,26 +33,28 @@ RSpec.describe SetupController, type: :controller do
   end
 
   describe "#create" do
-    context "when no blog is configured" do
-      before do
-        # Set up database similar to result of seeding
-        @blog = Blog.create
-      end
+    context "when blog is not configured" do
+      # Set up database similar to result of seeding
+      let!(:blog) { Blog.create }
 
       context "when passing correct parameters" do
         before do
           ActionMailer::Base.deliveries.clear
-          post :create, params: { setting: { blog_name: "Foo", email: "foo@bar.net",
-                                             password: strong_password } }
+          post :create, params: { blog: { blog_name: "Foo" },
+                                  user: { email: "foo@bar.net",
+                                          password: strong_password } }
         end
 
         it "correctly initializes blog and users" do
-          expect(Blog.first.blog_name).to eq("Foo")
           admin = User.find_by(login: "admin")
-          expect(admin).not_to be_nil
-          expect(admin.email).to eq("foo@bar.net")
-          expect(Article.first.user).to eq(admin)
-          expect(Page.first.user).to eq(admin)
+
+          aggregate_failures do
+            expect(Blog.first.blog_name).to eq("Foo")
+            expect(admin).not_to be_nil
+            expect(admin.email).to eq("foo@bar.net")
+            expect(Article.first.user).to eq(admin)
+            expect(Page.first.user).to eq(admin)
+          end
         end
 
         it "logs in admin user" do
@@ -63,29 +71,45 @@ RSpec.describe SetupController, type: :controller do
         end
       end
 
-      describe "when passing incorrect parameters" do
-        it "empty blog name should raise an error" do
-          post :create, params: { setting: { blog_name: "", email: "foo@bar.net",
-                                             password: strong_password } }
-          expect(response).to redirect_to(action: "index")
+      context "when passing incorrect parameters" do
+        it "does no setup when blog name is empty" do
+          post :create, params: { blog: { blog_name: "" },
+                                  user: { email: "foo@bar.net",
+                                          password: strong_password } }
+          aggregate_failures do
+            expect(response).to render_template "index"
+            expect(blog.reload).not_to be_configured
+          end
         end
 
-        it "empty email should raise an error" do
-          post :create, params: { setting: { blog_name: "Foo", email: "",
-                                             password: strong_password } }
-          expect(response).to redirect_to(action: "index")
+        it "does no setup when email is empty" do
+          post :create, params: { blog: { blog_name: "Foo" },
+                                  user: { email: "",
+                                          password: strong_password } }
+          aggregate_failures do
+            expect(response).to render_template "index"
+            expect(blog.reload).not_to be_configured
+          end
         end
 
-        it "empty password should raise an error" do
-          post :create, params: { setting: { blog_name: "Foo", email: "foo@bar.net",
-                                             password: "" } }
-          expect(response).to redirect_to(action: "index")
+        it "does no setup when password is empty" do
+          post :create, params: { blog: { blog_name: "Foo" },
+                                  user: { email: "foo@bar.net",
+                                          password: "" } }
+          aggregate_failures do
+            expect(response).to render_template "index"
+            expect(blog.reload).not_to be_configured
+          end
         end
 
-        it "weak password should raise an error" do
-          post :create, params: { setting: { blog_name: "Foo", email: "foo@bar.net",
-                                             password: "foo123bar" } }
-          expect(response).to redirect_to(action: "index")
+        it "does no setup when password is weak" do
+          post :create, params: { blog: { blog_name: "Foo" },
+                                  user: { email: "foo@bar.net",
+                                          password: "foo123bar" } }
+          aggregate_failures do
+            expect(response).to render_template "index"
+            expect(blog.reload).not_to be_configured
+          end
         end
       end
     end
@@ -93,7 +117,8 @@ RSpec.describe SetupController, type: :controller do
     describe "when a blog is configured and has some users" do
       before do
         create(:blog)
-        post :create, params: { setting: { blog_name: "Foo", email: "foo@bar.net" } }
+        post :create, params: { blog: { blog_name: "Foo" },
+                                user: { email: "foo@bar.net" } }
       end
 
       specify { expect(response).to redirect_to(controller: "articles", action: "index") }
