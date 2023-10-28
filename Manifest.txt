@@ -29,7 +29,6 @@ app/assets/javascripts/bootstrap/tab.js
 app/assets/javascripts/bootstrap/transition.js
 app/assets/javascripts/check_password.js
 app/assets/javascripts/cookies.js
-app/assets/javascripts/datetimepicker.js
 app/assets/javascripts/lang/ar_AR.js
 app/assets/javascripts/lang/da_DK.js
 app/assets/javascripts/lang/default.js
@@ -107,7 +106,6 @@ app/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss
 app/assets/stylesheets/bootstrap/mixins/_text-overflow.scss
 app/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss
 app/assets/stylesheets/coderay.css
-app/assets/stylesheets/datetimepicker.css
 app/assets/stylesheets/lightbox.css
 app/assets/stylesheets/publify.css.scss
 app/assets/stylesheets/publify_admin.css.scss

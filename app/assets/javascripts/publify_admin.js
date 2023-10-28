@@ -3,7 +3,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require datetimepicker
 //= require bootstrap-sprockets
 //= require quicktags
 //= require tagmanager
