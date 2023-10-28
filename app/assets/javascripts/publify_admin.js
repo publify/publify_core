@@ -69,9 +69,6 @@ $(document).ready(function() {
   $('#article_form').submit(function(e){save_article_tags()});
   $('#article_form').each(function(e){tag_manager()});
 
-  // Date time picker (not related to date picker at all!)
-  $( "#article_published_at" ).datetimepicker();
-
   // DropDown
   $(".dropdown-toggle").dropdown();
 });
