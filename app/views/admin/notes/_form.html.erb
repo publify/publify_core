@@ -25,11 +25,10 @@
   </div>
   <div class='form-group'>
     <label for='note_published_at'><%= t('.publish_at') %></label>
-    <%= n.text_field :published_at, class: 'form-control datepicker',
-                                    placeholder: t('.now'), data: { locale: I18n.locale } %>
+    <%= n.datetime_field :published_at, class: 'form-control' %>
   </div>
   <div class='form-group'>
-    <hr />
+    <hr>
     <%= link_to(t('.cancel'), action: 'index') %>
     <%= t('.or') %>
     <%= submit_tag(t('.publish'), class: 'btn btn-success') %>
