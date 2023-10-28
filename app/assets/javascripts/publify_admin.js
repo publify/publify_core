@@ -3,22 +3,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery-ui/i18n/datepicker-da
-//= require jquery-ui/i18n/datepicker-de
-//= require jquery-ui/i18n/datepicker-es
-//= require jquery-ui/i18n/datepicker-fr
-//= require jquery-ui/i18n/datepicker-he
-//= require jquery-ui/i18n/datepicker-it
-//= require jquery-ui/i18n/datepicker-ja
-//= require jquery-ui/i18n/datepicker-lt
-//= require jquery-ui/i18n/datepicker-nb
-//= require jquery-ui/i18n/datepicker-nl
-//= require jquery-ui/i18n/datepicker-pl
-//= require jquery-ui/i18n/datepicker-pt-BR
-//= require jquery-ui/i18n/datepicker-ro
-//= require jquery-ui/i18n/datepicker-ru
-//= require jquery-ui/i18n/datepicker-zh-CN
-//= require jquery-ui/i18n/datepicker-zh-TW
 //= require datetimepicker
 //= require bootstrap-sprockets
 //= require quicktags
@@ -84,11 +68,6 @@ $(document).ready(function() {
   $('#article_form').each(function(e){autosave_request(e)});
   $('#article_form').submit(function(e){save_article_tags()});
   $('#article_form').each(function(e){tag_manager()});
-
-  // DatePickers
-  $('.datepicker').each(function() {
-    $(this).datepicker($.datepicker.regional[this.dataset.locale]);
-  });
 
   // Date time picker (not related to date picker at all!)
   $( "#article_published_at" ).datetimepicker();
