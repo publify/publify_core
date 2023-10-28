@@ -1,5 +1,25 @@
 # Changelog
 
+## 10.0.1 / 2023-10-28
+
+* Update CarrierWave dependency to version 3.0 ([#102] by [mvz])
+* Move String monkey-patches into a module under PublifyCore ([#115] by [mvz])
+* Remove text filter plugin naming requirements ([#109], [#110], [#117] by [mvz])
+* Fix name and description of Twitterfilter ([#118] by [mvz])
+* Fix link to pull request in CHANGELOG ([#116] by [mvz])
+* Provide proper validation feedback during setup ([#119] by [mvz])
+
+[#102]: https://github.com/publify/publify_core/pull/102
+[#109]: https://github.com/publify/publify_core/pull/109
+[#110]: https://github.com/publify/publify_core/pull/110
+[#115]: https://github.com/publify/publify_core/pull/115
+[#116]: https://github.com/publify/publify_core/pull/116
+[#117]: https://github.com/publify/publify_core/pull/117
+[#118]: https://github.com/publify/publify_core/pull/118
+[#119]: https://github.com/publify/publify_core/pull/119
+[mvz]: https://github.com/mvz
+[dependabot]: https://github.com/apps/dependabot
+
 ## 10.0.0 / 2023-06-25
 
 ### Updated dependencies
