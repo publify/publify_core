@@ -6,7 +6,7 @@ RSpec.describe Admin::NotesController, type: :controller do
   render_views
 
   let(:admin) { create(:user, :as_admin, twitter: "@getpublify") }
-  let!(:blog) { create(:blog) }
+  let!(:blog) { create(:blog, limit_article_display: 10) }
 
   before do
     sign_in admin
@@ -16,13 +16,32 @@ RSpec.describe Admin::NotesController, type: :controller do
     describe "index" do
       let!(:notes) { create_list(:note, 2) }
 
-      before { get :index }
+      it "shows the index template" do
+        get :index
+        expect(response).to render_template("index")
+      end
 
-      it { expect(response).to render_template("index") }
-      it { expect(assigns(:notes).sort).to eq(notes.sort) }
-      it { expect(assigns(:note)).to be_a(Note) }
-      it { expect(assigns(:note).author).to eq(admin.login) }
-      it { expect(assigns(:note).user).to eq(admin) }
+      it "lists existing notes" do
+        get :index
+        expect(assigns(:notes)).to match_array notes
+      end
+
+      it "assigns a new note for the note form" do
+        get :index
+
+        aggregate_failures do
+          expect(assigns(:note)).to be_a(Note)
+          expect(assigns(:note).author).to eq(admin.login)
+          expect(assigns(:note).user).to eq(admin)
+        end
+      end
+
+      it "lists notes without publication date" do
+        create(:note, published_at: nil)
+
+        get :index
+        expect(response).to be_successful
+      end
     end
 
     describe "create" do

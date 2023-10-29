@@ -3,10 +3,10 @@
     <%= h(note.body.strip_html.slice(0..140)) %>
   </td>
   <td>
-    <%= author_link(note) %><br />
+    <%= author_link(note) %><br>
   </td>
   <td>
-    <%= l(note.published_at) %>
+    <%= l(note.published_at) if note.published_at %>
   </td>
   <td>
     <%= note.text_filter_name %>
