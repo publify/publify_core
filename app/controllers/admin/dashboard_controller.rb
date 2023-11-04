@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class Admin::DashboardController < Admin::BaseController
-  require "open-uri"
-  require "time"
-  require "rexml/document"
-
   def index
     today = Time.zone.now.strftime("%Y-%m-%d 00:00")
 
