@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require "open-uri"
-require "time"
-require "rexml/document"
-
 class Admin::ThemesController < Admin::BaseController
   def index
     @themes = Theme.find_all
