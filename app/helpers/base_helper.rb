@@ -88,13 +88,9 @@ module BaseHelper
     end
   end
 
-  def onhover_show_admin_tools(type, id = nil)
-    admin_id = "#admin_#{[type, id].compact.join("_")}"
-    tag = []
-    tag << %{ onmouseover="if (getCookie('publify_user_profile') == 'admin')\
-             { $('#{admin_id}').show(); }" }
-    tag << %{ onmouseout="$('#{admin_id}').hide();" }
-    safe_join(tag, " ")
+  # This method's original implementation was broken. Now it does nothing.
+  def onhover_show_admin_tools(_type, _id = nil)
+    ""
   end
 
   def feed_title
