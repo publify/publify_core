@@ -37,7 +37,10 @@ app/assets/javascripts/lang/fr_FR.js
 app/assets/javascripts/lang/nl_NL.js
 app/assets/javascripts/lang/zh_TW.js
 app/assets/javascripts/lightbox.js
+app/assets/javascripts/markup_help_popup.js
 app/assets/javascripts/observe.js
+app/assets/javascripts/optional_field_toggle.js
+app/assets/javascripts/preview_comment.js
 app/assets/javascripts/publify.js
 app/assets/javascripts/publify_admin.js
 app/assets/javascripts/quicktags.js
