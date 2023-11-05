@@ -8,6 +8,7 @@
 //= require lightbox
 //= require markup_help_popup
 //= require observe
+//= require optional_field_toggle
 //= require check_password
 //
 //= require_self
