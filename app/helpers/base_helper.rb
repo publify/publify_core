@@ -74,13 +74,16 @@ module BaseHelper
       modal = tag.dialog id: "this_markup_help_popup_dialog", class: "markup-help-popup" do
         tag.div do
           close_div = tag.div tag.span("\u2a09", class: "markup-help-popup-close")
-          content = sanitize(markup.commenthelp)
+          content = tag.div class: "content-target"
           safe_join [close_div, content]
         end
       end
 
+      url = url_for(controller: "articles", action: "markup_help", id: markup.name)
+
       link = link_to(text, "#", class: "markup-help-popup-link",
-                                data: { target: "this_markup_help_popup_dialog" })
+                                data: { target: "this_markup_help_popup_dialog",
+                                        url: url })
 
       safe_join [modal, link]
     else

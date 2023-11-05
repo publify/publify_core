@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ArticlesController < ContentController
+  include ActionView::Helpers::SanitizeHelper
+
   before_action :login_required, only: [:preview, :preview_page]
   before_action :verify_config
   before_action :auto_discovery_feed, only: [:show, :index]
@@ -127,7 +129,7 @@ class ArticlesController < ContentController
   def markup_help
     filter = TextFilter.make_filter(params[:id])
     if filter
-      render html: filter.commenthelp
+      render html: sanitize(filter.commenthelp)
     else
       render plain: "Unknown filter"
     end
