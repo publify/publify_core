@@ -67,6 +67,7 @@ $(document).ready(function() {
   $('#article_form').each(function(e){autosave_request(e)});
   $('#article_form').submit(function(e){save_article_tags()});
   $('#article_form').each(function(e){tag_manager()});
+  $('#checkall').click(function(e){check_all(e.target)});
 
   // DropDown
   $(".dropdown-toggle").dropdown();

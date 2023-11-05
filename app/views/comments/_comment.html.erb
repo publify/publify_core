@@ -1,5 +1,5 @@
 <% cache comment do %>
-  <li id="comment-<%= comment.id %>" <%= 'class="author_comment"' if comment.user %> <%= onhover_show_admin_tools(:comment, comment.id) %>>
+  <li id="comment-<%= comment.id %>" <%= 'class="author_comment"' if comment.user %>>
     <p class="author">
     <%= avatar_tag(email: comment.email, url: comment.url) %>
     <cite><strong><%= link_to_unless(comment.url.blank?, h(comment.author), comment.url) %></strong></cite>

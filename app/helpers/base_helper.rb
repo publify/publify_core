@@ -71,21 +71,29 @@ module BaseHelper
 
   def markup_help_popup(markup, text)
     if markup && markup.commenthelp.size > 1
-      link_to(text,
-              url_for(controller: "articles", action: "markup_help", id: markup.name),
-              onclick: "return popup(this, 'Publify Markup Help')")
+      modal = tag.dialog id: "this_markup_help_popup_dialog", class: "markup-help-popup" do
+        tag.div do
+          close_div = tag.div tag.span("\u2a09", class: "markup-help-popup-close")
+          content = tag.div class: "content-target"
+          safe_join [close_div, content]
+        end
+      end
+
+      url = url_for(controller: "articles", action: "markup_help", id: markup.name)
+
+      link = link_to(text, "#", class: "markup-help-popup-link",
+                                data: { target: "this_markup_help_popup_dialog",
+                                        url: url })
+
+      safe_join [modal, link]
     else
       ""
     end
   end
 
-  def onhover_show_admin_tools(type, id = nil)
-    admin_id = "#admin_#{[type, id].compact.join("_")}"
-    tag = []
-    tag << %{ onmouseover="if (getCookie('publify_user_profile') == 'admin')\
-             { $('#{admin_id}').show(); }" }
-    tag << %{ onmouseout="$('#{admin_id}').hide();" }
-    safe_join(tag, " ")
+  # This method's original implementation was broken. Now it does nothing.
+  def onhover_show_admin_tools(_type, _id = nil)
+    ""
   end
 
   def feed_title
