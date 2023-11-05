@@ -9,6 +9,7 @@
 //= require markup_help_popup
 //= require observe
 //= require optional_field_toggle
+//= require preview_comment
 //= require check_password
 //
 //= require_self
