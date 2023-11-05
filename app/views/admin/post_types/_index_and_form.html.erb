@@ -23,7 +23,7 @@
         <%= f.text_area :description, rows: 5, class: 'form-control', placeholder: 'Description' %>
       </div>
       <div class="form-group">
-        <hr />
+        <hr>
         <%= link_to(t('.cancel'), action: 'index') %>
         <%= t('.or') %>
         <%= f.submit t('.save'), class: 'btn btn-success' %>
@@ -48,7 +48,7 @@
       <% @post_types.each do |post_type| %>
         <tr>
           <td>
-            <%= post_type.name %><br />
+            <%= post_type.name %><br>
             <div class='action'>
               <%= button_to_edit post_type %>
               <%= button_to_delete post_type %>

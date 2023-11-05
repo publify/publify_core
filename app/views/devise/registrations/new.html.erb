@@ -18,13 +18,13 @@
   <div class="form-group">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-      <em>(<%= t('devise_custom.characters_minimum', min: @minimum_password_length) %>)</em><br />
+      <em>(<%= t('devise_custom.characters_minimum', min: @minimum_password_length) %>)</em><br>
     <% end %>
     <%= f.password_field :password, class: 'form-control', autofocus: true, autocomplete: 'off' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation %><br>
     <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: 'off' %>
   </div>
 
