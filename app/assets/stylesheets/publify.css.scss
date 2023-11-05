@@ -7,3 +7,16 @@
   border-bottom: #eee 1px solid;
   font-size: 0.9em;
 }
+
+.markup-help-popup {
+  padding: 0;
+}
+
+.markup-help-popup > div {
+  padding: 1em;
+}
+
+.markup-help-popup-close {
+  float: right;
+  cursor: pointer;
+}

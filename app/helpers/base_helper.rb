@@ -71,9 +71,18 @@ module BaseHelper
 
   def markup_help_popup(markup, text)
     if markup && markup.commenthelp.size > 1
-      link_to(text,
-              url_for(controller: "articles", action: "markup_help", id: markup.name),
-              onclick: "return popup(this, 'Publify Markup Help')")
+      modal = tag.dialog id: "this_markup_help_popup_dialog", class: "markup-help-popup" do
+        tag.div do
+          close_div = tag.div tag.span("\u2a09", class: "markup-help-popup-close")
+          content = sanitize(markup.commenthelp)
+          safe_join [close_div, content]
+        end
+      end
+
+      link = link_to(text, "#", class: "markup-help-popup-link",
+                                data: { target: "this_markup_help_popup_dialog" })
+
+      safe_join [modal, link]
     else
       ""
     end
