@@ -3,7 +3,7 @@
   <div class="sidebar-body">
     <p class="tag-sidebar-tag-cloud">
     <% sidebar.tags.each do |tag| %>
-      <span style="font-size:<%= sidebar.sizes[tag] %>%"><%= link_to tag.display_name, tag_url(tag.name) %></span>
+      <span class="tag-sidebar-tag-<%= sidebar.sizes[tag] %>"><%= link_to tag.display_name, tag_url(tag.name) %></span>
     <% end %>
     </p>
   </div>
