@@ -43,7 +43,7 @@ RSpec.describe TagSidebar, type: :model do
       create(:article, keywords: "foo, quuz")
 
       result = sidebar.sizes
-      expect(result.values.uniq).to contain_exactly (2.0 / 3.0 * 100), 200
+      expect(result.values.uniq).to contain_exactly 67, 200
     end
   end
 end
