@@ -58,7 +58,7 @@ RSpec.describe Admin::PagesController, type: :controller do
             page: {
               name: "new_page", title: "New Page Title", body: "Emphasis _mine_,
               arguments *strong*"
-            },
+            }
           }
         end
 

@@ -32,7 +32,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
     it "search query and limit on published_at" do
       get :index, params: { search: {
         searchstring: article.body[0..4],
-        published_at: article.published_at + 2.days,
+        published_at: article.published_at + 2.days
       } }
       expect(assigns(:articles)).to be_empty
     end
@@ -404,7 +404,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
 
       it "allows updating body_and_extended" do
         put :update, params: { "id" => article.id, "article" => {
-          "body_and_extended" => "foo<!--more-->bar<!--more-->baz",
+          "body_and_extended" => "foo<!--more-->bar<!--more-->baz"
         } }
         expect(response).to redirect_to action: "index"
         article.reload
@@ -414,7 +414,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
 
       it "allows updating password" do
         put :update, params: { "id" => article.id, "article" => {
-          "password" => "foobar",
+          "password" => "foobar"
         } }
         expect(response).to redirect_to action: "index"
         article.reload
@@ -431,7 +431,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
           before do
             put(:update, params: {
                   id: original.id,
-                  article: { id: draft.id, body: "update" },
+                  article: { id: draft.id, body: "update" }
                 })
           end
 
@@ -454,7 +454,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
           before do
             put(:update, params: {
                   id: draft.id,
-                  article: { id: draft.id, body: "update" },
+                  article: { id: draft.id, body: "update" }
                 })
           end
 
@@ -477,7 +477,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
           before do
             put(:update, params: {
                   id: draft.id,
-                  article: { id: draft.id, body: "update", published_at: "2016-07-07" },
+                  article: { id: draft.id, body: "update", published_at: "2016-07-07" }
                 })
           end
 
@@ -492,7 +492,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
           @orig = create(:article)
           put(:update, params: {
                 id: @orig.id,
-                article: { title: @orig.title, draft: "draft", body: "update" },
+                article: { title: @orig.title, draft: "draft", body: "update" }
               })
         end
 

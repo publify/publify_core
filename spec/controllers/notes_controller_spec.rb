@@ -44,10 +44,10 @@ RSpec.describe NotesController, type: :controller do
             "screen_name" => "a screen name",
             "entities" => {
               "url" => {
-                "urls" => [{ "expanded_url" => "an url" }],
-              },
-            },
-          },
+                "urls" => [{ "expanded_url" => "an url" }]
+              }
+            }
+          }
         }
       end
       let(:permalink) do
