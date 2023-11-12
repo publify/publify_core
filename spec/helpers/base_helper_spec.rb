@@ -97,8 +97,8 @@ RSpec.describe BaseHelper, type: :helper do
       reply = {
         "user" => {
           "name" => "truc",
-          "entities" => { "url" => { "urls" => [{ "expanded_url" => "an url" }] } },
-        },
+          "entities" => { "url" => { "urls" => [{ "expanded_url" => "an url" }] } }
+        }
       }
       expect(get_reply_context_url(reply)).to eq '<a href="an url">truc</a>'
     end
@@ -116,7 +116,7 @@ RSpec.describe BaseHelper, type: :helper do
         "created_at" => "Thu Jan 23 13:47:00 +0000 2014",
         "user" => {
           "screen_name" => "a_screen_name",
-          "entities" => { "url" => { "urls" => [{ "expanded_url" => "an url" }] } },
+          "entities" => { "url" => { "urls" => [{ "expanded_url" => "an url" }] } }
         } }
     end
 
