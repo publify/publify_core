@@ -65,7 +65,7 @@ class TextFilter
       markdown,
       smartypants,
       markdown_smartypants,
-      none,
+      none
     ]
   end
 
