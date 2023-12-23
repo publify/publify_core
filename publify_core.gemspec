@@ -60,7 +60,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rubocop", "~> 1.59.0"
   s.add_development_dependency "rubocop-capybara", "~> 2.19.0"
   s.add_development_dependency "rubocop-factory_bot", "~> 2.24.0"
-  s.add_development_dependency "rubocop-performance", "~> 1.19.0"
+  s.add_development_dependency "rubocop-performance", "~> 1.20.0"
   s.add_development_dependency "rubocop-rails", "~> 2.23.0"
   s.add_development_dependency "rubocop-rspec", "~> 2.25.0"
   s.add_development_dependency "shoulda-matchers", "~> 5.3"
