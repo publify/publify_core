@@ -224,7 +224,7 @@ module BaseHelper
     elsif !@article.nil?
       @article.feed_url(type)
     elsif !@auto_discovery_url_atom.nil?
-      instance_variable_get("@auto_discovery_url_#{type}")
+      instance_variable_get(:"@auto_discovery_url_#{type}")
     end
   end
 
