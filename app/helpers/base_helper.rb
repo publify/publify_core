@@ -198,7 +198,7 @@ module BaseHelper
   end
 
   def stop_index_robots?(blog)
-    stop = (params[:year].present? || params[:page].present?)
+    stop = params[:year].present? || params[:page].present?
     stop = blog.unindex_tags if controller_name == "tags"
     stop = blog.unindex_categories if controller_name == "categories"
     stop
