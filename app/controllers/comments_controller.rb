@@ -32,7 +32,7 @@ class CommentsController < BaseController
 
   def recaptcha_ok_for?(comment)
     use_recaptcha = comment.blog.use_recaptcha
-    ((use_recaptcha && verify_recaptcha(model: comment)) || !use_recaptcha)
+    (use_recaptcha && verify_recaptcha(model: comment)) || !use_recaptcha
   end
 
   def new_comment_defaults
