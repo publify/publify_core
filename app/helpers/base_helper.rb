@@ -37,8 +37,8 @@ module BaseHelper
     javascript_include_tag "/javascripts/theme/#{name}.js" if File.exist? src
   end
 
-  def render_to_string(*args, &block)
-    controller.send(:render_to_string, *args, &block)
+  def render_to_string(...)
+    controller.send(:render_to_string, ...)
   end
 
   def link_to_permalink(item, title,
