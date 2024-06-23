@@ -22,6 +22,14 @@ AllCops:
 Rails:
   Enabled: true
 
+# Require tests to specify whether an element is a link or a button
+Capybara/ClickLinkOrButtonStyle:
+  EnforcedStyle: strict
+
+# Match style of regular expectations
+Capybara/NegationMatcher:
+  EnforcedStyle: not_to
+
 # Put development dependencies in the gemspec so rubygems.org knows about them
 Gemspec/DevelopmentDependencies:
   EnforcedStyle: gemspec
