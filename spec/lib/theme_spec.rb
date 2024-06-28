@@ -28,6 +28,13 @@ RSpec.describe Theme, type: :model do
     end
   end
 
+  describe "#description_html" do
+    it "returns the contents of the about file processed as markdown" do
+      expect(default_theme.description_html)
+        .to start_with "<h4>Plain theme for Publify</h4>"
+    end
+  end
+
   describe ".find_all" do
     let(:theme_directories) do
       Dir.glob(PublifyCore::Engine.instance.root.join("themes/[a-zA-Z0-9]*"))
