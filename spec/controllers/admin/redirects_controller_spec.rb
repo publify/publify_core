@@ -3,8 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Admin::RedirectsController, type: :controller do
+  let!(:blog) { create(:blog) }
+
   before do
-    create(:blog)
     admin = create(:user, :as_admin)
     sign_in admin
   end
@@ -38,6 +39,16 @@ RSpec.describe Admin::RedirectsController, type: :controller do
       it "renders properly with redirects present" do
         create(:redirect)
         expect { get :index }.not_to raise_error
+      end
+
+      it "links to the redirect target using the full target path" do
+        blog.update(base_url: "https://foo.bar/baz")
+        create(:redirect, to_path: "qux")
+        get :index
+        aggregate_failures do
+          expect(response.body).not_to have_link href: "qux"
+          expect(response.body).to have_link "qux", href: "/baz/qux"
+        end
       end
     end
   end
