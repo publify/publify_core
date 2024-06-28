@@ -25,10 +25,15 @@ class Content < ApplicationRecord
   scope :drafts, -> { where(state: "draft").order("created_at DESC") }
   scope :no_draft, -> { where.not(state: "draft").order("published_at DESC") }
   scope :searchstring, lambda { |search_string|
+    result = where(state: "published")
+
     tokens = search_string.split(" ").map { |c| "%#{c.downcase}%" }
-    matcher = "(LOWER(body) LIKE ? OR LOWER(extended) LIKE ? OR LOWER(title) LIKE ?)"
-    template = "state = ? AND #{([matcher] * tokens.size).join(" AND ")}"
-    where(template, "published", *tokens.map { |token| [token] * 3 }.flatten)
+    tokens.each do |token|
+      result = result
+        .where("(LOWER(body) LIKE ? OR LOWER(extended) LIKE ? OR LOWER(title) LIKE ?)",
+               token, token, token)
+    end
+    result
   }
 
   scope :published_at_like, lambda { |date_at|
