@@ -1,5 +1,37 @@
 # Changelog
 
+## 10.0.2 / 2024-06-28
+
+### Security updates
+
+* Safely link target URLs for Redirects in admin ([#148] by [mvz])
+* Upgrade jquery-ui-rails to version 7.0 ([#149] by [mvz])
+
+### Functional changes
+
+* Use native datetime inputs in the Admin ([#121] by [mvz])
+* Display Theme description nicely in the admin ([#151] by [mvz])
+
+### Internal changes
+
+* Stop using and depending on REXML ([#123] by [mvz])
+* Remove inline javascript ([#124] by [mvz])
+* Switch to no-trailing-comma style ([#127] by [mvz])
+* Remove inline styles assigned in ERB templates ([#128] by [mvz])
+* Make Content.searchstring scope code more transparent ([#150] by [mvz])
+* Add erb-lint and fix initial warnings ([#125] by [mvz])
+
+[#121]: https://github.com/publify/publify_core/pull/121
+[#123]: https://github.com/publify/publify_core/pull/123
+[#124]: https://github.com/publify/publify_core/pull/124
+[#125]: https://github.com/publify/publify_core/pull/125
+[#127]: https://github.com/publify/publify_core/pull/127
+[#128]: https://github.com/publify/publify_core/pull/128
+[#148]: https://github.com/publify/publify_core/pull/148
+[#149]: https://github.com/publify/publify_core/pull/149
+[#150]: https://github.com/publify/publify_core/pull/150
+[#151]: https://github.com/publify/publify_core/pull/151
+
 ## 10.0.1 / 2023-10-28
 
 * Update CarrierWave dependency to version 3.0 ([#102] by [mvz])
@@ -18,7 +50,6 @@
 [#118]: https://github.com/publify/publify_core/pull/118
 [#119]: https://github.com/publify/publify_core/pull/119
 [mvz]: https://github.com/mvz
-[dependabot]: https://github.com/apps/dependabot
 
 ## 10.0.0 / 2023-06-25
 

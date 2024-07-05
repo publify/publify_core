@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Theme
-  attr_accessor :name, :path, :description_html
+  attr_reader :name, :path
 
   def initialize(name, path)
     @name = name
@@ -16,16 +16,27 @@ class Theme
   end
 
   def description
-    about_file = "#{path}/about.markdown"
-    if File.exist? about_file
-      File.read about_file
-    else
-      "### #{name}"
-    end
+    @description ||=
+      begin
+        about_file = theme_file("about.markdown")
+        if File.exist? about_file
+          File.read about_file
+        else
+          "### #{name}"
+        end
+      end
+  end
+
+  def description_html
+    TextFilter.markdown.filter_text(description)
   end
 
   def view_path
     "#{path}/views"
+  end
+
+  def theme_file(filename)
+    File.join(path, filename)
   end
 
   # Find a theme, given the theme name
