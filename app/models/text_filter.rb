@@ -44,7 +44,7 @@ class TextFilter
       if f.help_text.blank?
         ""
       else
-        "<h3>#{f.display_name}</h3>\n#{CommonMarker.render_html(f.help_text, :DEFAULT)}"
+        "<h3>#{f.display_name}</h3>\n#{Commonmarker.to_html(f.help_text)}"
       end
     end
 
@@ -56,7 +56,7 @@ class TextFilter
       .expand_filter_list([markup, filters].flatten)
 
     help_filters.map do |f|
-      f.help_text.blank? ? "" : CommonMarker.render_html(f.help_text)
+      f.help_text.blank? ? "" : Commonmarker.to_html(f.help_text)
     end.join("\n")
   end
 
