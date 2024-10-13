@@ -23,7 +23,7 @@ class Admin::NotesController < Admin::BaseController
     note = new_note
 
     note.state = "published"
-    note.attributes = params[:note].permit!
+    note.assign_attributes(note_params)
     note.text_filter ||= default_text_filter
     note.published_at ||= Time.zone.now
     if note.save
@@ -41,7 +41,7 @@ class Admin::NotesController < Admin::BaseController
   end
 
   def update
-    @note.attributes = params[:note].permit!
+    @note.assign_attributes(note_params)
     @note.save
     redirect_to admin_notes_url
   end
@@ -53,6 +53,15 @@ class Admin::NotesController < Admin::BaseController
   end
 
   private
+
+  def note_params
+    params.require(:note).permit(:text_filter_name,
+                                 :body,
+                                 :push_to_twitter,
+                                 :in_reply_to_status_id,
+                                 :permalink,
+                                 :published_at)
+  end
 
   def load_existing_notes
     @notes = Note.page(params[:page]).per(this_blog.limit_article_display)
