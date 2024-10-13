@@ -28,6 +28,10 @@ module ConfigManager
       fields[key.to_s].default
     end
 
+    def settings_keys
+      fields.keys
+    end
+
     private
 
     def add_setting_reader(item)
@@ -63,6 +67,10 @@ module ConfigManager
 
   def canonicalize(key, value)
     self.class.fields[key.to_s].canonicalize(value)
+  end
+
+  def settings_keys
+    self.class.settings_keys
   end
 
   class Item
