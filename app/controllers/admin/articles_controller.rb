@@ -108,7 +108,7 @@ class Admin::ArticlesController < Admin::BaseController
 
     fetch_fresh_or_existing_draft_for_article
 
-    @article.attributes = params[:article].permit!
+    @article.assign_attributes(update_params)
 
     @article.author = current_user
     @article.save_attachments!(params[:attachments])
