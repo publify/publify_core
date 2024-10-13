@@ -8,9 +8,11 @@ class Admin::SidebarController < Admin::BaseController
 
   # Just update a single active Sidebar instance at once
   def update
-    @sidebar = Sidebar.where(id: params[:id]).first
+    @sidebar = Sidebar.find(params[:id])
     @old_s_index = @sidebar.staged_position || @sidebar.active_position
-    @sidebar.update params[:configure][@sidebar.id.to_s].permit!
+    @sidebar.update params.require(:configure)
+      .require(@sidebar.id.to_s)
+      .permit(@sidebar.fields.map(&:key))
     respond_to do |format|
       format.js
       format.html do
