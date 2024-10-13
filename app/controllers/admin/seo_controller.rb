@@ -30,7 +30,11 @@ class Admin::SeoController < Admin::BaseController
   private
 
   def settings_params
-    @settings_params ||= params.require(:setting).permit!
+    @settings_params ||= params.require(:setting).permit(settings_keys)
+  end
+
+  def settings_keys
+    @setting.settings_keys + [:custom_permalink]
   end
 
   VALID_SECTIONS = %w(general titles permalinks).freeze
