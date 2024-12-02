@@ -33,7 +33,7 @@ module ContentBase
   # Generate HTML for a specific field using the text_filter in use for this
   # object.
   def generate_html(field, text = nil)
-    text ||= self[field].to_s
+    text ||= self[field] || ""
     html = (text_filter || default_text_filter).filter_text(text) || text
     html_postprocess(field, html).to_s
   end
