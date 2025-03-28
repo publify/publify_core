@@ -3,10 +3,10 @@
 namespace :manifest do
   def gemmable_files
     `git ls-files -z`.split("\x0").reject do |file|
-      file.match(%r{^(bin|spec)/}) ||
+      file.match(%r{^(bin|spec|gemfiles)/}) ||
         file.end_with?("/.keep") ||
         file.start_with?(".") ||
-        %w(Manifest.txt Gemfile Rakefile publify_core.gemspec).include?(file)
+        %w(Manifest.txt Appraisals Gemfile Rakefile publify_core.gemspec).include?(file)
     end
   end
 
