@@ -1,6 +1,6 @@
 CHANGELOG.md
-MIT-LICENSE
 README.md
+MIT-LICENSE
 app/assets/fonts/open-sans-bold.woff
 app/assets/fonts/open-sans.woff
 app/assets/images/admin/loading.gif
