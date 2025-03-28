@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.description = "Core engine for the Publify blogging system, formerly known as Typo."
   s.license     = "MIT"
 
-  s.files       = File.open("Manifest.txt").readlines.map(&:chomp)
+  s.files       = File.read("Manifest.txt").split
 
   s.required_ruby_version = ">= 3.0.0"
 
@@ -56,6 +56,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "feedjira", "~> 3.2"
   s.add_development_dependency "i18n-tasks", "~> 1.0.12"
   s.add_development_dependency "rails-controller-testing", "~> 1.0.1"
+  s.add_development_dependency "rake-manifest", "~> 0.2.0"
   s.add_development_dependency "rspec-rails", "~> 6.0"
   s.add_development_dependency "rubocop", "~> 1.59.0"
   s.add_development_dependency "rubocop-capybara", "~> 2.21.0"
