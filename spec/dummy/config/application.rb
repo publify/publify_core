@@ -2,6 +2,8 @@
 
 require_relative "boot"
 
+# FIXME: Remove after support for Rails < 7.1 is dropped
+require "logger"
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"

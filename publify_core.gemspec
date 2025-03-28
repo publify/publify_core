@@ -49,6 +49,7 @@ Gem::Specification.new do |s|
   s.add_dependency "twitter", ">= 7.0", "< 8.2"
   s.add_dependency "uuidtools", "~> 2.2.0"
 
+  s.add_development_dependency "appraisal", "~> 2.3"
   s.add_development_dependency "capybara", "~> 3.0"
   s.add_development_dependency "erb_lint", "~> 0.5.0"
   s.add_development_dependency "factory_bot", "~> 6.2"
