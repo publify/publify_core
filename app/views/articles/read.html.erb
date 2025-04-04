@@ -1,5 +1,5 @@
 <div class="post admin-tools-reveal">
-  <% if current_user&.profile == "admin" %>
+  <% if current_user&.profile.in? [User::ADMIN, User::PUBLISHER] %>
     <%= link_to(t('.edit'), edit_admin_article_path(@article.id), class: 'admintools', id: 'admin_article') %>
   <% end %>
   <% cache @article do %>
