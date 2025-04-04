@@ -1,3 +1,15 @@
+<thead>
+  <tr>
+    <th><%= t(".title") %></th>
+    <th><%= t(".author") %></th>
+    <th><%= t(".created_at") %></th>
+    <th><%= t(".published_at") %></th>
+    <th><%= t(".feedback") %></th>
+    <th><%= t(".text_filter") %></th>
+    <th><%= t(".actions") %></th>
+  </tr>
+</thead>
+<tbody id="articleList">
 <% if @articles.empty? %>
   <tr>
     <td colspan="7">
@@ -39,3 +51,4 @@
   </tr>
 <% end %>
 <%= display_pagination(@articles, 7, 'first', 'last') %>
+</tbody>
