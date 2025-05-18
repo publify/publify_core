@@ -47,6 +47,8 @@ RSpec.feature "Signing up", type: :feature do
   scenario "Disallow account sign-up link with a blog setting" do
     Blog.first.update(allow_signup: 0)
     visit admin_dashboard_path
+
+    expect(page).to have_text "You need to sign in or sign up before continuing."
     expect(page).not_to have_link I18n.t("accounts.create_account")
 
     visit new_user_registration_path
