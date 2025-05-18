@@ -101,7 +101,7 @@ class Article < Content
 
   def self.search_with(params)
     params ||= {}
-    scoped = super(params)
+    scoped = super
     if %w(no_draft drafts published withdrawn pending).include?(params[:state])
       scoped = scoped.send(params[:state])
     end
@@ -145,7 +145,7 @@ class Article < Content
   end
 
   def previous
-    Article.where("published_at < ?", published_at).order("published_at desc")
+    Article.where(published_at: ...published_at).order("published_at desc")
       .limit(1).first
   end
 

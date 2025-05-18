@@ -196,7 +196,7 @@ RSpec.describe ArticlesController, type: :controller do
       end
 
       it "assigns @search the search string" do
-        expect(assigns[:search]).to be_equal(controller.params[:q])
+        expect(assigns[:search]).to equal(controller.params[:q])
       end
     end
   end
