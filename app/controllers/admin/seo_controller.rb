@@ -4,6 +4,8 @@ class Admin::SeoController < Admin::BaseController
   before_action :set_setting
   before_action :set_section
 
+  VALID_SECTIONS = %w(general titles permalinks).freeze
+
   def show
     if @setting.permalink_format != "/%year%/%month%/%day%/%title%" &&
         @setting.permalink_format != "/%year%/%month%/%title%" &&
@@ -36,8 +38,6 @@ class Admin::SeoController < Admin::BaseController
   def settings_keys
     @setting.settings_keys + [:custom_permalink]
   end
-
-  VALID_SECTIONS = %w(general titles permalinks).freeze
 
   def set_section
     section = params[:section]

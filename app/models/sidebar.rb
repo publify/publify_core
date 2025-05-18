@@ -97,9 +97,7 @@ class Sidebar < ApplicationRecord
 
   def parse_request(_contents, _params); end
 
-  def fields
-    self.class.fields
-  end
+  delegate :fields, to: :class
 
   def fieldmap(field = nil)
     if field
@@ -109,17 +107,11 @@ class Sidebar < ApplicationRecord
     end
   end
 
-  def description
-    self.class.description
-  end
+  delegate :description, to: :class
 
-  def short_name
-    self.class.short_name
-  end
+  delegate :short_name, to: :class
 
-  def display_name
-    self.class.display_name
-  end
+  delegate :display_name, to: :class
 
   def content_partial
     "/#{self.class.path_name}/content"

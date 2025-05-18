@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Admin::SettingsController < Admin::BaseController
+  VALID_ACTIONS = %w(index write feedback display).freeze
+
   def index
     this_blog.base_url = blog_base_url if this_blog.base_url.blank?
     load_settings
@@ -32,8 +34,6 @@ class Admin::SettingsController < Admin::BaseController
   end
 
   private
-
-  VALID_ACTIONS = %w(index write feedback display).freeze
 
   def settings_params
     @settings_params ||= params.require(:setting).permit(@setting.settings_keys)

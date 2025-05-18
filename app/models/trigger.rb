@@ -11,7 +11,7 @@ class Trigger < ApplicationRecord
     end
 
     def fire
-      where("due_at <= ?", Time.zone.now).destroy_all
+      where(due_at: ..Time.zone.now).destroy_all
       true
     end
 

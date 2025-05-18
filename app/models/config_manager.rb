@@ -69,9 +69,7 @@ module ConfigManager
     self.class.fields[key.to_s].canonicalize(value)
   end
 
-  def settings_keys
-    self.class.settings_keys
-  end
+  delegate :settings_keys, to: :class
 
   class Item
     VALID_TYPES = [:boolean, :integer, :string, :text].freeze
