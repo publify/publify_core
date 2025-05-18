@@ -16,10 +16,15 @@ load "rails/tasks/statistics.rake"
 Bundler::GemHelper.install_tasks
 
 require "rspec/core/rake_task"
+require "rake/manifest/task"
+
+Rake::Manifest::Task.new do |t|
+  t.patterns = ["*.md", "MIT-LICENSE", "{app,config,db,lib,themes}/**/*"]
+end
+
+task default: "manifest:check"
 
 desc "Run all specs in spec directory"
 RSpec::Core::RakeTask.new(spec: "app:db:test:prepare")
-task default: :spec
 
-load "lib/tasks/manifest.rake"
-task default: "manifest:check"
+task default: :spec
