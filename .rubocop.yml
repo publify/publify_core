@@ -4,12 +4,13 @@ inherit_mode:
   merge:
     - Exclude
 
-require:
+plugins:
   - rubocop-capybara
   - rubocop-factory_bot
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-rspec_rails
 
 AllCops:
   Exclude:
@@ -114,12 +115,12 @@ Rails/SkipsModelValidations:
   Exclude:
     - 'db/migrate/*'
 
-RSpec/Capybara/FeatureMethods:
+RSpec/Dialect:
   Exclude:
     - 'spec/features/**_spec.rb'
 
 # Spec type inference is disabled, so this cop must be disabled too.
-RSpec/Rails/InferredSpecType:
+RSpecRails/InferredSpecType:
   Enabled: false
 
 # Allow the use of 'and' 'or' in control structures.
