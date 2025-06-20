@@ -15,7 +15,7 @@ require "publify_core/text_filter/smartypants"
 require "publify_core/text_filter/twitterfilter"
 require "publify_core/string_ext"
 
-require "bootstrap-sass"
+require "bootstrap"
 require "carrierwave"
 require "jquery-rails"
 require "jquery-ui-rails"
