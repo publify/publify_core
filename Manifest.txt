@@ -173,6 +173,7 @@ app/views/admin/settings/feedback.html.erb
 app/views/admin/settings/index.html.erb
 app/views/admin/settings/write.html.erb
 app/views/admin/shared/_edit.html.erb
+app/views/admin/shared/_flash.html.erb
 app/views/admin/shared/_menu.html.erb
 app/views/admin/shared/_twitter_alert.html.erb
 app/views/admin/sidebar/_available.html.erb

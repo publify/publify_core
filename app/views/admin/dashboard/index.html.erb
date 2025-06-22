@@ -1,15 +1,15 @@
 <% content_for :page_heading do %>
-<h2 class="page-title"><%= t('.welcome_back', user_name: current_user.name) %></h2>
+  <h2 class="display-4"><%= t('.welcome_back', user_name: current_user.name) %></h2>
 <% end %>
 
 <%= render 'overview' %>
 
 <div class='row'>
-  <div class='col-md-6'>
+  <div class='col-lg-6'>
     <%= render 'welcome' %>
     <%= render 'comments' %>
   </div>
-  <div class='col-md-6'>
+  <div class='col-lg-6'>
     <%= render 'drafts' %>
   </div>
 </div>

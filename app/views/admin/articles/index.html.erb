@@ -1,40 +1,32 @@
 <% content_for :page_heading do %>
   <h2>
     <%= t('.manage_articles') %>
-    <%= link_to(t('.new_article'), { controller: 'articles', action: 'new' }, { id: 'dialog-link', class: 'btn btn-info pull-right' }) %>
+    <%= link_to(t('.new_article'), { controller: 'articles', action: 'new' }, { id: 'dialog-link', class: 'btn btn-info float-right' }) %>
   </h2>
 <% end %>
 
-<%= form_tag({ action: 'index' }, { method: :get, name: 'article', remote: true, class: 'form-inline spinnable', "data-update-success": 'articleList' }) do %>
+<%= form_tag({ action: 'index' }, { method: :get, name: 'article', remote: true, class: 'spinnable', "data-update-success": 'articleList' }) do %>
 
   <% if params[:search] and params[:search]['state'] %>
     <input type="hidden" name="search[state]" value="<%= params[:search]['state'] %>">
   <% end %>
 
   <p>
-    <%= link_to(t('.all_articles'), { action: 'index' }, { class: 'label label-default' }) %>
-    <%= link_to(t('.published'), { action: 'index', search: { state: 'published' } }, { class: 'label label-success' }) %>
-    <%= link_to(t('.withdrawn'), { action: 'index', search: { state: 'withdrawn' } }, { class: 'label label-danger' }) %>
-    <%= link_to(t('.drafts'), { action: 'index', search: { state: 'drafts' } }, { class: 'label label-info' }) %>
-    <%= link_to(t('.publication_pending'), { action: 'index', search: { state: 'pending' } }, { class: 'label label-warning' }) %>
+    <%= link_to(t('.all_articles'), { action: 'index' }, { class: 'badge badge-secondary' }) %>
+    <%= link_to(t('.published'), { action: 'index', search: { state: 'published' } }, { class: 'badge badge-success' }) %>
+    <%= link_to(t('.withdrawn'), { action: 'index', search: { state: 'withdrawn' } }, { class: 'badge badge-danger' }) %>
+    <%= link_to(t('.drafts'), { action: 'index', search: { state: 'drafts' } }, { class: 'badge badge-info' }) %>
+    <%= link_to(t('.publication_pending'), { action: 'index', search: { state: 'pending' } }, { class: 'badge badge-warning' }) %>
   </p>
 
-  <div class="panel panel-default">
-    <div class="panel-heading clearfix">
-      <div class="pull-right">
-        <div class="form-group">
-          <%= select_tag('search[user_id]', options_from_collection_for_select(User.all, 'id', 'name'), prompt: t('.select_an_author'), class: 'form-control') %>
-        </div>
-        <div class="form-group">
-          <%= select_tag('search[published_at]', options_for_select(Article.publication_months), prompt: t('.publication_date'), class: 'form-control') %>
-        </div>
-        <div class="form-group">
-          <input id="search" type="text" name="search[searchstring]" class="form-control" autocomplete="off">
-        </div>
-        <div class="form-group">
-          <%= submit_tag(t('.search'), class: 'btn btn-success') %>
-          <span id="spinner" class="hidden"><%= image_tag('spinner.gif') %></span>
-        </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="clearfix float-right form-inline">
+        <%= select_tag('search[user_id]', options_from_collection_for_select(User.all, 'id', 'name'), prompt: t('.select_an_author'), class: 'form-control mr-sm-2') %>
+        <%= select_tag('search[published_at]', options_for_select(Article.publication_months), prompt: t('.publication_date'), class: 'form-control mr-sm-2') %>
+        <input id="search" type="text" name="search[searchstring]" class="form-control mr-sm-2" autocomplete="off">
+        <%= submit_tag(t('.search'), class: 'btn btn-success') %>
+        <span id="spinner" class="d-none"><%= image_tag('spinner.gif') %></span>
       </div>
     </div>
   </div>

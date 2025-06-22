@@ -35,11 +35,9 @@ module Admin::BaseHelper
   end
 
   def show_actions(item)
-    tag.div(class: "action", style: "") do
-      safe_join [button_to_edit(item),
-                 button_to_delete(item),
-                 button_to_short_url(item)], " "
-    end
+    safe_join [button_to_edit(item),
+               button_to_delete(item),
+               button_to_short_url(item)], " "
   end
 
   def display_pagination(collection, cols, _first = "", _last = "")
@@ -53,7 +51,7 @@ module Admin::BaseHelper
   def button_to_edit(item)
     link_to(t("generic.edit"),
             { action: "edit", id: item.id },
-            { class: "btn btn-primary btn-xs btn-action" })
+            { class: "btn btn-primary btn-sm" })
   end
 
   def button_to_delete(item)
@@ -61,7 +59,7 @@ module Admin::BaseHelper
                      element: item.class.model_name.human.downcase)
     link_to(t("generic.delete"),
             { action: "destroy", id: item.id },
-            { class: "btn btn-danger btn-xs btn-action", method: :delete,
+            { class: "btn btn-danger btn-sm", method: :delete,
               data: { confirm: confirm_text } })
   end
 
@@ -69,18 +67,26 @@ module Admin::BaseHelper
     return "" if item.short_url.nil?
 
     link_to(t("generic.short_url"), item.short_url,
-            class: "btn btn-success btn-xs btn-action")
+            class: "btn btn-success btn-sm")
   end
 
   def twitter_available?(blog, user)
     blog.has_twitter_configured? && user.has_twitter_configured?
   end
 
+  def top_menu_item(name, url)
+    if current_page? url
+      tag.li(link_to(name, "#", class: "active nav-link"), class: "nav-item")
+    else
+      tag.li(link_to(name, url, class: "nav-link"), class: "nav-item")
+    end
+  end
+
   def menu_item(name, url)
     if current_page? url
-      tag.li(link_to(name, "#"), class: "active")
+      link_to(name, "#", class: "active dropdown-item")
     else
-      tag.li(link_to(name, url))
+      link_to(name, url, class: "dropdown-item")
     end
   end
 end
