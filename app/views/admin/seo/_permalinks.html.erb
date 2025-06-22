@@ -3,29 +3,37 @@
   <p><%= t('.sample') %></p>
 </div>
 
-<div class='form-horizontal'>
-  <div class='form-group'>
-    <label class='control-label col-sm-4 col-md-3 col-lg-2'><%= t('.permalink_format') %></label>
-    <div class='col-sm-8 col-md-6 col-lg-4'>
-      <div class='radio'>
-        <label for="setting_permalink_format_yearmonthdaytitle">
-          <%= radio_button(:setting, :permalink_format, '/%year%/%month%/%day%/%title%') %>
+<div class='mb-4'>
+  <div class='form-group row'>
+    <legend class='col-form-label col-md-4 col-lg-3 col-xl-2'><%= t('.permalink_format') %></legend>
+    <div class='col-md-8 col-lg-6 col-xl-4'>
+      <div class='form-check'>
+        <%= radio_button(:setting, :permalink_format, '/%year%/%month%/%day%/%title%', class: "form-check-input") %>
+        <label for="setting_permalink_format_yearmonthdaytitle" class="form-check-label">
           <%= t('.date_and_title') %>
         </label>
         <small class='help-block'><%= "#{this_blog.base_url}/#{Time.zone.now.strftime('%Y/%m/%d')}/sample-article" %></small>
-        <label for="setting_permalink_format_yearmonthtitle">
-          <%= radio_button(:setting, :permalink_format, '/%year%/%month%/%title%') %>
+      </div>
+      <div class='form-check'>
+        <%= radio_button(:setting, :permalink_format, '/%year%/%month%/%title%', class: "form-check-input") %>
+        <label for="setting_permalink_format_yearmonthtitle" class="form-check-label">
           <%= t('.month_and_title') %>
         </label>
         <small class='help-block'><%= "#{this_blog.base_url}/#{Time.zone.now.strftime('%Y/%m')}/sample-article" %></small>
-        <label for="setting_permalink_format_title">
-          <%= radio_button(:setting, :permalink_format, '/%title%') %> <%= t('.title_only') %>
+      </div>
+      <div class='form-check'>
+        <%= radio_button(:setting, :permalink_format, '/%title%', class: "form-check-input") %>
+        <label for="setting_permalink_format_title" class="form-check-label">
+          <%= t('.title_only') %>
         </label>
         <small class='help-block'><%= "#{this_blog.base_url}/sample-article" %></small>
-        <label for="setting_permalink_format_custom">
-          <%= radio_button(:setting, :permalink_format, 'custom') %> <%= t('.custom') %>
-          <%= text_field(:setting, :custom_permalink, class: 'form-control') %>
+      </div>
+      <div class='form-check'>
+        <%= radio_button(:setting, :permalink_format, 'custom', class: "form-check-input") %>
+        <label for="setting_permalink_format_custom" class="form-check-label">
+          <%= t('.custom') %>
         </label>
+        <%= text_field(:setting, :custom_permalink, class: 'form-control') %>
       </div>
     </div>
   </div>

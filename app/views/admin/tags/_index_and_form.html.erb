@@ -5,7 +5,7 @@
 <% end %>
 
 <div class='row'>
-  <div class='col-md-4'>
+  <div class='col-lg-4'>
     <%= form_for([:admin, @tag]) do |f| %>
       <% if @tag.errors.any? %>
         <ul>
@@ -26,7 +26,7 @@
       </div>
     <% end %>
   </div>
-  <div class='col-md-8'>
+  <div class='col-lg-8'>
     <table class="table table-hover">
       <thead>
         <tr class='noborder'>
@@ -48,7 +48,7 @@
             <%= button_to_edit tag %>
             <%= button_to_delete tag %>
             <%= link_to_permalink(tag, "#{tag.contents.size} #{t(".view")}".html_safe,
-                                  style: 'btn btn-success btn-xs') %>
+                                  style: 'btn btn-success btn-sm') %>
           </td>
           <td><%= tag.name %></td>
         </tr>

@@ -1,7 +1,6 @@
-<div class='alert alert-info'>
-  <button type="button" class="close" data-dismiss="alert">
+<div class="alert alert-info">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
-    <span class="sr-only">Close</span>
   </button>
   <% links = []
      links << link_to(t('.write_a_post'), controller: 'articles', action: 'new') if can? :new, 'admin/articles'

@@ -3,13 +3,13 @@
   <%= hidden_field_tag('article[id]', @article.id) if @article.present? %>
 </div>
 <div class="row save-bar">
-  <div class="col-md-8 col-md-offset-2" id="save-bar">
-    <div class="pull-right">
+  <div class="col-lg-8 offset-lg-2" id="save-bar">
+    <div class="float-xs-right">
       <%= link_to(t('.cancel'), { action: 'index' }, { class: 'btn btn-default' }) %>
       <span id="preview_link">
         <%= link_to(t('.preview'), { controller: '/articles', action: 'preview', id: @article.id }, { target: 'new', class: 'btn btn-default' }) if @article.id %>
       </span>
-      <input id="save_draft" type="submit" value="<%= t('.save_as_draft') %>" name="article[draft]" class="btn btn-default">
+      <input id="save_draft" type="submit" value="<%= t('.save_as_draft') %>" name="article[draft]" class="btn btn-secondary">
       <!-- Button trigger modal -->
       <button class="btn btn-success" data-toggle="modal" type="button" data-target="#publishOptions">
         <%= controller.action_name == 'new' ? t('.publish') : t('.save') %>
@@ -19,7 +19,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2" id="error-message-article">
+  <div class="col-lg-8 offset-lg-2" id="error-message-article">
     <%= render 'shared/flash', flash: flash %>
     <% if @article.errors.any? %>
       <div id="error_explanation">
@@ -36,12 +36,12 @@
 </div>
 
 <div class="row">
-  <div class="col-md-2" id="quicktags-block">
-    <div id="quicktags" class="pull-right">
+  <div class="col-lg-2" id="quicktags-block">
+    <div id="quicktags" class="float-xs-right">
       <script type="text/javascript">edToolbar('article_body_and_extended', '<%= @article.text_filter_name %>');</script>
     </div>
   </div>
-  <div class="col-md-8">
+  <div class="col-lg-8">
     <%= text_field 'article', 'title', class: 'form-control', placeholder: t('.title') %>
     <div id="editor">
       <%= text_area('article', 'body_and_extended', class: 'form-control ', style: 'height: 360px', placeholder: t('.type_your_post')) %>
@@ -91,7 +91,7 @@
                   <%= text_field 'article', 'permalink', autocomplete: 'off', class: 'form-control' %>
                 </div>
                 <p>
-                <span class="btn btn-mini btn-default">
+                <span class="btn btn-mini btn-secondary">
                   <%= toggle_element('permalink', t('.ok')) %>
                 </span>
                 </p>
@@ -108,7 +108,7 @@
                   <%= t('.published') %>
                 </label>
                 <p>
-                <span class="btn btn-mini btn-default">
+                <span class="btn btn-mini btn-secondary">
                   <%= toggle_element 'status', t('.ok') %>
                 </span>
                 </p>
@@ -125,7 +125,7 @@
                   <%= t('.allow_comments') %>
                 </label>
                 <p>
-                <span class="btn btn-mini btn-default">
+                <span class="btn btn-mini btn-secondary">
                   <%= toggle_element('conversation', t('.ok')) %>
                 </span>
                 </p>
@@ -146,7 +146,7 @@
               <div id="publish" class="collapse">
                 <%= datetime_field 'article', 'published_at' %>
                 <p>
-                <span class="btn btn-mini btn-default">
+                <span class="btn btn-mini btn-secondary">
                   <%= toggle_element('publish', t('.ok')) %>
                 </span>
                 </p>
@@ -161,7 +161,7 @@
                 <label for="article_password"><%= t('.password') %></label>
                 <%= text_field 'article', 'password', class: 'form-control' %>
                 <p>
-                <span class="btn btn-mini btn-default">
+                <span class="btn btn-mini btn-secondary">
                   <%= toggle_element('visibility', t('.ok')) %>
                 </span>
                 </p>
@@ -177,7 +177,7 @@
                   <%= options_for_select text_filter_options, @article.text_filter_name %>
                 </select>
                 <p>
-                <span class="btn btn-mini btn-default">
+                <span class="btn btn-mini btn-secondary">
                   <%= toggle_element 'text_filter', 'OK' %>
                 </span>
                 </p>
@@ -187,7 +187,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('.cancel') %></button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('.cancel') %></button>
         <%= submit_tag(t('.publish'), class: 'btn btn-success') %>
       </div>
     </div>
