@@ -23,19 +23,19 @@ module Admin::FeedbackHelper
   def button_to_edit_comment(item)
     link_to(t("generic.edit"),
             { controller: "admin/feedback", action: "edit", id: item.id },
-            { class: "btn btn-primary btn-xs btn-action" })
+            { class: "btn btn-primary btn-sm" })
   end
 
   def button_to_delete_comment(item)
     link_to(t("generic.delete"),
             { controller: "admin/feedback", action: "destroy", id: item.id },
-            { class: "btn btn-danger btn-xs btn-action" })
+            { class: "btn btn-danger btn-sm" })
   end
 
   def button_to_conversation(item)
     link_to(t("generic.conversation"),
             { controller: "admin/feedback", action: "article", id: item.article_id },
-            { class: "btn btn-default btn-xs btn-action" })
+            { class: "btn btn-default btn-sm" })
   end
 
   def change_status(item, context = "listing")
@@ -46,7 +46,7 @@ module Admin::FeedbackHelper
     link_to(link_text,
             { controller: "admin/feedback", action: "change_state",
               id: item.id, context: context },
-            { class: "btn btn-#{button_type} btn-xs btn-action",
+            { class: "btn btn-#{button_type} btn-sm",
               method: :post, remote: true })
   end
 end

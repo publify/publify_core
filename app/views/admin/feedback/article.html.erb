@@ -4,7 +4,7 @@
   </h2>
 <% end %>
 
-<%= form_tag({ action: 'bulkops' }, { class: 'form-inline' }) do %>
+<%= form_tag({ action: 'bulkops' }) do %>
 
   <%= hidden_field_tag 'article_id', @article.id %>
 
@@ -40,35 +40,35 @@
   </table>
 <% end %>
 
-<%= form_tag action: 'create' do %>
-  <%= hidden_field_tag('article_id', @article.id) %>
-  <fieldset class='form-horizontal'>
+<%= form_with url: {action: 'create'}, local: true do |form| %>
+  <%= form.hidden_field :article_id, value: @article.id %>
+  <fieldset class='mb-4'>
     <legend><%= t('.add_a_comment') %></legend>
-    <div class="form-group">
-      <label for="comment_author" class='control-label col-sm-2'><%= t('.author') %></label>
-      <div class='col-sm-5'>
+    <div class="form-group row">
+      <label for="comment_author" class='col-form-label col-md-2'><%= t('.author') %></label>
+      <div class="col-md-5">
         <%= text_field 'comment', 'author', class: 'form-control' %>
       </div>
     </div>
-    <div class='form-group'>
-      <label for="comment_email" class='control-label col-sm-2'><%= t('.email') %></label>
-      <div class='col-sm-5'>
+    <div class="form-group row">
+      <label for="comment_email" class='col-form-label col-md-2'><%= t('.email') %></label>
+      <div class="col-md-5">
         <%= text_field 'comment', 'email', class: 'form-control' %>
       </div>
     </div>
-    <div class='form-group'>
-      <label for="comment_url" class='control-label col-sm-2'><%= t('.url') %></label>
-      <div class='col-sm-5'>
+    <div class="form-group row">
+      <label for="comment_url" class='col-form-label col-md-2'><%= t('.url') %></label>
+      <div class="col-md-5">
         <%= text_field 'comment', 'url', class: 'form-control' %>
       </div>
     </div>
-    <div class='form-group'>
-      <label for='comment_body' class='control-label col-sm-2'><%= t('.your_comment') %></label>
-      <div class='col-sm-5'>
+    <div class="form-group row">
+      <label for="comment_body" class='col-form-label col-md-2'><%= t('.your_comment') %></label>
+      <div class="col-md-5">
         <%= text_area 'comment', 'body', rows: '10', class: 'form-control' %>
       </div>
     </div>
-    <div>
+    <div class="mt-3">
       <%= t('.action_or_other_html', first_action: link_to(t('.cancel'), action: 'index'), second_action: submit_tag(t('.save'), class: 'btn btn-primary')) %>
     </div>
   </fieldset>

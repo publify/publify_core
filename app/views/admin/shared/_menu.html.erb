@@ -1,121 +1,108 @@
-<nav class='navbar navbar-default navbar-fixed-top' role="navigation">
-  <div class="navbar-header">
-    <%= link_to t(".home"), { controller: 'admin/dashboard' }, { class: 'navbar-brand' } %>
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sidebar-top">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-  </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" role="navigation">
+  <a class="navbar-brand" href="<%= admin_dashboard_path %>"><%= t(".home") %></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar-top" aria-controls="sidebar-top" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
   <div class="collapse navbar-collapse" id="sidebar-top">
-    <ul class='nav navbar-nav'>
+    <ul class="navbar-nav mr-auto">
       <% if can? :index, 'admin/articles' %>
-        <li class='dropdown'>
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= t('.articles') %>
-            <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <div class="dropdown-menu" aria-labelledby="dLabel">
             <%= menu_item(t('.all_articles'), admin_articles_path) %>
             <%= menu_item(t('.new_article'), new_admin_article_path) %>
             <%= menu_item(t('.feedback'), admin_feedback_index_path) %>
             <%= menu_item(t('.tags'), admin_tags_path) %>
             <%= menu_item(t('.article_types'), admin_post_types_path) %>
             <%= menu_item(t('.redirects'), admin_redirects_path) %>
-          </ul>
+          </div>
         </li>
       <% end %>
       <% if can? :index, 'admin/notes' %>
-        <%= menu_item(t('.notes'), admin_notes_path) %>
+        <%= top_menu_item(t('.notes'), admin_notes_path) %>
       <% end %>
       <% if can? :index, 'admin/pages' %>
-        <li class='dropdown'>
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= t('.pages') %>
-            <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <div class="dropdown-menu" aria-labelledby="dLabel">
             <%= menu_item(t('.all_pages'), admin_pages_path) %>
             <%= menu_item(t('.new_page'), new_admin_page_path) %>
-          </ul>
+          </div>
         </li>
       <% end %>
       <% if can? :index, 'admin/resources' %>
-        <%= menu_item(t('.media_library'), admin_resources_path) %>
+        <%= top_menu_item(t('.media_library'), admin_resources_path) %>
       <% end %>
       <% if can? :index, 'admin/themes' %>
-        <li class='dropdown'>
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= t('.design') %>
-            <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <div class="dropdown-menu" aria-labelledby="dLabel">
             <%= menu_item(t('.choose_theme'), admin_themes_path) %>
             <%= menu_item(t('.customize_sidebar'), admin_sidebar_index_path) %>
-          </ul>
+          </div>
         </li>
       <% end %>
       <% if can? :index, 'admin/settings' %>
-        <li class='dropdown'>
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= t('.settings') %>
-            <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <div class="dropdown-menu" aria-labelledby="dLabel">
             <%= menu_item(t('.general_settings'), admin_settings_path) %>
             <%= menu_item(t('.write'), write_admin_settings_path) %>
             <%= menu_item(t('.display'), display_admin_settings_path) %>
             <%= menu_item(t('.feedback'), feedback_admin_settings_path) %>
             <%= menu_item(t('.manage_users'), admin_users_path) %>
-          </ul>
+          </div>
         </li>
       <% end %>
       <% if can? :index, 'admin/seo' %>
-        <li class='dropdown'>
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= t('.seo') %>
-            <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <div class="dropdown-menu" aria-labelledby="dLabel">
             <%= menu_item(t('.global_seo_settings'), admin_seo_path(section: 'general')) %>
             <%= menu_item(t('.permalinks'), admin_seo_path(section: 'permalinks')) %>
             <%= menu_item(t('.titles'), admin_seo_path(section: 'titles')) %>
-          </ul>
+          </div>
         </li>
       <% end %>
-      <%= menu_item(t('.view_blog'), this_blog.base_url) %>
+      <%= top_menu_item(t('.view_blog'), this_blog.base_url) %>
     </ul>
-    <ul class='nav navbar-nav pull-right'>
-      <li class='dropdown'>
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= t('.logged_in_as', login: current_user.display_name) %>
-          <b class="caret"></b>
         </a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <li><%= link_to t('.profile'), controller: 'admin/profiles', action: 'index' %></li>
-          <li role="presentation" class="divider"></li>
-          <li><%= link_to t('.documentation'), 'https://github.com/fdv/publify/wiki' %></li>
-          <li><%= link_to t('.report_a_bug'), 'https://github.com/fdv/publify/issues' %></li>
-          <li><%= link_to t('.in_page_plugins'), 'https://github.com/fdv/publify/wiki/In-Page-Plugins' %></li>
-          <li><%= link_to t('.sidebar_plugins'), 'https://github.com/fdv/publify/wiki/Sidebar-plugins' %></li>
-          <li role="presentation" class="divider"></li>
-          <li><%= link_to t('.logout_html'), destroy_user_session_path, method: :delete %></li>
-        </ul>
+        <div class="dropdown-menu" aria-labelledby="dLabel">
+          <%= menu_item t('.profile'), { controller: 'admin/profiles', action: 'index' } %>
+          <div class="dropdown-divider"></div>
+          <%= menu_item t('.documentation'), 'https://github.com/fdv/publify/wiki' %>
+          <%= menu_item t('.report_a_bug'), 'https://github.com/fdv/publify/issues' %>
+          <%= menu_item t('.in_page_plugins'), 'https://github.com/fdv/publify/wiki/In-Page-Plugins' %>
+          <%= menu_item t('.sidebar_plugins'), 'https://github.com/fdv/publify/wiki/Sidebar-plugins' %>
+          <div class="dropdown-divider"></div>
+          <%= link_to t('.logout_html'), destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+        </div>
       </li>
-    </ul>
-    <ul class='nav navbar-nav pull-right'>
-      <li class='dropdown'>
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= t('.new') %>
-          <b class="caret"></b>
         </a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <li><%= link_to(t('.new_article'), controller: 'articles', action: 'new') %></li>
-          <li><%= link_to(t('.new_page'), controller: 'pages', actions: 'new') %></li>
-          <li><%= link_to(t('.new_media'), controller: 'resources', action: 'index') %></li>
-          <li><%= link_to(t('.new_note'), controller: 'notes') %></li>
-        </ul>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
+          <%= menu_item(t('.new_article'), { controller: 'articles', action: 'new' }) %>
+          <%= menu_item(t('.new_page'), { controller: 'pages', actions: 'new' }) %>
+          <%= menu_item(t('.new_media'), { controller: 'resources', action: 'index' }) %>
+          <%= menu_item(t('.new_note'), { controller: 'notes' }) %>
+        </div>
       </li>
     </ul>
   </div>

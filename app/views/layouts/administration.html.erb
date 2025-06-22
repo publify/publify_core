@@ -12,9 +12,9 @@
   <body>
     <%= render 'admin/shared/menu' %>
     <div class='container-fluid'>
-      <%= render 'shared/flash', flash: flash %>
+      <%= render 'admin/shared/flash', flash: flash %>
       <% if content_for?(:page_heading) %>
-        <div class='page-header'>
+        <div class="pb-2 mt-4 mb-4 border-bottom">
           <%= yield :page_heading %>
         </div>
       <% end %>
