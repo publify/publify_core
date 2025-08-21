@@ -13,7 +13,10 @@ module PublifyCore::TextFilter
     def self.filtertext(text)
       # FIXME: Workaround for <publify:foo> not being interpreted as an HTML tag.
       escaped_macros = text.gsub(%r{(</?publify):}, '\1X')
-      html = CommonMarker.render_doc(escaped_macros, :SMART).to_html(:UNSAFE)
+      html = Commonmarker.to_html(escaped_macros, options: {
+                                    parse: { smart: true },
+                                    render: { unsafe: true }
+                                  })
       html.gsub(%r{(</?publify)X}, '\1:').strip
     end
   end
