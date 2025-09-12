@@ -139,6 +139,6 @@ class User < ApplicationRecord
   private
 
   def set_default_profile
-    self.profile ||= User.count.zero? ? "admin" : "contributor"
+    self.profile ||= User.none? ? "admin" : "contributor"
   end
 end
