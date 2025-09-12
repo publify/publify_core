@@ -18,7 +18,7 @@ AllCops:
     - 'spec/dummy/bin/*'
     - 'spec/dummy/db/schema.rb'
   NewCops: enable
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.2
 
 Rails:
   Enabled: true
