@@ -2,6 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   include BlogHelper
+
   before_action :require_signup_allowed
 
   private

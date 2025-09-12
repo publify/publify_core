@@ -5,6 +5,7 @@ require "carrierwave/orm/activerecord"
 
 class Resource < ApplicationRecord
   include StringLengthLimit
+
   belongs_to :blog
   belongs_to :content, optional: true
 

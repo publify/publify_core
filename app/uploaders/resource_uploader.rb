@@ -4,6 +4,7 @@ require "marcel"
 
 class ResourceUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
+
   before :process, :check_content_type!
 
   process :fix_exif_rotation, if: :image?

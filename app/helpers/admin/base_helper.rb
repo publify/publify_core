@@ -43,7 +43,7 @@ module Admin::BaseHelper
   end
 
   def display_pagination(collection, cols, _first = "", _last = "")
-    return if collection.count == 0
+    return if collection.none?
 
     tag.tr do
       tag.td(paginate(collection), class: "paginate", colspan: cols)

@@ -25,7 +25,7 @@ class SetupController < BaseController
 
     sign_in @user
 
-    if User.count == 1
+    if User.one?
       create_first_post @user
       create_first_page @user
     end

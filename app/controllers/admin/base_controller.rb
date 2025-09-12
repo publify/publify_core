@@ -18,7 +18,7 @@ class Admin::BaseController < BaseController
     @record = klass_to_destroy.find(params[:id])
     if @record.respond_to?(:access_by?) && !@record.access_by?(current_user)
       flash[:error] = I18n.t("admin.base.not_allowed")
-      return(redirect_to action: "index")
+      return redirect_to action: "index"
     end
     @record.destroy
     flash[:notice] = I18n.t("admin.base.successfully_deleted",
