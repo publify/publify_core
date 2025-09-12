@@ -73,4 +73,4 @@ jobs:
       - name: Check translations
         run: bundle exec i18n-tasks health
       - name: Check ERB files
-        run: bundle exec erblint --lint-all
+        run: bundle exec erb_lint --lint-all
