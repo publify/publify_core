@@ -100,8 +100,8 @@ class TextFilterPlugin
     ""
   end
 
-  def self.sanitize(*args)
-    (@sanitizer ||= Rails::Html::WhiteListSanitizer.new).sanitize(*args)
+  def self.sanitize(*)
+    (@sanitizer ||= Rails::Html::WhiteListSanitizer.new).sanitize(*)
   end
 
   def self.default_helper_module!; end
