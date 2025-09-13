@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency "bootstrap", "~> 4.6.2"
   s.add_dependency "cancancan", "~> 3.0"
   s.add_dependency "carrierwave", "~> 3.0"
-  s.add_dependency "commonmarker", "~> 0.23.2"
+  s.add_dependency "commonmarker", "~> 2.3"
   s.add_dependency "devise", ">= 4.8", "< 4.10"
   s.add_dependency "devise-i18n", "~> 1.2"
   s.add_dependency "devise_zxcvbn", "~> 6.0"
