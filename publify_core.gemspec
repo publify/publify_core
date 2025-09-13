@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency "html-pipeline", "~> 2.14"
   s.add_dependency "html-pipeline-hashtag", "~> 0.1.2"
   s.add_dependency "jquery-rails", ">= 4.5", "< 4.7"
-  s.add_dependency "jquery-ui-rails", "~> 7.0"
+  s.add_dependency "jquery-ui-rails", ">= 7", "< 9"
   s.add_dependency "kaminari", ["~> 1.2", ">= 1.2.1"]
   s.add_dependency "marcel", "~> 1.0.0"
   s.add_dependency "mini_magick", ["~> 4.9", ">= 4.9.4"]
