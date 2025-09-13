@@ -3,8 +3,8 @@
 require "twitter"
 require "json"
 require "uri"
-require "html/pipeline"
-require "html/pipeline/hashtag/hashtag_filter"
+require "html_pipeline"
+require "html_pipeline/node_filter/mention_filter"
 
 class Note < Content
   include PublifyGuid
@@ -33,37 +33,51 @@ class Note < Content
   TWITTER_HTTPS_URL_LENGTH = 21
   TWITTER_LINK_LENGTH = 22
 
-  class TwitterHashtagFilter < HTML::Pipeline::HashtagFilter
-    def initialize(text)
-      super(text,
-            tag_url: "https://twitter.com/search?q=%%23%<tag>s&src=tren&mode=realtime",
-            tag_link_attr: "")
+  class TwitterHashtagFilter < HTMLPipeline::NodeFilter
+    def after_initialize
+      context[:tag_url] ||= "https://twitter.com/search?q=%%23%<tag>s&src=tren&mode=realtime"
+    end
+
+    SELECTOR = Selma::Selector.new(match_text_within: "*",
+                                   ignore_text_within: ["a"])
+
+    def selector
+      SELECTOR
+    end
+
+    HASHTAG_PATTERN = /(?<=^|\W)#([-_A-Za-z0-9]+)(?=\W|$)/
+
+    def handle_text_chunk(chunk)
+      text = chunk.to_s
+
+      html = text.gsub(HASHTAG_PATTERN) do |match|
+        tag = Regexp.last_match(1)
+        url = format context[:tag_url], tag: tag
+        "<a href=\"#{url}\">#{match}</a>"
+      end
+
+      return chunk if html == text
+
+      chunk.replace(html, as: :html)
     end
   end
 
-  class TwitterMentionFilter < HTML::Pipeline::MentionFilter
-    def initialize(text)
-      super(text, base_url: "https://twitter.com")
-    end
-
-    # Override base mentions finder, treating @mention just like any other @foo.
-    def self.mentioned_logins_in(text, username_pattern = UsernamePattern)
-      text.gsub MentionPatterns[username_pattern] do |match|
-        login = Regexp.last_match(1)
-        yield match, login, false
-      end
+  class TwitterMentionFilter < HTMLPipeline::NodeFilter::MentionFilter
+    def after_initialize
+      super
+      context[:base_url] ||= "https://twitter.com"
+      context[:info_url] ||= "https://foo.com"
     end
 
     # Override base link creator, removing the class
-    def link_to_mentioned_user(login)
+    def link_to_mentioned_user(base_url, login)
       result[:mentioned_usernames] |= [login]
 
       url = base_url.dup
-      url << "/" unless %r{[/~]\z}.match?(url)
+      excluded_prefixes = %r{[/(?:~|@]\z}
+      url << "/" unless excluded_prefixes.match?(url)
 
-      "<a href='#{url << login}'>" \
-        "@#{login}" \
-        "</a>"
+      "<a href=\"#{url << login}\">@#{login}</a>"
     end
   end
 
@@ -82,7 +96,8 @@ class Note < Content
 
   def generate_html(field, text = nil)
     if field == :in_reply_to
-      html = TextFilter.make_filter("none").filter_text(text)
+      helper = PublifyCore::ContentTextHelpers.new
+      html = helper.simple_format(text)
       html_postprocess(field, html).to_s
     else
       super
@@ -93,8 +108,8 @@ class Note < Content
     helper = PublifyCore::ContentTextHelpers.new
     html = helper.auto_link(html)
 
-    html = TwitterHashtagFilter.new(html).call
-    html = TwitterMentionFilter.new(html).call.to_s
+    html = TwitterHashtagFilter.call(html)
+    html = TwitterMentionFilter.call(html).to_s
     super
   end
 
