@@ -4,7 +4,7 @@ require "sidebar_field"
 
 # This class cannot be autoloaded since other sidebar classes depend on it.
 class Sidebar < ApplicationRecord
-  serialize :config, Hash
+  serialize :config, Hash, coder: YAML
 
   belongs_to :blog
 

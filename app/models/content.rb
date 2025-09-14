@@ -39,7 +39,7 @@ class Content < ApplicationRecord
                               where(published_at: PublifyTime.delta_like(date_at))
                             }
 
-  serialize :whiteboard
+  serialize :whiteboard, coder: YAML
 
   validates_default_string_length :title, :author, :permalink, :name,
                                   :post_type, :text_filter_name

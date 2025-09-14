@@ -31,7 +31,7 @@ class User < ApplicationRecord
 
   has_many :articles
 
-  serialize :settings, Hash
+  serialize :settings, Hash, coder: YAML
 
   STATUS = %w(active inactive).freeze
 
