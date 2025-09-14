@@ -9,7 +9,7 @@ class Admin::BaseController < BaseController
   @@look_for_migrations = true
   layout "administration"
 
-  before_action :login_required, except: [:login, :signup]
+  before_action :login_required
   before_action :no_caching
 
   private
