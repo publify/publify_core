@@ -1,5 +1,19 @@
 # Changelog
 
+## 10.0.3 / 2025-03-28
+
+* Limit accepted parameters for Sidebar update in Admin ([#159] by [mvz])
+* Use known set of allowed attributes when autosaving an Article ([#160] by [mvz])
+* Permit only valid settings keys when updating blog settings ([#161] by [mvz])
+* Limit assigned attributes when creating and updating Notes ([#162] by [mvz])
+* Limit allowed SEO settings params ([#163] by [mvz])
+
+[#159]: https://github.com/publify/publify_core/pull/159
+[#160]: https://github.com/publify/publify_core/pull/160
+[#161]: https://github.com/publify/publify_core/pull/161
+[#162]: https://github.com/publify/publify_core/pull/162
+[#163]: https://github.com/publify/publify_core/pull/163
+
 ## 10.0.2 / 2024-06-28
 
 ### Security updates
