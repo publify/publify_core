@@ -98,7 +98,7 @@ class ArticlesController < ContentController
     r = Redirect.find_by!(from_path: from)
     # TODO: If linked to article, directly redirect to the article.
     # Let redirection made outside of the blog on purpose (deal with it, Brakeman!)
-    redirect_to r.full_to_path, status: :moved_permanently if r
+    redirect_to r.full_to_path, allow_other_host: true, status: :moved_permanently if r
   end
 
   def archives
