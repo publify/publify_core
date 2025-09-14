@@ -32,7 +32,7 @@ class Blog < ApplicationRecord
 
   validates :blog_name, presence: true
 
-  serialize :settings, Hash
+  serialize :settings, Hash, coder: YAML
 
   # Description
   setting :blog_name, :string, "My Shiny Weblog!"
