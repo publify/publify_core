@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "aasm", "~> 5.0"
   s.add_dependency "akismet", "~> 3.0"
-  s.add_dependency "bootstrap", "~> 4.6.2"
+  s.add_dependency "bootstrap", ">= 4.6.2", "< 5.4.0"
   s.add_dependency "cancancan", "~> 3.0"
   s.add_dependency "carrierwave", "~> 3.0"
   s.add_dependency "commonmarker", "~> 2.3"
