@@ -54,7 +54,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "capybara", "~> 3.0"
   s.add_development_dependency "erb_lint", "~> 0.9.0"
   s.add_development_dependency "factory_bot", "~> 6.2"
-  s.add_development_dependency "feedjira", "~> 3.2"
+  s.add_development_dependency "feedjira", "~> 4.0"
   s.add_development_dependency "i18n-tasks", "~> 1.0.12"
   s.add_development_dependency "rails-controller-testing", "~> 1.0.1"
   s.add_development_dependency "rake-manifest", "~> 0.2.0"
