@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency "devise_zxcvbn", "~> 6.0"
   s.add_dependency "fog-aws", "~> 3.2"
   s.add_dependency "fog-core", "~> 2.2"
-  s.add_dependency "html-pipeline", "~> 2.14"
+  s.add_dependency "html-pipeline", ">= 2.14", "< 4.0"
   s.add_dependency "html-pipeline-hashtag", "~> 0.1.2"
   s.add_dependency "jquery-rails", ">= 4.5", "< 4.7"
   s.add_dependency "jquery-ui-rails", ">= 7", "< 9"
