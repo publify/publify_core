@@ -9,8 +9,7 @@ RSpec.describe TextFilterPlugin do
         PublifyCore::TextFilter::None,
         PublifyCore::TextFilter::Markdown,
         PublifyCore::TextFilter::Smartypants,
-        PublifyCore::TextFilter::MarkdownSmartquotes,
-        PublifyCore::TextFilter::Twitterfilter)
+        PublifyCore::TextFilter::MarkdownSmartquotes)
     end
   end
 

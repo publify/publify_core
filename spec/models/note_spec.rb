@@ -294,6 +294,15 @@ RSpec.describe Note, type: :model do
         expect(note.html).to eq(expected)
       end
 
+      it "works with a hashtag and a mention" do
+        note = create(:note, body: "A test tweet with a #hashtag and a @mention")
+        expected =
+          "<p>A test tweet with a <a href=\"https://twitter.com/search?q=%23hashtag" \
+          "&amp;src=tren&amp;mode=realtime\">#hashtag</a> and a" \
+          " <a href=\"https://twitter.com/mention\">@mention</a></p>"
+        expect(note.html).to eq expected
+      end
+
       it "links markdown links only once" do
         note = create(:note, body: "A test tweet with [a markdown link](https://link.com)")
         expect(note.html)

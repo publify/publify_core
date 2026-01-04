@@ -36,10 +36,13 @@ RSpec.describe NotesController, type: :controller do
     end
 
     context "in reply" do
+      render_views
+
       let(:reply) do
         {
           "id_str" => "123456789",
           "created_at" => DateTime.new(2014, 1, 23, 13, 47).in_time_zone,
+          "text" => "**original** #foo",
           "user" => {
             "screen_name" => "a screen name",
             "entities" => {
@@ -57,9 +60,13 @@ RSpec.describe NotesController, type: :controller do
 
       before { get :show, params: { permalink: permalink } }
 
-      it { expect(response).to be_successful }
-      it { expect(response).to render_template("show_in_reply") }
-      it { expect(assigns[:page_title]).to eq("Notes | test blog ") }
+      it "successfully renders the tweet the note replies to without extra filters" do
+        aggregate_failures do
+          expect(response).to be_successful
+          expect(response.body).to have_text "**original** #foo"
+          expect(response.body).to have_link "#foo"
+        end
+      end
     end
 
     context "note not found" do
