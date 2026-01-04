@@ -24,11 +24,11 @@ class Blog < ApplicationRecord
   has_many :notes
 
   has_many :redirects
-  has_many :sidebars, ->() { order("active_position ASC") }
+  has_many :sidebars, ->() { order(:active_position) }
 
   attr_accessor :custom_permalink
 
-  default_scope -> { order("id") }
+  default_scope -> { order(:id) }
 
   validates :blog_name, presence: true
 

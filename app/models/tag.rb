@@ -43,11 +43,11 @@ class Tag < ApplicationRecord
       .where(contents: { state: "published" })
       .select(*Tag.column_names, "COUNT(contents_tags.content_id) as content_counter")
       .group(*Tag.column_names)
-      .order("content_counter DESC").limit(1000)
+      .order(content_counter: :desc).limit(1000)
   end
 
   def self.find_with_char(char)
-    where("name LIKE ? ", "%#{char}%").order("name ASC")
+    where("name LIKE ? ", "%#{char}%").order(:name)
   end
 
   def self.collection_to_string(tags)

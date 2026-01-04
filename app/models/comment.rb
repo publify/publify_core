@@ -16,7 +16,7 @@ class Comment < Feedback
   scope :ham, -> { where(state: "ham") }
   scope :unconfirmed, -> { where(state: %w(presumed_spam presumed_ham)) }
 
-  scope :last_published, -> { published.limit(5).order("created_at DESC") }
+  scope :last_published, -> { published.limit(5).order(created_at: :desc) }
 
   def notify_user_via_email(user)
     EmailNotify.send_comment(self, user) if user.notify_via_email?

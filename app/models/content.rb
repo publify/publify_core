@@ -21,8 +21,8 @@ class Content < ApplicationRecord
                          published.where(published_at: PublifyTime.delta(*time_params))
                        }
   scope :not_published, -> { where.not(state: "published") }
-  scope :drafts, -> { where(state: "draft").order("created_at DESC") }
-  scope :no_draft, -> { where.not(state: "draft").order("published_at DESC") }
+  scope :drafts, -> { where(state: "draft").order(created_at: :desc) }
+  scope :no_draft, -> { where.not(state: "draft").order(published_at: :desc) }
   scope :searchstring, lambda { |search_string|
     result = where(state: "published")
 
@@ -119,6 +119,6 @@ class Content < ApplicationRecord
   end
 
   def short_url
-    redirect.from_url if redirect.present?
+    redirect&.from_url
   end
 end
