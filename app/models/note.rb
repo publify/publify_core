@@ -43,6 +43,15 @@ class Note < Content
     []
   end
 
+  def generate_html(field, text = nil)
+    if field == :in_reply_to
+      html = TextFilter.make_filter("none").filter_text(text)
+      html_postprocess(field, html).to_s
+    else
+      super
+    end
+  end
+
   def html_postprocess(field, html)
     super(field, PublifyCore::TextFilter::Twitterfilter.filtertext(html))
   end
