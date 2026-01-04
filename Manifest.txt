@@ -247,7 +247,6 @@ app/views/notes/_note.html.erb
 app/views/notes/error.html.erb
 app/views/notes/index.html.erb
 app/views/notes/show.html.erb
-app/views/notes/show_in_reply.html.erb
 app/views/notification_mailer/_mail_footer.html.erb
 app/views/notification_mailer/_mail_header.html.erb
 app/views/notification_mailer/article.html.erb

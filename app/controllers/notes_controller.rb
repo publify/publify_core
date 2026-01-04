@@ -19,10 +19,7 @@ class NotesController < ContentController
   def show
     @note = Note.published.find_by! permalink: CGI.escape(params[:permalink])
 
-    if @note.in_reply_to_message.present?
-      @reply = JSON.parse(@note.in_reply_to_message)
-      render :show_in_reply
-    end
+    @reply = JSON.parse(@note.in_reply_to_message) if @note.in_reply_to_message.present?
   end
 
   private
