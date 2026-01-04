@@ -119,6 +119,6 @@ class Content < ApplicationRecord
   end
 
   def short_url
-    redirect.from_url if redirect.present?
+    redirect&.from_url
   end
 end

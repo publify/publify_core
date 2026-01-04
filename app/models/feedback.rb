@@ -252,7 +252,7 @@ class Feedback < ApplicationRecord
   end
 
   def blog_id
-    article.blog_id if article.present?
+    article.blog_id
   end
 
   def plural_model_name
