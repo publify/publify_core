@@ -23,7 +23,7 @@ class Note < Content
   scope :published, lambda {
     where(state: "published").where(published_at: ..Time.zone.now).order(default_order)
   }
-  default_scope { order("published_at DESC") }
+  default_scope { order(published_at: :desc) }
 
   TWITTER_FTP_URL_LENGTH = 19
   TWITTER_HTTP_URL_LENGTH = 20

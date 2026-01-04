@@ -4,13 +4,13 @@ class Admin::RedirectsController < Admin::BaseController
   before_action :set_redirect, only: [:edit, :update, :destroy]
 
   def index
-    @redirects = Redirect.where(content_id: nil).order("id desc").page(params[:page])
+    @redirects = Redirect.where(content_id: nil).order(id: :desc).page(params[:page])
       .per(this_blog.admin_display_elements)
     @redirect = Redirect.new
   end
 
   def edit
-    @redirects = Redirect.where(content_id: nil).order("id desc").page(params[:page])
+    @redirects = Redirect.where(content_id: nil).order(id: :desc).page(params[:page])
       .per(this_blog.admin_display_elements)
   end
 

@@ -116,7 +116,7 @@ class Admin::ArticlesController < Admin::BaseController
     @article.text_filter_name ||= default_text_filter
 
     if @article.title.blank?
-      lastid = Article.order("id desc").first.id
+      lastid = Article.order(id: :desc).first.id
       @article.title = "Draft article #{lastid}"
     end
 

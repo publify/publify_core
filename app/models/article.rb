@@ -36,7 +36,7 @@ class Article < Content
              "contents.state" => "published")
       .group("contents.id")
       .select("contents.*, count(feedback.id) as comment_count")
-      .order("comment_count DESC")
+      .order(comment_count: :desc)
       .limit(5)
   }
 
@@ -106,7 +106,7 @@ class Article < Content
       scoped = scoped.send(params[:state])
     end
 
-    scoped.order("created_at DESC")
+    scoped.order(created_at: :desc)
   end
 
   # FIXME: Use keyword params to clean up call sites.
@@ -140,12 +140,12 @@ class Article < Content
   end
 
   def next
-    Article.where("published_at > ?", published_at).order("published_at asc")
+    Article.where("published_at > ?", published_at).order(:published_at)
       .limit(1).first
   end
 
   def previous
-    Article.where(published_at: ...published_at).order("published_at desc")
+    Article.where(published_at: ...published_at).order(published_at: :desc)
       .limit(1).first
   end
 
