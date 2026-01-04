@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+require "twitter"
+require "json"
+require "uri"
+require "html/pipeline"
+require "html/pipeline/hashtag/hashtag_filter"
+
 class Note < Content
-  require "twitter"
-  require "json"
-  require "uri"
   include PublifyGuid
   include ConfigManager
 
@@ -30,6 +33,40 @@ class Note < Content
   TWITTER_HTTPS_URL_LENGTH = 21
   TWITTER_LINK_LENGTH = 22
 
+  class TwitterHashtagFilter < HTML::Pipeline::HashtagFilter
+    def initialize(text)
+      super(text,
+            tag_url: "https://twitter.com/search?q=%%23%<tag>s&src=tren&mode=realtime",
+            tag_link_attr: "")
+    end
+  end
+
+  class TwitterMentionFilter < HTML::Pipeline::MentionFilter
+    def initialize(text)
+      super(text, base_url: "https://twitter.com")
+    end
+
+    # Override base mentions finder, treating @mention just like any other @foo.
+    def self.mentioned_logins_in(text, username_pattern = UsernamePattern)
+      text.gsub MentionPatterns[username_pattern] do |match|
+        login = Regexp.last_match(1)
+        yield match, login, false
+      end
+    end
+
+    # Override base link creator, removing the class
+    def link_to_mentioned_user(login)
+      result[:mentioned_usernames] |= [login]
+
+      url = base_url.dup
+      url << "/" unless %r{[/~]\z}.match?(url)
+
+      "<a href='#{url << login}'>" \
+        "@#{login}" \
+        "</a>"
+    end
+  end
+
   def set_permalink
     self.permalink = "#{id}-#{body.to_permalink[0..79]}" if permalink.blank?
     save
@@ -53,7 +90,12 @@ class Note < Content
   end
 
   def html_postprocess(field, html)
-    super(field, PublifyCore::TextFilter::Twitterfilter.filtertext(html))
+    helper = PublifyCore::ContentTextHelpers.new
+    html = helper.auto_link(html)
+
+    html = TwitterHashtagFilter.new(html).call
+    html = TwitterMentionFilter.new(html).call.to_s
+    super
   end
 
   def truncate(message, length)

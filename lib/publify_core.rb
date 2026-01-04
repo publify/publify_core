@@ -12,7 +12,6 @@ require "publify_core/text_filter/none"
 require "publify_core/text_filter/markdown"
 require "publify_core/text_filter/markdown_smartquotes"
 require "publify_core/text_filter/smartypants"
-require "publify_core/text_filter/twitterfilter"
 require "publify_core/string_ext"
 
 require "bootstrap"

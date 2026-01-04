@@ -385,7 +385,6 @@ lib/publify_core/text_filter/markdown.rb
 lib/publify_core/text_filter/markdown_smartquotes.rb
 lib/publify_core/text_filter/none.rb
 lib/publify_core/text_filter/smartypants.rb
-lib/publify_core/text_filter/twitterfilter.rb
 lib/publify_core/version.rb
 lib/publify_guid.rb
 lib/publify_plugins.rb
