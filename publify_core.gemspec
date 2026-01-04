@@ -67,7 +67,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rubocop-rspec_rails", "~> 2.32.0"
   s.add_development_dependency "shoulda-matchers", "~> 6.0"
   s.add_development_dependency "simplecov", "~> 0.22.0"
-  s.add_development_dependency "sqlite3", "~> 1.6"
+  s.add_development_dependency "sqlite3", "~> 2.9"
   s.add_development_dependency "timecop", "~> 0.9.1"
   s.add_development_dependency "webmock", "~> 3.3"
   s.metadata["rubygems_mfa_required"] = "true"
