@@ -32,7 +32,7 @@ class Sidebar < ApplicationRecord
   def self.setting(key, default = nil, options = {})
     key = key.to_s
 
-    return if instance_methods.include?(key)
+    return if method_defined?(key)
 
     fields << SidebarField.build(key, default, options)
 
