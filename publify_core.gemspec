@@ -45,7 +45,7 @@ Gem::Specification.new do |s|
   s.add_dependency "recaptcha", ["~> 5.0"]
   s.add_dependency "rubypants", "~> 0.7.0"
   s.add_dependency "sassc-rails", "~> 2.0"
-  s.add_dependency "twitter", ">= 7.0", "< 8.3"
+  s.add_dependency "twitter", ">= 7.0", "< 8.4"
   s.add_dependency "uuidtools", ">= 2.2", "< 3.1"
   s.add_dependency "zxcvbn", "~> 1.0"
 
