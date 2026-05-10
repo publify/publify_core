@@ -10,7 +10,7 @@ class Note < Content
   include PublifyGuid
   include ConfigManager
 
-  serialize :settings, Hash, coder: YAML
+  serialize :settings, type: Hash, coder: YAML
 
   setting :twitter_id, :string, ""
   setting :in_reply_to_status_id, :string, ""
