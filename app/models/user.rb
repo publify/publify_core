@@ -8,11 +8,12 @@ class User < ApplicationRecord
   ADMIN = "admin"
   PUBLISHER = "publisher"
   CONTRIBUTOR = "contributor"
+  MIN_PASSWORD_SCORE = 4
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :zxcvbnable
+         :recoverable, :rememberable, :trackable, :validatable
   include ConfigManager
   include StringLengthLimit
 
@@ -23,6 +24,7 @@ class User < ApplicationRecord
   validates :login, length: { in: 3..40 }
   validates_default_string_length :email, :text_filter_name
   validates :name, length: { maximum: 2048 }
+  validate :strong_password, if: :password_required?
 
   belongs_to :resource, optional: true
   has_many :notifications, foreign_key: "notify_user_id"
@@ -137,6 +139,13 @@ class User < ApplicationRecord
   end
 
   private
+
+  def strong_password
+    return if password.blank?
+
+    test = Zxcvbn.test(password)
+    errors.add :password, :weak_password if test.score < MIN_PASSWORD_SCORE
+  end
 
   def set_default_profile
     self.profile ||= User.none? ? "admin" : "contributor"

@@ -19,6 +19,8 @@ es-MX:
           attributes:
             title:
               blank: no puede ser vac&iacute;o
+        user:
+          weak_password: is too weak
   admin:
     articles:
       access_granted:

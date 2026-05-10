@@ -19,6 +19,8 @@ ar:
           attributes:
             title:
               blank: لا يمكن تركها فارغة
+        user:
+          weak_password: is too weak
   admin:
     articles:
       access_granted:

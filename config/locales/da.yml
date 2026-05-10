@@ -19,6 +19,8 @@ da:
           attributes:
             title:
               blank: can't be blank
+        user:
+          weak_password: is too weak
   admin:
     articles:
       access_granted:
