@@ -8,7 +8,7 @@ class Article < Content
   include PublifyGuid
   include ConfigManager
 
-  serialize :settings, Hash, coder: YAML
+  serialize :settings, type: Hash, coder: YAML
 
   content_fields :body, :extended
 

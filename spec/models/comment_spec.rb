@@ -286,9 +286,7 @@ RSpec.describe Comment, type: :model do
         it "rejects with filter '#{filter}'" do
           blog.comment_text_filter = filter
 
-          ActiveSupport::Deprecation.silence do
-            expect(comment.html(:body)).not_to include "<script>"
-          end
+          expect(comment.html(:body)).not_to include "<script>"
         end
       end
     end
@@ -308,10 +306,8 @@ RSpec.describe Comment, type: :model do
 
           html = comment.html(:body)
 
-          ActiveSupport::Deprecation.silence do
-            expect(html).not_to match(/<img/)
-            expect(html).to match(%r{<b>foo</b>})
-          end
+          expect(html).not_to match(/<img/)
+          expect(html).to match(%r{<b>foo</b>})
         end
       end
     end
