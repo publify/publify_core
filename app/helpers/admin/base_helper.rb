@@ -3,8 +3,8 @@
 module Admin::BaseHelper
   include ActionView::Helpers::DateHelper
 
-  def toggle_element(element, label = t("generic.change"))
-    link_to label, "##{element}", data: { toggle: :collapse }
+  def toggle_element(element, label = t("generic.change"), **)
+    link_to(label, "##{element}", data: { "bs-toggle": :collapse }, **)
   end
 
   def class_for_admin_state(sidebar, this_position)
@@ -76,7 +76,8 @@ module Admin::BaseHelper
 
   def top_menu_item(name, url)
     if current_page? url
-      tag.li(link_to(name, "#", class: "active nav-link"), class: "nav-item")
+      tag.li(link_to(name, "#", class: "active nav-link", "aria-current": "page"),
+             class: "nav-item")
     else
       tag.li(link_to(name, url, class: "nav-link"), class: "nav-item")
     end
@@ -84,9 +85,9 @@ module Admin::BaseHelper
 
   def menu_item(name, url)
     if current_page? url
-      link_to(name, "#", class: "active dropdown-item")
+      tag.li(link_to(name, "#", class: "active dropdown-item", "aria-current": "page"))
     else
-      link_to(name, url, class: "dropdown-item")
+      tag.li(link_to(name, url, class: "dropdown-item"))
     end
   end
 end

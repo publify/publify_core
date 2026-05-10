@@ -1,5 +1,5 @@
 <%= n.hidden_field :text_filter_name, value: current_user.text_filter_name %>
-<div class='form-group'>
+<div class="mb-3">
   <%= n.text_area :body, class: 'form-control', rows: '7', placeholder: t('.compose_new_note') %>
 </div>
 
@@ -14,20 +14,20 @@
         <%= t('.posse_to_twitter') %>
       </label>
     </div>
-    <div class="form-group">
+    <div class="mb-3">
       <label for="note_in_reply_to_status_id"><%= t('.in_reply_to') %></label>
       <%= n.text_field :in_reply_to_status_id, class: 'form-control', placeholder: t('.tweet_id_like') %>
     </div>
   <% end %>
-  <div class='form-group'>
+  <div class="mb-3">
     <label for="note_permalink"><%= t('.permanent_link') %></label>
     <%= n.text_field :permalink, class: 'form-control' %>
   </div>
-  <div class='form-group'>
+  <div class="mb-3">
     <label for='note_published_at'><%= t('.publish_at') %></label>
     <%= n.datetime_field :published_at, class: 'form-control' %>
   </div>
-  <div class='form-group'>
+  <div class="mb-3">
     <hr>
     <%= link_to(t('.cancel'), action: 'index') %>
     <%= t('.or') %>

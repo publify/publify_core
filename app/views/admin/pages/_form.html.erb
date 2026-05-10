@@ -5,7 +5,7 @@
     <div class="float-xs-right">
       <%= link_to(t('.cancel'), { action: 'index' }, { class: 'btn btn-default' }) %>
       <!-- Button trigger modal -->
-      <button class="btn btn-success" data-toggle="modal" type="button" data-target="#publishOptions">
+      <button class="btn btn-success" data-bs-toggle="modal" type="button" data-bs-target="#publishOptions">
         <%= controller.action_name == 'new' ? t('.publish') : t('.save') %>
       </button>
     </div>
@@ -56,7 +56,7 @@
       <div class="modal-body">
         <div class="well">
           <h4><%= t('.permanent_link') %></h4>
-          <div class="form-group">
+          <div class="mb-3">
             <%= text_field 'page', 'name', class: 'form-control' %>
           </div>
         </div>
@@ -69,16 +69,14 @@
               <%= t('.status') %>: <strong><%= @page.state %></strong>
               <%= toggle_element('status') %>
               </p>
-              <div id="status" class="collapse">
-                <label for="page_published" class="checkbox">
-                  <%= check_box 'page', 'state', {}, 'published', '' %>
-                  <%= t('.online') %>
-                </label>
-                <p>
-                <span class="btn btn-mini btn-secondary">
-                  <%= toggle_element 'status', 'OK' %>
-                </span>
-                </p>
+              <div id="status" class="collapse mb-3">
+                <div class="mb-3">
+                  <label for="page_published" class="checkbox">
+                    <%= check_box 'page', 'state', {}, 'published', '' %>
+                    <%= t('.online') %>
+                  </label>
+                </div>
+                <%= toggle_element 'status', 'OK', class: "btn btn-mini btn-secondary" %>
               </div>
             </div>
             <div class="control-group">
@@ -87,21 +85,19 @@
               <%= toggle_element 'text_filter' %>
               </p>
               <div id="text_filter" class="collapse">
-                <select name="page[text_filter_name]" id="text_filter_name" class='form-control'>
-                  <%= options_for_select text_filter_options, @page.text_filter_name %>
-                </select>
-                <p>
-                <span class="btn btn-mini btn-secondary">
-                  <%= toggle_element 'text_filter', 'OK' %>
-                </span>
-                </p>
+                <div class="mb-3">
+                  <select name="page[text_filter_name]" id="text_filter_name" class='form-select'>
+                    <%= options_for_select text_filter_options, @page.text_filter_name %>
+                  </select>
+                </div>
+                <%= toggle_element 'status', 'OK', class: "btn btn-mini btn-secondary" %>
               </div>
             </div>
           </fieldset>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <%= submit_tag(t('.publish'), class: 'btn btn-success') %>
       </div>
     </div>

@@ -11,7 +11,7 @@
       </span>
       <input id="save_draft" type="submit" value="<%= t('.save_as_draft') %>" name="article[draft]" class="btn btn-secondary">
       <!-- Button trigger modal -->
-      <button class="btn btn-success" data-toggle="modal" type="button" data-target="#publishOptions">
+      <button class="btn btn-success" data-bs-toggle="modal" type="button" data-bs-target="#publishOptions">
         <%= controller.action_name == 'new' ? t('.publish') : t('.save') %>
       </button>
     </div>
@@ -91,15 +91,11 @@
                 <%= t('.permalink') %>:
                 <%= toggle_element('permalink') %>
                 </p>
-                <div id="permalink" class="collapse">
-                  <div class="form-group">
+                <div id="permalink" class="mb-3 collapse">
+                  <div class="mb-3">
                     <%= text_field 'article', 'permalink', autocomplete: 'off', class: 'form-control' %>
                   </div>
-                  <p>
-                  <span class="btn btn-mini btn-secondary">
-                    <%= toggle_element('permalink', t('.ok')) %>
-                  </span>
-                  </p>
+                  <%= toggle_element('permalink', t('.ok'), class: "btn btn-mini btn-secondary") %>
                 </div>
               </div>
               <div class="control-group">
@@ -107,16 +103,14 @@
                 <%= t('.status') %>: <strong><%= @article.state.to_s.downcase %></strong>
                 <%= toggle_element('status') %>
                 </p>
-                <div id="status" class="collapse">
-                  <label for="article_published" class="checkbox">
-                    <%= check_box 'article', 'published?' %>
-                    <%= t('.published') %>
-                  </label>
-                  <p>
-                  <span class="btn btn-mini btn-secondary">
-                    <%= toggle_element 'status', t('.ok') %>
-                  </span>
-                  </p>
+                <div id="status" class="mb-3 collapse">
+                  <div class="mb-3">
+                    <label for="article_published" class="checkbox">
+                      <%= check_box 'article', 'published?' %>
+                      <%= t('.published') %>
+                    </label>
+                  </div>
+                  <%= toggle_element('status', t('.ok'), class: "btn btn-mini btn-secondary") %>
                 </div>
               </div>
               <div class="control-group">
@@ -124,16 +118,16 @@
                 <%= t('.allowed_comments_html', allow_comment: content_tag(:strong, @article.allow_comments? ? t('.allow_comments_status.enabled') : t('.allow_comments_status.disabled'))) %>
                 <%= toggle_element('conversation') %>
                 </p>
-                <div id="conversation" class="collapse">
-                  <label for="article_allow_comments" class="checkbox">
-                    <%= check_box 'article', 'allow_comments' %>
-                    <%= t('.allow_comments') %>
-                  </label>
-                  <p>
-                  <span class="btn btn-mini btn-secondary">
-                    <%= toggle_element('conversation', t('.ok')) %>
-                  </span>
-                  </p>
+                <div id="conversation" class="mb-3 collapse">
+                  <div class="mb-3">
+                    <label for="article_allow_comments" class="checkbox">
+                      <%= check_box 'article', 'allow_comments' %>
+                      <%= t('.allow_comments') %>
+                    </label>
+                  </div>
+                  <div>
+                    <%= toggle_element('conversation', t('.ok'), class: "btn btn-mini btn-secondary") %>
+                  </div>
                 </div>
               </div>
               <div class="control-group">
@@ -148,13 +142,11 @@
                 </strong>
                 <%= toggle_element('publish') %>
                 </p>
-                <div id="publish" class="collapse">
-                  <%= datetime_field 'article', 'published_at' %>
-                  <p>
-                  <span class="btn btn-mini btn-secondary">
-                    <%= toggle_element('publish', t('.ok')) %>
-                  </span>
-                  </p>
+                <div id="publish" class="mb-3 collapse">
+                  <div class="mb-3">
+                    <%= datetime_field 'article', 'published_at' %>
+                  </div>
+                  <%= toggle_element('publish', t('.ok'), class: "btn btn-mini btn-secondary") %>
                 </div>
               </div>
               <div class="control-group">
@@ -162,14 +154,12 @@
                 <%= t('.visibility') %>: <strong><%= @article.password.blank? ? t('.public') : t('.protected') %></strong>
                 <%= toggle_element('visibility') %>
                 </p>
-                <div id="visibility" class="collapse">
-                  <label for="article_password"><%= t('.password') %></label>
-                  <%= text_field 'article', 'password', class: 'form-control' %>
-                  <p>
-                  <span class="btn btn-mini btn-secondary">
-                    <%= toggle_element('visibility', t('.ok')) %>
-                  </span>
-                  </p>
+                <div id="visibility" class="mb-3 collapse">
+                  <div class="mb-3">
+                    <label for="article_password"><%= t('.password') %></label>
+                    <%= text_field 'article', 'password', class: 'form-control' %>
+                  </div>
+                  <%= toggle_element('visibility', t('.ok'), class: "btn btn-mini btn-secondary") %>
                 </div>
               </div>
               <div class="control-group">
@@ -178,14 +168,12 @@
                 <%= toggle_element 'text_filter' %>
                 </p>
                 <div id="text_filter" class="collapse">
-                  <select name="article[text_filter_name]" id="text_filter_name" class='form-control'>
-                    <%= options_for_select text_filter_options, @article.text_filter_name %>
-                  </select>
-                  <p>
-                  <span class="btn btn-mini btn-secondary">
-                    <%= toggle_element 'text_filter', 'OK' %>
-                  </span>
-                  </p>
+                  <div class="mb-3">
+                    <select name="article[text_filter_name]" id="text_filter_name" class='form-select'>
+                      <%= options_for_select text_filter_options, @article.text_filter_name %>
+                    </select>
+                  </div>
+                  <%= toggle_element('text_filter', t('.ok'), class: "btn btn-mini btn-secondary") %>
                 </div>
               </div>
             </fieldset>
@@ -193,7 +181,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('.cancel') %></button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= t('.cancel') %></button>
         <%= submit_tag(t('.publish'), class: 'btn btn-success') %>
       </div>
     </div>

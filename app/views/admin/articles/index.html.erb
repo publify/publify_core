@@ -12,19 +12,19 @@
   <% end %>
 
   <p>
-    <%= link_to(t('.all_articles'), { action: 'index' }, { class: 'badge badge-secondary' }) %>
-    <%= link_to(t('.published'), { action: 'index', search: { state: 'published' } }, { class: 'badge badge-success' }) %>
-    <%= link_to(t('.withdrawn'), { action: 'index', search: { state: 'withdrawn' } }, { class: 'badge badge-danger' }) %>
-    <%= link_to(t('.drafts'), { action: 'index', search: { state: 'drafts' } }, { class: 'badge badge-info' }) %>
-    <%= link_to(t('.publication_pending'), { action: 'index', search: { state: 'pending' } }, { class: 'badge badge-warning' }) %>
+    <%= link_to(t('.all_articles'), { action: 'index' }, { class: 'badge text-bg-secondary' }) %>
+    <%= link_to(t('.published'), { action: 'index', search: { state: 'published' } }, { class: 'badge text-bg-success' }) %>
+    <%= link_to(t('.withdrawn'), { action: 'index', search: { state: 'withdrawn' } }, { class: 'badge text-bg-danger' }) %>
+    <%= link_to(t('.drafts'), { action: 'index', search: { state: 'drafts' } }, { class: 'badge text-bg-info' }) %>
+    <%= link_to(t('.publication_pending'), { action: 'index', search: { state: 'pending' } }, { class: 'badge text-bg-warning' }) %>
   </p>
 
-  <div class="card">
+  <div class="card mb-4">
     <div class="card-header">
-      <div class="clearfix float-right form-inline">
-        <%= select_tag('search[user_id]', options_from_collection_for_select(User.all, 'id', 'name'), prompt: t('.select_an_author'), class: 'form-control mr-sm-2') %>
-        <%= select_tag('search[published_at]', options_for_select(Article.publication_months), prompt: t('.publication_date'), class: 'form-control mr-sm-2') %>
-        <input id="search" type="text" name="search[searchstring]" class="form-control mr-sm-2" autocomplete="off">
+      <div class="d-sm-flex">
+        <%= select_tag('search[user_id]', options_from_collection_for_select(User.all, 'id', 'name'), prompt: t('.select_an_author'), class: 'form-select ms-sm-auto me-sm-2') %>
+        <%= select_tag('search[published_at]', options_for_select(Article.publication_months), prompt: t('.publication_date'), class: 'form-select me-sm-2') %>
+        <input id="search" type="text" name="search[searchstring]" class="form-control me-sm-2" autocomplete="off">
         <%= submit_tag(t('.search'), class: 'btn btn-success') %>
         <span id="spinner" class="d-none"><%= image_tag('spinner.gif') %></span>
       </div>
