@@ -2,7 +2,6 @@
 
 require "devise"
 require "devise-i18n"
-require "devise_zxcvbn"
 
 require "publify_core/version"
 require "publify_core/engine"
@@ -23,6 +22,7 @@ require "rails-i18n"
 require "rails-timeago"
 require "recaptcha/rails"
 require "sassc-rails"
+require "zxcvbn"
 
 require "email_notify"
 require "publify_guid"

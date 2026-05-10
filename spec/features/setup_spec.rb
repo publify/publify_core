@@ -57,7 +57,7 @@ RSpec.feature "Blog setup", type: :feature do
     click_button I18n.t!("generic.save")
 
     expect(page)
-      .to have_text "Password not strong enough. It scored 2. It must score at least 4."
+      .to have_text "Password is too weak"
 
     fill_in :user_password, with: strong_password
     click_button I18n.t!("generic.save")

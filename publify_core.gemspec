@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
   s.add_dependency "commonmarker", "~> 2.3"
   s.add_dependency "devise", ">= 4.8", "< 4.10"
   s.add_dependency "devise-i18n", "~> 1.2"
-  s.add_dependency "devise_zxcvbn", "~> 6.0"
   s.add_dependency "fog-aws", "~> 3.2"
   s.add_dependency "fog-core", "~> 2.2"
   s.add_dependency "html-pipeline", "~> 3.2"
@@ -48,6 +47,7 @@ Gem::Specification.new do |s|
   s.add_dependency "sassc-rails", "~> 2.0"
   s.add_dependency "twitter", ">= 7.0", "< 8.3"
   s.add_dependency "uuidtools", ">= 2.2", "< 3.1"
+  s.add_dependency "zxcvbn", "~> 1.0"
 
   s.add_development_dependency "appraisal", "~> 2.3"
   s.add_development_dependency "capybara", "~> 3.0"

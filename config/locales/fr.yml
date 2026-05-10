@@ -19,6 +19,8 @@ fr:
           attributes:
             title:
               blank: ne peut être laissé vide
+        user:
+          weak_password: is too weak
   admin:
     articles:
       access_granted:

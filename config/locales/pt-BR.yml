@@ -19,6 +19,8 @@ pt-BR:
           attributes:
             title:
               blank: não pode ser vazio
+        user:
+          weak_password: is too weak
   admin:
     articles:
       access_granted:

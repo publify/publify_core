@@ -19,6 +19,8 @@ ru:
           attributes:
             title:
               blank: не может быть пустым
+        user:
+          weak_password: is too weak
   admin:
     articles:
       access_granted:

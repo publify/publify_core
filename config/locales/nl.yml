@@ -19,6 +19,8 @@ nl:
           attributes:
             title:
               blank: mag niet leeg zijn
+        user:
+          weak_password: is too weak
   admin:
     articles:
       access_granted:
