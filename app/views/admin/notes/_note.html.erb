@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <%= h(note.body.strip_html.slice(0..140)) %>
+    <%= h(note.excerpt_text(140)) %>
   </td>
   <td>
     <%= author_link(note) %><br>

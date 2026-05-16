@@ -82,7 +82,10 @@ class Note < Content
   end
 
   def set_permalink
-    self.permalink = "#{id}-#{body.to_permalink[0..79]}" if permalink.blank?
+    if permalink.blank?
+      base_permalink = PublifyCore::TextTransformer.to_permalink(body)[0..79]
+      self.permalink = "#{id}-#{base_permalink}"
+    end
     save
   end
 
@@ -122,7 +125,7 @@ class Note < Content
   end
 
   def twitter_message
-    base_message = body.strip_html
+    base_message = PublifyCore::TextTransformer.strip_html(body)
     if too_long?("#{base_message} (#{short_link})")
       max_length = 140 - "... (#{redirect.from_url})".length - 1
       "#{truncate(base_message, max_length)}... (#{redirect.from_url})"
