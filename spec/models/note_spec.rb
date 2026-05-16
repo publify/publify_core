@@ -318,4 +318,21 @@ RSpec.describe Note, type: :model do
         .to eq "<p>A <a href=\"https://link.com#foo\">https://link.com#foo</a></p>"
     end
   end
+
+  describe "#excerpt_text" do
+    it "shortens the note text" do
+      note = described_class.new(blog: blog, body: "a" * 200)
+      expect(note.excerpt_text).to eq("#{"a" * 160}...")
+    end
+
+    it "strips html from the note text" do
+      note = described_class.new(blog: blog, body: "<em>Boom!</em>")
+      expect(note.excerpt_text).to eq("Boom!")
+    end
+
+    it "replaces numeric comparisons with html entities" do
+      note = described_class.new(blog: blog, body: "5 < 6 > 4")
+      expect(note.excerpt_text).to eq("5 &lt; 6 &gt; 4")
+    end
+  end
 end
