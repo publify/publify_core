@@ -10,8 +10,6 @@ class Note < Content
   include PublifyGuid
   include ConfigManager
 
-  include ActionView::Helpers::SanitizeHelper
-
   serialize :settings, type: Hash, coder: YAML
 
   setting :twitter_id, :string, ""

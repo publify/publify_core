@@ -3,6 +3,7 @@
 module ContentBase
   def self.included(base)
     base.extend ClassMethods
+    base.include ActionView::Helpers::SanitizeHelper
   end
 
   attr_accessor :just_changed_published_status
@@ -49,13 +50,13 @@ module ContentBase
   end
 
   def excerpt_text(length = 160)
-    text = if respond_to?(:excerpt) && (excerpt || "") != ""
+    text = if respond_to?(:excerpt) && excerpt.present?
              generate_html(:excerpt, excerpt)
            else
              html(:all)
            end
 
-    text = text.strip_html
+    text = strip_tags(text)
 
     text.slice(0, length) +
       (text.length > length ? "..." : "")
