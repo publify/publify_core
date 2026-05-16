@@ -85,4 +85,24 @@ RSpec.describe Trackback, type: :model do
         url: "http://notaspammer.com", ip: "212.42.230.206" }
     end
   end
+
+  describe "#excerpt_text" do
+    let(:blog) { build(:blog) }
+    let(:article) { build(:article, blog: blog) }
+
+    it "uses the excerpt of the trackback" do
+      trackback = described_class.new(article: article, excerpt: "some excerpt")
+      expect(trackback.excerpt_text).to eq "some excerpt"
+    end
+
+    it "shortens the excerpt if too long" do
+      trackback = described_class.new(article: article, excerpt: "a" * 200)
+      expect(trackback.excerpt_text).to eq("#{"a" * 160}...")
+    end
+
+    it "strips html from the trackback text" do
+      trackback = described_class.new(article: article, excerpt: "<em>Boom!</em>")
+      expect(trackback.excerpt_text).to eq("Boom!")
+    end
+  end
 end
