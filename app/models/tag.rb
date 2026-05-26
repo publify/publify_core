@@ -23,7 +23,7 @@ class Tag < ApplicationRecord
         x.first.tr("\"'", "")
       end
       tagwords.uniq.each do |tagword|
-        tagname = tagword.to_url
+        tagname = PublifyCore::TextTransformer.to_url(tagword)
         tags << article.blog.tags.find_or_create_by(name: tagname) do |tag|
           tag.display_name = tagword
         end
@@ -35,7 +35,7 @@ class Tag < ApplicationRecord
 
   def ensure_naming_conventions
     self.display_name = name if display_name.blank?
-    self.name = display_name.to_url if display_name.present?
+    self.name = PublifyCore::TextTransformer.to_url(display_name) if display_name.present?
   end
 
   def self.find_all_with_content_counters

@@ -13,7 +13,7 @@ class Page < Content
   after_save :shorten_url
 
   def set_permalink
-    self.name = title.to_permalink if name.blank?
+    self.name = PublifyCore::TextTransformer.to_permalink(title) if name.blank?
   end
 
   content_fields :body

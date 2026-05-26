@@ -12,6 +12,7 @@ require "publify_core/text_filter/markdown"
 require "publify_core/text_filter/markdown_smartquotes"
 require "publify_core/text_filter/smartypants"
 require "publify_core/string_ext"
+require "publify_core/text_transformer"
 
 require "bootstrap"
 require "carrierwave"
@@ -44,4 +45,10 @@ module PublifyCore
 
   # Mime type is fully determined by url
   Engine.config.action_dispatch.ignore_accept_header = true
+
+  def self.deprecator
+    @deprecator ||= ActiveSupport::Deprecation.new("10.1", "PublifyCore")
+  end
+
+  deprecator.deprecate_methods PublifyCore::StringExt, :to_permalink, :to_url, :strip_html
 end

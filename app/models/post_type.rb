@@ -15,6 +15,6 @@ class PostType < ApplicationRecord
   end
 
   def sanitize_title
-    self.permalink = name.to_permalink
+    self.permalink = PublifyCore::TextTransformer.to_permalink(name)
   end
 end
