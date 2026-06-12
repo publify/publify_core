@@ -21,6 +21,12 @@ module PublifyCore
       string.gsub(/<[^>]*>/, "").to_url
     end
 
+    def to_title(item, settings, params)
+      TitleBuilder.new(self).build(item, settings, params)
+    end
+
+    protected
+
     # Returns a-string-with-dashes when passed 'a string with dashes'.
     # All special chars are stripped in the process
     def to_url
@@ -29,10 +35,6 @@ module PublifyCore
       s = downcase.tr("\"'", "")
       s = s.gsub(/\P{Word}/, " ")
       s.strip.tr_s(" ", "-").tr(" ", "-").sub(/^$/, "-")
-    end
-
-    def to_title(item, settings, params)
-      TitleBuilder.new(self).build(item, settings, params)
     end
   end
 end
