@@ -8,6 +8,11 @@ RSpec.describe PublifyCore::StringExt do
       expect("L'été s'ra chaud, l'été s'ra chaud".to_permalink)
         .to eq("l-ete-s-ra-chaud-l-ete-s-ra-chaud")
     end
+
+    it "strips html" do
+      expect("This <i>is</i> a <b>test</b>".to_permalink)
+        .to eq "this-is-a-test"
+    end
   end
 
   describe "to_url" do
