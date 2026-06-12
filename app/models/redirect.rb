@@ -31,10 +31,6 @@ class Redirect < ApplicationRecord
     end
   end
 
-  def to_url
-    raise "Use #from_url"
-  end
-
   def from_url
     File.join(blog.shortener_url, from_path)
   end
