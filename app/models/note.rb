@@ -122,7 +122,7 @@ class Note < Content
   end
 
   def twitter_message
-    base_message = body.strip_html
+    base_message = strip_tags(body)
     if too_long?("#{base_message} (#{short_link})")
       max_length = 140 - "... (#{redirect.from_url})".length - 1
       "#{truncate(base_message, max_length)}... (#{redirect.from_url})"

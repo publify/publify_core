@@ -7,9 +7,7 @@ feed.entry(item, id: "urn:uuid:#{item.guid}", published: item.published_at,
   end
 
   if item.is_a?(Note)
-    truncated_body = truncate(item.html(:body).strip_html,
-                              length: 80, separator: " ", omissions: "...")
-    entry.title truncated_body, "type" => "html"
+    entry.title truncated_body(item), "type" => "html"
   else
     entry.title item.title, "type" => "html"
   end

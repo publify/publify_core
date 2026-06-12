@@ -13,7 +13,7 @@
             <%= link_to(post.title, controller: 'admin/articles', action: 'edit', id: post.id) %>
             <%= display_date_and_time(post.created_at) %>
           </h5>
-          <p><%= post.body&.strip_html&.slice(0, 300) %></p>
+          <p><%= post.excerpt_text(300) %></p>
           <hr>
           </li>
         <% end %>

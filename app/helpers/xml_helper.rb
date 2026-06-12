@@ -15,4 +15,8 @@ module XmlHelper
       times.max.xmlschema
     end
   end
+
+  def truncated_body(item)
+    truncate(strip_tags(item.html(:body)), length: 80, separator: " ", omissions: "...")
+  end
 end
