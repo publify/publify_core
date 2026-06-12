@@ -9,7 +9,7 @@
       <%= display_date_and_time comment.created_at %>
     </h5>
     <p>
-    <%= comment.html.strip_html.slice(0..300) %>
+    <%= comment.excerpt_text(300) %>
     </p>
     <%= button_to_conversation(comment) %>
     <hr>
