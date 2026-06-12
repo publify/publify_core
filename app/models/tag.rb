@@ -19,11 +19,9 @@ class Tag < ApplicationRecord
 
     tags = []
     Tag.transaction do
-      tagwords = article.keywords.to_s.scan(/((['"]).*?\2|[.:[[:alnum:]]]+)/).map do |x|
-        x.first.tr("\"'", "")
-      end
+      tagwords = article.keywords.to_s.scan(/((['"]).*?\2|[.:[[:alnum:]]]+)/).map(&:first)
       tagwords.uniq.each do |tagword|
-        tagname = tagword.to_url
+        tagname = tagword.to_permalink
         tags << article.blog.tags.find_or_create_by(name: tagname) do |tag|
           tag.display_name = tagword
         end
@@ -35,7 +33,7 @@ class Tag < ApplicationRecord
 
   def ensure_naming_conventions
     self.display_name = name if display_name.blank?
-    self.name = display_name.to_url if display_name.present?
+    self.name = display_name.to_permalink if display_name.present?
   end
 
   def self.find_all_with_content_counters
