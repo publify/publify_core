@@ -75,24 +75,6 @@ class User < ApplicationRecord
       .map { |f| send(f) }.delete_if(&:empty?)
   end
 
-  # Authenticate users with old password hashes
-  alias devise_valid_password? valid_password?
-
-  def valid_password?(password)
-    devise_valid_password?(password)
-  rescue BCrypt::Errors::InvalidHash
-    digest = Digest::SHA1.hexdigest("#{self.class.salt}--#{password}--")
-    if digest == encrypted_password
-      # Update old SHA1 password with new Devise ByCrypt password
-      self.encrypted_password = password_digest(password)
-      save
-      true
-    else
-      # If not BCrypt password and not old SHA1 password deny access
-      false
-    end
-  end
-
   def active_for_authentication?
     super && state == "active"
   end
