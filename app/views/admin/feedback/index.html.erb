@@ -4,14 +4,14 @@
   </h2>
 <% end %>
 
-<%= form_tag({ action: 'index' }, { method: :get, class: 'form-inline' }) do %>
+<%= form_tag({ action: 'index' }, { method: :get }) do %>
   <p>
-    <%= link_to(t('.all'), { controller: 'admin/feedback', action: :index }, { class: 'badge badge-secondary' }) %>
-    <%= link_to(t('.unapproved_comments'), { controller: 'admin/feedback', action: :index, only: 'unapproved' }, { class: 'badge badge-info' }) %>
-    <%= link_to(t('.presumed_ham'), { controller: 'admin/feedback', action: :index, only: 'presumed_ham' }, { class: 'badge badge-primary' }) %>
-    <%= link_to(t('.ham'), { controller: 'admin/feedback', action: :index, only: 'ham' }, { class: 'badge badge-success' }) %>
-    <%= link_to(t('.presumed_spam'), { controller: 'admin/feedback', action: :index, only: 'presumed_spam' }, { class: 'badge badge-warning' }) %>
-    <%= link_to(t('.spam'), { controller: 'admin/feedback', action: :index, only: 'spam' }, { class: 'badge badge-danger' }) %>
+    <%= link_to(t('.all'), { controller: 'admin/feedback', action: :index }, { class: 'badge text-bg-secondary' }) %>
+    <%= link_to(t('.unapproved_comments'), { controller: 'admin/feedback', action: :index, only: 'unapproved' }, { class: 'badge text-bg-info' }) %>
+    <%= link_to(t('.presumed_ham'), { controller: 'admin/feedback', action: :index, only: 'presumed_ham' }, { class: 'badge text-bg-primary' }) %>
+    <%= link_to(t('.ham'), { controller: 'admin/feedback', action: :index, only: 'ham' }, { class: 'badge text-bg-success' }) %>
+    <%= link_to(t('.presumed_spam'), { controller: 'admin/feedback', action: :index, only: 'presumed_spam' }, { class: 'badge text-bg-warning' }) %>
+    <%= link_to(t('.spam'), { controller: 'admin/feedback', action: :index, only: 'spam' }, { class: 'badge text-bg-danger' }) %>
   </p>
 <% end %>
 

@@ -7,12 +7,12 @@
   </p>
 <% end %>
 
-<%= form_tag({ action: 'upload' }, { enctype: 'multipart/form-data', class: 'form-inline' }) do %>
+<%= form_tag({ action: 'upload' }, { enctype: 'multipart/form-data' }) do %>
   <div class="card card-body">
     <h3><%= t('.upload_a_file_to_your_site') %></h3>
     <div class="form-group row">
       <div class="col-auto">
-        <%= file_field_tag(:upload, class: 'form-control-file') %>
+        <%= file_field_tag(:upload, class: 'form-control') %>
       </div>
       <div class="col-auto">
         <%= submit_tag(t('.upload'), class: 'btn btn-success') %>

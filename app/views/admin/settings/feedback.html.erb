@@ -28,7 +28,7 @@
     <div class='form-group row'>
       <label class='col-form-label col-md-4 col-lg-3 col-xl-2' for="comment_text_filter"><%= t('.comments_filter') %></label>
       <div class='col-md-8 col-lg-6 col-xl-4'>
-        <select name="setting[comment_text_filter]" id="comment_text_filter" class='form-control'>
+        <select name="setting[comment_text_filter]" id="comment_text_filter" class='form-select'>
           <%= options_for_select text_filter_options, this_blog.comment_text_filter %>
         </select>
       </div>
@@ -36,7 +36,7 @@
     <div class='form-group row'>
       <label class='col-form-label col-md-4 col-lg-3 col-xl-2' for="setting_plugin_avatar"><%= t('.avatars_provider') %></label>
       <div class='col-md-8 col-lg-6 col-xl-4'>
-        <select name="setting[plugin_avatar]" id="setting_plugin_avatar" class='form-control'>
+        <select name="setting[plugin_avatar]" id="setting_plugin_avatar" class='form-select'>
           <%= options_for_select plugin_options(:avatar).push([t('.none'), '']), this_blog.plugin_avatar %>
         </select>
       </div>

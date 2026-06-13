@@ -15,15 +15,15 @@
       <div class="row">
         <div class="col-lg-4 offset-lg-4">
           <div class="card">
-            <h1 class="card-title"><%= link_to('Publify', 'https://publify.github.io') %></h1>
             <div class="card-body">
+              <h1 class="card-title"><%= link_to('Publify', 'https://publify.github.io') %></h1>
               <%= render 'shared/flash', flash: flash %>
               <%= yield %>
+              <% if content_for?(:account_links) %>
+                <%= yield :account_links %>
+              <% end %>
             </div>
           </div>
-          <% if content_for?(:account_links) %>
-            <%= yield :account_links %>
-          <% end %>
         </div>
       </div>
     </div>

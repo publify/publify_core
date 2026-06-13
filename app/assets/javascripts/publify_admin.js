@@ -3,6 +3,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require popper
 //= require bootstrap-sprockets
 //= require quicktags
 //= require tagmanager
@@ -68,9 +69,6 @@ $(document).ready(function() {
   $('#article_form').submit(function(e){save_article_tags()});
   $('#article_form').each(function(e){tag_manager()});
   $('#checkall').click(function(e){check_all(e.target)});
-
-  // DropDown
-  $(".dropdown-toggle").dropdown();
 });
 
 $(document).delegate('*[data-toggle="lightbox"]', 'click',
