@@ -69,10 +69,14 @@ $(document).ready(function() {
   $('#article_form').submit(function(e){save_article_tags()});
   $('#article_form').each(function(e){tag_manager()});
   $('#checkall').click(function(e){check_all(e.target)});
-});
 
-$(document).delegate('*[data-toggle="lightbox"]', 'click',
-    function(event) {
-      event.preventDefault();
-      $(this).ekkoLightbox();
-    });
+  const lightboxModal = document.getElementById('image-lightbox-modal');
+  if (lightboxModal) {
+    lightboxModal.addEventListener('show.bs.modal', event => {
+      const triggerElem = event.relatedTarget;
+      const imageUrl = triggerElem.getAttribute('data-bs-imageurl');
+      const imageElem = lightboxModal.querySelector('.modal-body img')
+      imageElem.src = imageUrl;
+    })
+  }
+});

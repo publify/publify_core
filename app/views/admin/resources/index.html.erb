@@ -42,7 +42,7 @@
   <tr>
     <td>
       <% if resource.mime =~ /image/ %>
-        <a href="<%= resource.upload.medium.url %>" data-toggle="lightbox">
+        <a href="#image-lightbox-modal" data-bs-imageurl="<%= resource.upload.medium.url %>" data-bs-toggle="modal">
           <%= image_tag(resource.upload.thumb.url) %>
         </a>
       <% else %>
@@ -70,3 +70,13 @@
   <% end %>
   <%= display_pagination(@resources, 6) %>
 </table>
+
+<div class="modal fade" id="image-lightbox-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>
