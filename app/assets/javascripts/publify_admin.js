@@ -10,7 +10,6 @@
 //= require typeahead
 //= require sidebar
 //= require spinnable
-//= require lightbox
 //
 //= require_self
 
