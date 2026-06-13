@@ -27,7 +27,6 @@ app/assets/javascripts/lang/en_US.js
 app/assets/javascripts/lang/fr_FR.js
 app/assets/javascripts/lang/nl_NL.js
 app/assets/javascripts/lang/zh_TW.js
-app/assets/javascripts/lightbox.js
 app/assets/javascripts/markup_help_popup.js
 app/assets/javascripts/observe.js
 app/assets/javascripts/optional_field_toggle.js
@@ -43,7 +42,6 @@ app/assets/javascripts/typeahead.js
 app/assets/stylesheets/accounts.css.scss
 app/assets/stylesheets/administration_structure.css.scss
 app/assets/stylesheets/coderay.css
-app/assets/stylesheets/lightbox.css
 app/assets/stylesheets/publify.css.scss
 app/assets/stylesheets/publify_admin.css.scss
 app/assets/stylesheets/rss.css
