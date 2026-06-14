@@ -19,22 +19,43 @@ RSpec.describe TextFilterPlugin do
     end
   end
 
-  shared_examples "a macro class" do
-    describe ".attributes_parse" do
-      it 'parses lang="ruby" to {"lang" => "ruby"}' do
-        expect(described_class.attributes_parse('<publify:code lang="ruby">'))
-          .to eq("lang" => "ruby")
+  shared_examples "an abstract macro class" do
+    describe ".filtertext" do
+      before do
+        allow(described_class).to receive(:macrofilter) do |attrs, content = nil|
+          content ||= "NO CONTENT"
+          attrs_text = attrs.map { |key, val| "#{key}=#{val}" }.join(", ")
+          "#{attrs_text} (#{content})"
+        end
+        allow(described_class).to receive(:short_name).and_return "code"
       end
 
-      it "parses lang='ruby' to {'lang' => 'ruby'}" do
-        expect(described_class.attributes_parse("<publify:code lang='ruby'>"))
-          .to eq("lang" => "ruby")
+      it "parses contentless tags with double-quoted attribute values" do
+        expect(described_class.filtertext("<publify:code lang=\"ruby\"/>"))
+          .to eq("lang=ruby (NO CONTENT)")
+      end
+
+      it "parses contentless tags with single-quoted attribute values" do
+        expect(described_class.filtertext("<publify:code lang='ruby'/>"))
+          .to eq("lang=ruby (NO CONTENT)")
+      end
+
+      it "parses contentful tags with double-quoted attribute values" do
+        result = described_class
+          .filtertext("<publify:code lang=\"ruby\">puts \"hi!\"</publify:code>")
+        expect(result).to eq("lang=ruby (puts \"hi!\")")
+      end
+
+      it "parses contentful tags with single-quoted attribute values" do
+        result = described_class
+          .filtertext("<publify:code lang='ruby'>puts \"hi!\"</publify:code>")
+        expect(result).to eq("lang=ruby (puts \"hi!\")")
       end
     end
   end
 
   describe described_class::MacroPre do
-    it_behaves_like "a macro class"
+    it_behaves_like "an abstract macro class"
 
     it "declares itself to be a macropre filter" do
       expect(described_class.filter_type).to eq "macropre"
@@ -42,7 +63,7 @@ RSpec.describe TextFilterPlugin do
   end
 
   describe described_class::MacroPost do
-    it_behaves_like "a macro class"
+    it_behaves_like "an abstract macro class"
 
     it "declares itself to be a macropost filter" do
       expect(described_class.filter_type).to eq "macropost"
