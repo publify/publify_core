@@ -2,7 +2,7 @@
  <div class="post">
    <h2><%= link_to_permalink article, article.title %></h2>
    <% if article.password.blank? %>
-     <%= article.html(:body).gsub(%r{</?[^>]*>}, '').slice(0..300) %>...
+     <%= article.excerpt_text(300) %>
    <% end %>
   </div>
 <% end %>
