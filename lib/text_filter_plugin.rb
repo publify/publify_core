@@ -118,6 +118,10 @@ class TextFilterPlugin
   def self.abstract_filter!
     @@filter_map.delete short_name
   end
+
+  def self.filtertext(_text)
+    raise NotImplementedError, "Must be implemented by subclasses"
+  end
 end
 
 class TextFilterPlugin::PostProcess < TextFilterPlugin
@@ -129,24 +133,6 @@ class TextFilterPlugin::PostProcess < TextFilterPlugin
 end
 
 module TextFilterPlugin::MacroMethods
-  # Utility function -- hand it a XML string like <a href="foo" title="bar">
-  # and it'll give you back { "href" => "foo", "title" => "bar" }
-  def attributes_parse(string)
-    attributes = {}
-
-    string.gsub(/([^ =]+="[^"]*")/) do |match|
-      key, value = match.split("=", 2)
-      attributes[key] = value.delete('"')
-    end
-
-    string.gsub(/([^ =]+='[^']*')/) do |match|
-      key, value = match.split("=", 2)
-      attributes[key] = value.delete("'")
-    end
-
-    attributes
-  end
-
   def filtertext(text)
     regex1 = %r{<publify:#{short_name}(?:[ \t][^>]*)?/>}
     regex2 = %r{<publify:#{short_name}([ \t][^>]*)?>(.*?)</publify:#{short_name}>}m
@@ -155,9 +141,21 @@ module TextFilterPlugin::MacroMethods
       macrofilter(attributes_parse(match))
     end
 
-    new_text.gsub(regex2) do |_match|
-      macrofilter(attributes_parse(Regexp.last_match[1].to_s), Regexp.last_match[2].to_s)
+    new_text.gsub(regex2) do |match|
+      macrofilter(attributes_parse(match), Regexp.last_match[2].to_s)
     end
+  end
+
+  def macrofilter(...)
+    raise NotImplementedError, "Must be implemented by subclasses"
+  end
+
+  private
+
+  # Return a hash of attributes of the HMTL element represented by string
+  def attributes_parse(string)
+    elem = Nokogiri::HTML5.fragment(string).children.first
+    elem.attribute_nodes.to_h { [_1.name, _1.value] }
   end
 end
 
