@@ -5,7 +5,7 @@ class Theme
 
   def initialize(name, path)
     @name = name
-    @path = path
+    @path = Pathname.new path
   end
 
   def description
@@ -40,6 +40,10 @@ class Theme
   # List all themes
   def self.find_all
     registered_themes.values
+  end
+
+  def self.find_each
+    find_all.each { yield _1 }
   end
 
   def self.register_theme(path)

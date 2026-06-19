@@ -53,16 +53,6 @@ Rails.application.routes.draw do
 
   resources :authors, path: "author", only: :show
 
-  # ThemeController
-  scope controller: "theme", filename: /.*/ do
-    get "stylesheets/theme/:filename", action: "stylesheets", format: false
-    get "images/theme/:filename", action: "images", format: false
-    get "fonts/theme/:filename", action: "fonts", format: false
-  end
-
-  # For the tests
-  get "theme/static_view_test", format: false
-
   # For the statuses
   get "/notes", to: "notes#index", format: false
   get "/notes/page/:page", to: "notes#index", format: false
