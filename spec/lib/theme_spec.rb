@@ -11,8 +11,6 @@ RSpec.describe Theme, type: :model do
       theme = described_class.new("test", "test")
       expect(theme.layout("index")).to eq "layouts/default"
     end
-
-    # FIXME: Test pages layout
   end
 
   describe "#name" do

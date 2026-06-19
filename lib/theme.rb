@@ -8,10 +8,7 @@ class Theme
     @path = path
   end
 
-  def layout(action = :default)
-    if action.to_s == "view_page"
-      return "layouts/pages" if File.exist? "#{view_path}/layouts/pages.html.erb"
-    end
+  def layout(_action = :default)
     "layouts/default"
   end
 
