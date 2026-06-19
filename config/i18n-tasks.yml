@@ -46,6 +46,5 @@ ignore_missing:
 ## Consider these keys used:
 ignore_unused:
   - 'time.formats.*'
-  - 'layouts.default.designed_by'
   - 'date.*'
   - 'activerecord.errors.models.*'

@@ -841,7 +841,6 @@ ru:
     administration:
       powered_by: с гордостью работает на
     default:
-      designed_by: Designed by %{designed_by}
       powered_by_html: Powered by %{powered_by}
   notes:
     note:

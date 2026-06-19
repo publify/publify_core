@@ -807,7 +807,6 @@ he:
     administration:
       powered_by: is proudly powered by
     default:
-      designed_by: עוצב על ידי %{designed_by}
       powered_by_html: מופעל על ידי %{powered_by}
   notes:
     note:

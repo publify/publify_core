@@ -829,7 +829,6 @@ fr:
     administration:
       powered_by: Tourne fièrement sous
     default:
-      designed_by: Design par %{designed_by}
       powered_by_html: Propulsé par %{powered_by}
   notes:
     note:
