@@ -1,15 +1,8 @@
 # frozen_string_literal: true
 
 class ThemeController < ContentController
-  # Allow javascripts via Get request
-  skip_before_action :verify_authenticity_token, only: :javascripts
-
   def stylesheets
     render_theme_item(:stylesheets, params[:filename], "text/css; charset=utf-8")
-  end
-
-  def javascripts
-    render_theme_item(:javascripts, params[:filename], "text/javascript; charset=utf-8")
   end
 
   def images
@@ -44,8 +37,6 @@ class ThemeController < ContentController
 
   def mime_for(filename)
     case filename.downcase
-    when /\.js$/
-      "text/javascript"
     when /\.css$/
       "text/css"
     when /\.gif$/

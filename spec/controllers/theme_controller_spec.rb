@@ -14,15 +14,6 @@ RSpec.describe ThemeController, type: :controller do
       .to eq 'inline; filename="theme.css"; filename*=UTF-8\'\'theme.css'
   end
 
-  it "test_javascripts" do
-    get :javascripts, params: { filename: "theme.js" }
-    expect(response).to be_successful
-    expect(@response.media_type).to eq "text/javascript"
-    expect(@response.charset).to eq "utf-8"
-    expect(@response.headers["Content-Disposition"])
-      .to eq 'inline; filename="theme.js"; filename*=UTF-8\'\'theme.js'
-  end
-
   it "test_malicious_path" do
     get :stylesheets, params: { filename: "../../../config/database.yml" }
     expect(response).to be_not_found
