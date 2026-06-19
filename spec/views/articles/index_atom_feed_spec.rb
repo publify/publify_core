@@ -84,15 +84,15 @@ RSpec.describe "articles/index_atom_feed.atom.builder", type: :view do
 
       it "shows the body content if there is no excerpt" do
         render
-        expect(rendered_entry.content).to match(/public info/)
+        expect(rendered_entry.content).to include("public info")
         expect(rendered_entry.content).not_to match(/public info.*and more/m)
       end
 
       it "shows the excerpt but no body content, if there is an excerpt" do
         @article.excerpt = "excerpt"
         render
-        expect(rendered_entry.content).to match(/excerpt/)
-        expect(rendered_entry.content).not_to match(/public info/)
+        expect(rendered_entry.content).to include("excerpt")
+        expect(rendered_entry.content).not_to include("public info")
       end
 
       it "does not have a summary element in addition to the content element" do
@@ -112,11 +112,11 @@ RSpec.describe "articles/index_atom_feed.atom.builder", type: :view do
       end
 
       it "shows the body content in the feed" do
-        expect(rendered_entry.content).to match(/public info/)
+        expect(rendered_entry.content).to include("public info")
       end
 
       it "shows the RSS description in the feed" do
-        expect(rendered_entry.content).to match(/rss description/)
+        expect(rendered_entry.content).to include("rss description")
       end
     end
   end
@@ -146,7 +146,7 @@ RSpec.describe "articles/index_atom_feed.atom.builder", type: :view do
       end
 
       it "does not show any secret bits anywhere" do
-        expect(rendered).not_to match(/secret/)
+        expect(rendered).not_to include("secret")
       end
     end
 
@@ -165,7 +165,7 @@ RSpec.describe "articles/index_atom_feed.atom.builder", type: :view do
       end
 
       it "does not show any secret bits anywhere" do
-        expect(rendered).not_to match(/secret/)
+        expect(rendered).not_to include("secret")
       end
     end
   end

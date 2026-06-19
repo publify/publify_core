@@ -208,7 +208,7 @@ RSpec.describe BaseHelper, type: :helper do
       end
 
       it "returns a friendly error message" do
-        expect(render_sidebars).to match(/It seems something went wrong/)
+        expect(render_sidebars).to include("It seems something went wrong")
       end
     end
 
@@ -218,7 +218,7 @@ RSpec.describe BaseHelper, type: :helper do
       end
 
       it "renders the sidebar" do
-        expect(render_sidebars).to match(/Rendered/)
+        expect(render_sidebars).to include("Rendered")
       end
     end
   end
