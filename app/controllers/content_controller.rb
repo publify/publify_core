@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ContentController < BaseController
-  layout "default"
-
   private
 
   # TODO: Make this work for all content.

@@ -814,7 +814,7 @@ nl:
   layouts:
     administration:
       powered_by: wordt trots aangedreven door
-    default:
+    application:
       powered_by_html: Powered by %{powered_by}
   notes:
     note:

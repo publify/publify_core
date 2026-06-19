@@ -806,7 +806,7 @@ nb:
   layouts:
     administration:
       powered_by: drives stolt av
-    default:
+    application:
       powered_by_html: Drives av %{powered_by}
   notes:
     note:

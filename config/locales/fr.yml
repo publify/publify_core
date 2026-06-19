@@ -828,7 +828,7 @@ fr:
   layouts:
     administration:
       powered_by: Tourne fièrement sous
-    default:
+    application:
       powered_by_html: Propulsé par %{powered_by}
   notes:
     note:
