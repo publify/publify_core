@@ -336,8 +336,8 @@ RSpec.describe Admin::ArticlesController, type: :controller do
         expect(response).to render_template "edit"
         expect(assigns(:article)).not_to be_nil
         expect(assigns(:article)).to be_valid
-        expect(response.body).to match(/body/)
-        expect(response.body).to match(/extended content/)
+        expect(response.body).to include("body")
+        expect(response.body).to include("extended content")
       end
 
       it "correctly converts multi-word tags" do

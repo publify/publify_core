@@ -265,7 +265,7 @@ RSpec.describe Comment, type: :model do
   describe "#html" do
     it "renders email addresses in the body" do
       comment = build_stubbed(:comment, body: "foo@example.com")
-      expect(comment.html).to match(/mailto:/)
+      expect(comment.html).to include("mailto:")
     end
 
     it "returns an html_safe string" do
@@ -306,8 +306,8 @@ RSpec.describe Comment, type: :model do
 
           html = comment.html(:body)
 
-          expect(html).not_to match(/<img/)
-          expect(html).to match(%r{<b>foo</b>})
+          expect(html).not_to include("<img")
+          expect(html).to include("<b>foo</b>")
         end
       end
     end
@@ -321,8 +321,8 @@ RSpec.describe Comment, type: :model do
         result = comment.html
 
         aggregate_failures do
-          expect(result).to match(%r{<em>italic</em>})
-          expect(result).to match(%r{<strong>bold</strong>})
+          expect(result).to include("<em>italic</em>")
+          expect(result).to include("<strong>bold</strong>")
         end
       end
     end
