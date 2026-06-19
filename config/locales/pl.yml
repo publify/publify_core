@@ -840,7 +840,6 @@ pl:
     administration:
       powered_by: dumnie działa na
     default:
-      designed_by: Designed by %{designed_by}
       powered_by_html: Powered by %{powered_by}
   notes:
     note:

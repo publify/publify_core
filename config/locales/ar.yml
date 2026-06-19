@@ -845,7 +845,6 @@ ar:
     administration:
       powered_by: بفخر تُشغل بواسطة
     default:
-      designed_by: صُممت بواسطة %{designed_by}
       powered_by_html: مشغل بواسطة %{powered_by}
   notes:
     note:
