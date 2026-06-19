@@ -59,7 +59,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rails-controller-testing", "~> 1.0.1"
   s.add_development_dependency "rake-manifest", "~> 0.2.0"
   s.add_development_dependency "rspec-rails", "~> 7.1"
-  s.add_development_dependency "rubocop", "~> 1.86.1"
+  s.add_development_dependency "rubocop", "~> 1.87.0"
   s.add_development_dependency "rubocop-capybara", "~> 2.23.0"
   s.add_development_dependency "rubocop-factory_bot", "~> 2.28.0"
   s.add_development_dependency "rubocop-performance", "~> 1.26.1"
