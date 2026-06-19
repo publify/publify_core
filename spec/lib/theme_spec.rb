@@ -6,13 +6,6 @@ RSpec.describe Theme, type: :model do
   let(:blog) { build_stubbed(:blog) }
   let(:default_theme) { blog.current_theme }
 
-  describe "#layout" do
-    it 'returns "layouts/default" by default' do
-      theme = described_class.new("test", "test")
-      expect(theme.layout("index")).to eq "layouts/default"
-    end
-  end
-
   describe "#name" do
     it "returns the theme's name (default: plain)" do
       expect(default_theme.name).to eq "plain"

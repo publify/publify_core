@@ -2,7 +2,6 @@
 
 class TagsController < ContentController
   before_action :auto_discovery_feed, only: [:show, :index]
-  layout :theme_layout
 
   def index
     @tags = Tag.page(params[:page]).per(100)

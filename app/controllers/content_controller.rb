@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ContentController < BaseController
+  layout "default"
+
   private
 
   # TODO: Make this work for all content.
@@ -9,10 +11,6 @@ class ContentController < BaseController
       @auto_discovery_url_rss = opts.url_for(format: "rss", only_path: false)
       @auto_discovery_url_atom = opts.url_for(format: "atom", only_path: false)
     end
-  end
-
-  def theme_layout
-    this_blog.current_theme.layout(action_name)
   end
 
   def render_cached_xml(template, object)

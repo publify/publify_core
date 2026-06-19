@@ -6,8 +6,6 @@ class ArticlesController < ContentController
   before_action :login_required, only: [:preview, :preview_page]
   before_action :verify_config
 
-  layout :theme_layout, except: [:trackback]
-
   helper :"admin/base"
 
   def index

@@ -8,10 +8,6 @@ class Theme
     @path = path
   end
 
-  def layout(_action = :default)
-    "layouts/default"
-  end
-
   def description
     @description ||=
       begin
