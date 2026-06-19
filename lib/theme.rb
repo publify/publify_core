@@ -67,7 +67,7 @@ class Theme
   end
 
   def self.theme_from_path(path)
-    name = path.scan(/[-\w]+$/i).flatten.first
+    name = File.basename(path)
     new(name, path)
   end
 
