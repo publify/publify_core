@@ -14,6 +14,12 @@ module PublifyCore
       end
     end
 
+    initializer "publify_core.assets" do |app|
+      Theme.find_each do |theme|
+        app.config.assets.paths += theme.asset_paths
+      end
+    end
+
     initializer "publify_core.assets.precompile" do |app|
       app.config.assets.precompile += %w(
         publify.js
@@ -26,6 +32,9 @@ module PublifyCore
         spinner-blue.gif
         spinner.gif
       )
+      Theme.find_each do |theme|
+        app.config.assets.precompile += theme.assets
+      end
     end
   end
 end

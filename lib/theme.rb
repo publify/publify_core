@@ -5,7 +5,7 @@ class Theme
 
   def initialize(name, path)
     @name = name
-    @path = path
+    @path = Pathname.new path
   end
 
   def description
@@ -32,45 +32,71 @@ class Theme
     File.join(path, filename)
   end
 
-  # Find a theme, given the theme name
-  def self.find(name)
-    registered_themes[name]
+  def assets
+    list_assets("fonts", "*.*") +
+      list_assets("images", "*.*") +
+      list_assets("javascripts", "*.js") +
+      list_assets("stylesheets", "*.css")
   end
 
-  # List all themes
-  def self.find_all
-    registered_themes.values
+  def asset_paths
+    [
+      path.join("fonts"),
+      path.join("images"),
+      path.join("javascripts"),
+      path.join("stylesheets")
+    ]
   end
 
-  def self.register_theme(path)
-    theme = theme_from_path(path)
-    registered_themes[theme.name] = theme
+  private
+
+  def list_assets(type, glob)
+    dir = path.join type
+    dir.glob("#{name}/#{glob}").map { _1.relative_path_from(dir).to_s }
   end
 
-  def self.register_themes(themes_root)
-    search_theme_directory(themes_root).each do |path|
-      register_theme path
+  class << self
+    # Find a theme, given the theme name
+    def find(name)
+      registered_themes[name]
+    end
+
+    # List all themes
+    def find_all
+      registered_themes.values
+    end
+
+    def find_each
+      find_all.each { yield _1 }
+    end
+
+    def register_theme(path)
+      theme = theme_from_path(path)
+      registered_themes[theme.name] = theme
+    end
+
+    def register_themes(themes_root)
+      search_theme_directory(themes_root).each do |path|
+        register_theme path
+      end
+    end
+
+    private
+
+    def registered_themes
+      @registered_themes ||= {}
+    end
+
+    def theme_from_path(path)
+      name = File.basename(path)
+      new(name, path)
+    end
+
+    def search_theme_directory(themes_root)
+      glob = "#{themes_root}/[a-zA-Z0-9]*"
+      Dir.glob(glob).select do |file|
+        File.readable?("#{file}/about.markdown")
+      end.compact
     end
   end
-
-  # Private
-
-  def self.registered_themes
-    @registered_themes ||= {}
-  end
-
-  def self.theme_from_path(path)
-    name = File.basename(path)
-    new(name, path)
-  end
-
-  def self.search_theme_directory(themes_root)
-    glob = "#{themes_root}/[a-zA-Z0-9]*"
-    Dir.glob(glob).select do |file|
-      File.readable?("#{file}/about.markdown")
-    end.compact
-  end
-
-  private_class_method :search_theme_directory,
-                       :theme_from_path, :registered_themes
 end

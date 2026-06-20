@@ -28,13 +28,17 @@ module BaseHelper
   end
 
   def themeable_stylesheet_link_tag(name)
-    src = this_blog.current_theme.path + "/stylesheets/#{name}.css"
-    stylesheet_link_tag "/stylesheets/theme/#{name}.css" if File.exist? src
+    theme = this_blog.current_theme
+    src = theme.path.join("stylesheets", theme.name, "#{name}.css")
+
+    stylesheet_link_tag "#{theme.name}/#{name}.css" if File.exist? src
   end
 
   def themeable_javascript_include_tag(name)
-    src = this_blog.current_theme.path + "/javascripts/#{name}.js"
-    javascript_include_tag "/javascripts/theme/#{name}.js" if File.exist? src
+    theme = this_blog.current_theme
+    src = theme.path.join("javascripts", theme.name, "#{name}.js")
+
+    javascript_include_tag "#{theme.name}/#{name}.js" if File.exist? src
   end
 
   def render_to_string(...)
