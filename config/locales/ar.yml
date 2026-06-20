@@ -844,7 +844,7 @@ ar:
   layouts:
     administration:
       powered_by: بفخر تُشغل بواسطة
-    default:
+    application:
       powered_by_html: مشغل بواسطة %{powered_by}
   notes:
     note:

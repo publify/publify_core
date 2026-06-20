@@ -3,8 +3,6 @@
 class NotesController < ContentController
   require "json"
 
-  layout :theme_layout
-
   after_action :set_blog_infos
 
   def index

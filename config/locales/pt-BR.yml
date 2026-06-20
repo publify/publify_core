@@ -814,7 +814,7 @@ pt-BR:
   layouts:
     administration:
       powered_by: é orgulhosamente desenvolvido por
-    default:
+    application:
       powered_by_html: Powered by %{powered_by}
   notes:
     note:

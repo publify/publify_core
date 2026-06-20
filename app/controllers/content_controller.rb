@@ -11,10 +11,6 @@ class ContentController < BaseController
     end
   end
 
-  def theme_layout
-    this_blog.current_theme.layout(action_name)
-  end
-
   def render_cached_xml(template, object)
     feed = cache([controller_name, template, object]) do
       render_to_string template, layout: false

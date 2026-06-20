@@ -238,7 +238,7 @@ app/views/feedback/index.atom.builder
 app/views/feedback/index.rss.builder
 app/views/layouts/accounts.html.erb
 app/views/layouts/administration.html.erb
-app/views/layouts/default.html.erb
+app/views/layouts/application.html.erb
 app/views/layouts/editor.html.erb
 app/views/meta_sidebar/_content.html.erb
 app/views/notes/_note.html.erb

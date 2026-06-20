@@ -806,7 +806,7 @@ he:
   layouts:
     administration:
       powered_by: is proudly powered by
-    default:
+    application:
       powered_by_html: מופעל על ידי %{powered_by}
   notes:
     note:

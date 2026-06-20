@@ -810,7 +810,7 @@ en:
   layouts:
     administration:
       powered_by: is proudly powered by
-    default:
+    application:
       powered_by_html: Powered by %{powered_by}
   notes:
     note:
