@@ -76,7 +76,6 @@ app/controllers/setup_controller.rb
 app/controllers/tags_controller.rb
 app/controllers/text_controller.rb
 app/controllers/textfilter_controller.rb
-app/controllers/theme_controller.rb
 app/controllers/users/registrations_controller.rb
 app/controllers/xml_controller.rb
 app/helpers/admin/base_helper.rb
@@ -273,7 +272,6 @@ app/views/static_sidebar/_content.html.erb
 app/views/tag_sidebar/_content.html.erb
 app/views/tags/index.html.erb
 app/views/tags/show.html.erb
-app/views/theme/static_view_test.html.erb
 app/views/xml/_googlesitemap_item_article.googlesitemap.builder
 app/views/xml/_googlesitemap_item_category.googlesitemap.builder
 app/views/xml/_googlesitemap_item_page.googlesitemap.builder
@@ -394,6 +392,6 @@ lib/tasks/publify_core_tasks.rake
 lib/text_filter_plugin.rb
 lib/theme.rb
 themes/plain/about.markdown
-themes/plain/javascripts/theme.js
+themes/plain/javascripts/plain/theme.js
 themes/plain/preview.png
-themes/plain/stylesheets/theme.css
+themes/plain/stylesheets/plain/theme.css
