@@ -16,10 +16,7 @@ module PublifyCore
 
     initializer "publify_core.assets" do |app|
       Theme.find_each do |theme|
-        app.config.assets.paths << theme.path.join("fonts")
-        app.config.assets.paths << theme.path.join("images")
-        app.config.assets.paths << theme.path.join("javascripts")
-        app.config.assets.paths << theme.path.join("stylesheets")
+        app.config.assets.paths += theme.asset_paths
       end
     end
 
@@ -36,23 +33,7 @@ module PublifyCore
         spinner.gif
       )
       Theme.find_each do |theme|
-        path = theme.path
-
-        dir = path.join("fonts")
-        app.config.assets.precompile +=
-          dir.glob("#{theme.name}/*.*").map { _1.relative_path_from(dir).to_s }
-
-        dir = path.join("images")
-        app.config.assets.precompile +=
-          dir.glob("#{theme.name}/*.*").map { _1.relative_path_from(dir).to_s }
-
-        dir = path.join("javascripts")
-        app.config.assets.precompile +=
-          dir.glob("#{theme.name}/*.js").map { _1.relative_path_from(dir).to_s }
-
-        dir = path.join("stylesheets")
-        app.config.assets.precompile +=
-          dir.glob("#{theme.name}/*.css").map { _1.relative_path_from(dir).to_s }
+        app.config.assets.precompile += theme.assets
       end
     end
   end
