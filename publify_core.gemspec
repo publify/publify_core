@@ -67,7 +67,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rubocop-rspec", "~> 3.10.2"
   s.add_development_dependency "rubocop-rspec_rails", "~> 2.32.0"
   s.add_development_dependency "shoulda-matchers", "~> 7.0"
-  s.add_development_dependency "simplecov", "~> 1.0.0"
+  s.add_development_dependency "simplecov", "~> 1.1.1"
   s.add_development_dependency "sqlite3", "~> 2.9"
   s.add_development_dependency "timecop", "~> 0.9.1"
   s.add_development_dependency "webmock", "~> 3.3"
