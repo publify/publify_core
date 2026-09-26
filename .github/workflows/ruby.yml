@@ -30,6 +30,7 @@ jobs:
         ruby: ["3.2", "3.3", "3.4", "4.0"]
         gemfile:
           - rails_71
+          - rails_72
 
     env:
       BUNDLE_GEMFILE: gemfiles/${{ matrix.gemfile }}.gemfile
