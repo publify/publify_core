@@ -32,6 +32,8 @@ Gem::Specification.new do |s|
   s.add_dependency "html-pipeline", "~> 3.2"
   s.add_dependency "jquery-rails", ">= 4.5", "< 4.7"
   s.add_dependency "jquery-ui-rails", ">= 7", "< 9"
+  # Prevent use of json 3 which is incompatible with supported Rails versions
+  s.add_dependency "json", "~> 2.0"
   s.add_dependency "kaminari", ["~> 1.2", ">= 1.2.1"]
   s.add_dependency "marcel", ">= 1.0", "< 1.3"
   s.add_dependency "mini_magick", ["~> 4.9", ">= 4.9.4"]
