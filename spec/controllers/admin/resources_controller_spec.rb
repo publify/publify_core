@@ -239,6 +239,31 @@ RSpec.describe Admin::ResourcesController, type: :controller do
       end
     end
 
+    context "when mime detection detects file with html extension as plain" do
+      let(:upload) { file_upload("like_plain.html", "text/plain") }
+
+      it "does not create a new Resource" do
+        expect { post :upload, params: { upload: upload } }
+          .not_to change(Resource, :count)
+      end
+
+      it "warns the user that there is a mime type mismatch" do
+        post :upload, params: { upload: upload }
+        result = assigns(:up)
+        expect(result.errors[:upload])
+          .to contain_exactly("has MIME type mismatch",
+                              "can't be blank")
+      end
+
+      it "sets the flash to failure" do
+        post :upload, params: { upload: upload }
+        aggregate_failures do
+          expect(flash[:success]).to be_nil
+          expect(flash[:warning]).not_to be_nil
+        end
+      end
+    end
+
     context "when uploading nothing" do
       it "does not create a new Resource" do
         expect { post :upload }
