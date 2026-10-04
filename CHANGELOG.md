@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.0.4 / 2026-10-04
+
+* Refuse attempts to upload a file detected as text with an html extension ([#267] by [mvz])
+
+[#267]: https://github.com/publify/publify_core/pull/267
+
 ## 10.0.3 / 2025-03-28
 
 * Limit accepted parameters for Sidebar update in Admin ([#159] by [mvz])
