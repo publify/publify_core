@@ -29,7 +29,9 @@ jobs:
         ruby: ["2.7", "3.0", "3.1", "3.2"]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+      - name: Install GraphicsMagick
+        run: sudo apt-get install -y --no-install-recommends graphicsmagick
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -45,11 +47,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Install newer libyaml for consistent normalization
-        run: |
-          wget http://mirrors.kernel.org/ubuntu/pool/main/liby/libyaml/libyaml-0-2_0.2.5-1_amd64.deb
-          sudo apt-get install ./libyaml-0-2_0.2.5-1_amd64.deb
+      - uses: actions/checkout@v7
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
