@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Install GraphicsMagick
-        run: sudo apt-get install -y --no-install-recommends graphicsmagick
+        run: sudo apt-get install -y --no-install-recommends imagemagick
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
