@@ -105,10 +105,10 @@ Rails/ApplicationRecord:
 Rails/BulkChangeTable:
   Enabled: false
 
-# The manifest and i18n tasks do not need environment
+# The appraisal and i18n tasks do not need environment
 Rails/RakeEnvironment:
   Exclude:
-    - 'lib/tasks/manifest.rake'
+    - 'lib/tasks/appraisal.rake'
     - 'lib/tasks/i18n.rake'
 
 # Migrations should not do validations in general?

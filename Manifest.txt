@@ -389,6 +389,7 @@ lib/publify_time.rb
 lib/sidebar_field.rb
 lib/sidebar_registry.rb
 lib/spam_protection.rb
+lib/tasks/appraisal.rake
 lib/tasks/publify_core_tasks.rake
 lib/text_filter_plugin.rb
 lib/theme.rb
