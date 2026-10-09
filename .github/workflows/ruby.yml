@@ -31,6 +31,7 @@ jobs:
         gemfile:
           - rails_71
           - rails_72
+          - rails_80
 
     env:
       BUNDLE_GEMFILE: gemfiles/${{ matrix.gemfile }}.gemfile
