@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   # Prevent use of json 3 which is incompatible with supported Rails versions
   s.add_dependency "json", "~> 2.0"
   s.add_dependency "kaminari", ["~> 1.2", ">= 1.2.1"]
-  s.add_dependency "marcel", ">= 1.0", "< 1.3"
+  s.add_dependency "marcel", ">= 1.0", "< 2.2"
   s.add_dependency "mini_magick", ["~> 4.9", ">= 4.9.4"]
   # Force minimum nokogiri version to avoid security issues
   s.add_dependency "nokogiri", ">= 1.12.5"
