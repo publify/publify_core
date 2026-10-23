@@ -9,7 +9,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
     create(:blog)
   end
 
-  describe "index" do
+  describe "#index" do
     let(:publisher) { create(:user, :as_publisher) }
     let!(:article) { create(:article) }
 
@@ -148,7 +148,88 @@ RSpec.describe Admin::ArticlesController, type: :controller do
   end
 
   describe "#create" do
-    shared_examples_for "create action" do
+    context "as a publisher" do
+      let(:publisher) { create(:user, :as_publisher) }
+      let(:article_params) { { title: "posted via tests!", body: "a good boy" } }
+
+      before do
+        sign_in publisher
+        @user = publisher
+      end
+
+      it "creates an article" do
+        expect do
+          post :create, params: { article: article_params }
+        end.to change(Article, :count).by(1)
+      end
+
+      context "when publishing a new article now" do
+        before do
+          post :create, params: { article: article_params }
+        end
+
+        it { expect(response).to redirect_to(action: :index) }
+        it { expect(flash[:success]).to eq(I18n.t("admin.articles.create.success")) }
+
+        it "publishes the article" do
+          expect(assigns(:article)).to be_published
+        end
+
+        it "links the article to the signed-in user" do
+          expect(assigns(:article).user).to eq(publisher)
+        end
+      end
+
+      context "when creating a draft" do
+        let(:article_params) do
+          { title: "posted via tests!", body: "a good boy", draft: "true" }
+        end
+
+        before do
+          post :create, params: { article: article_params }
+        end
+
+        it "does not publish the article" do
+          expect(assigns(:article)).not_to be_published
+        end
+      end
+
+      context "writing for the future" do
+        let(:article_params) do
+          { title: "posted via tests!", body: "a good boy",
+            published_at: 1.hour.from_now.to_s }
+        end
+
+        before do
+          post :create, params: { article: article_params }
+        end
+
+        it "does not create a short url" do
+          expect(Redirect.count).to eq 0
+        end
+
+        it "creates a trigger to publish the article" do
+          expect(Trigger.count).to eq 1
+        end
+
+        it "does not publish the article" do
+          expect(assigns(:article)).to be_publication_pending
+        end
+
+        it "sets the publication time in the future" do
+          expect(assigns(:article).published_at).to be > 10.minutes.from_now
+        end
+      end
+    end
+
+    context "as an admin" do
+      let(:admin) { create(:user, :as_admin) }
+
+      before do
+        sign_in admin
+        @user = admin
+      end
+
       def base_article(options = {})
         { title: "posted via tests!",
           body: "A good body",
@@ -234,91 +315,17 @@ RSpec.describe Admin::ArticlesController, type: :controller do
         end
       end
 
-      describe "with an unrelated draft in the database" do
+      context "with an unrelated draft in the database" do
         before do
           @draft = create(:article, state: "draft")
         end
 
-        describe "saving new article as draft" do
-          it "leaves the original draft in existence" do
-            post :create, params: { article: base_article(draft: "save as draft") }
-            expect(assigns(:article).id).not_to eq(@draft.id)
-            expect(Article.find(@draft.id)).not_to be_nil
-          end
+        it "saves the article as a fresh draft" do
+          post :create, params: { article: base_article(draft: "save as draft") }
+          expect(assigns(:article).id).not_to eq(@draft.id)
+          expect(Article.find(@draft.id)).not_to be_nil
         end
       end
-    end
-
-    context "as a publisher" do
-      let(:publisher) { create(:user, :as_publisher) }
-      let(:article_params) { { title: "posted via tests!", body: "a good boy" } }
-
-      before do
-        sign_in publisher
-        @user = publisher
-      end
-
-      it "creates an article" do
-        expect do
-          post :create, params: { article: article_params }
-        end.to change(Article, :count).by(1)
-      end
-
-      context "classic" do
-        before { post :create, params: { article: article_params } }
-
-        it { expect(response).to redirect_to(action: :index) }
-        it { expect(flash[:success]).to eq(I18n.t("admin.articles.create.success")) }
-
-        it { expect(assigns(:article)).to be_published }
-        it { expect(assigns(:article).user).to eq(publisher) }
-
-        context "when doing a draft" do
-          let(:article_params) do
-            { title: "posted via tests!", body: "a good boy", draft: "true" }
-          end
-
-          it { expect(assigns(:article)).not_to be_published }
-        end
-      end
-
-      context "writing for the future" do
-        let(:article_params) do
-          { title: "posted via tests!", body: "a good boy",
-            published_at: 1.hour.from_now.to_s }
-        end
-
-        before do
-          post :create, params: { article: article_params }
-        end
-
-        it "does not create a short url" do
-          expect(Redirect.count).to eq 0
-        end
-
-        it "creates a trigger to publish the article" do
-          expect(Trigger.count).to eq 1
-        end
-
-        it "does not publish the article" do
-          expect(assigns(:article)).to be_publication_pending
-        end
-
-        it "sets the publication time in the future" do
-          expect(assigns(:article).published_at).to be > 10.minutes.from_now
-        end
-      end
-    end
-
-    context "as an admin" do
-      let(:admin) { create(:user, :as_admin) }
-
-      before do
-        sign_in admin
-        @user = admin
-      end
-
-      it_behaves_like "create action"
     end
   end
 
