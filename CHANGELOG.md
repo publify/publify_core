@@ -1,5 +1,20 @@
 # Changelog
 
+## 11.0.1 / 2026-10-23
+
+This release fixes a security issue where a user with publisher role can update
+any other user's articles.
+
+* Support Rails 8.0 ([#270] by [mvz])
+* Update `mini_magick` dependency ([#271] by [mvz])
+* Support Rails 8.1 ([#272] by [mvz])
+* Check user update rights in admin article create action ([#274] by [mvz])
+
+[#270]: https://github.com/publify/publify_core/pull/270
+[#271]: https://github.com/publify/publify_core/pull/271
+[#272]: https://github.com/publify/publify_core/pull/272
+[#274]: https://github.com/publify/publify_core/pull/274
+
 ## 11.0.0 / 2026-10-04
 
 This major release updates Rails to version 7.2, and updates supported Ruby
