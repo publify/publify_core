@@ -37,7 +37,10 @@ class Admin::ArticlesController < Admin::BaseController
 
   def create
     article_factory = Article::Factory.new(this_blog, current_user)
-    @article = article_factory.get_or_build_from(params[:article][:id])
+    id = params[:article][:id].presence
+    return if id && !access_granted?(id)
+
+    @article = article_factory.get_or_build_from(id)
 
     update_article_attributes
 
