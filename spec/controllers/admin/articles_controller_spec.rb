@@ -220,6 +220,40 @@ RSpec.describe Admin::ArticlesController, type: :controller do
           expect(assigns(:article).published_at).to be > 10.minutes.from_now
         end
       end
+
+      context "with an existing draft" do
+        before do
+          @draft = create(:article, body: "draft", state: "draft", user: publisher)
+          post :create,
+               params: { article: { id: @draft.id, body: "update", published: true } }
+        end
+
+        it "updates the draft" do
+          expect(Article.find(@draft.id).body).to eq "update"
+        end
+
+        it "makes the draft published" do
+          expect(Article.find(@draft.id)).to be_published
+        end
+      end
+
+      context "with an existing draft belonging to another user" do
+        let(:other_user) { create(:user, :as_publisher) }
+
+        before do
+          @draft = create(:article, body: "draft", state: "draft", user: other_user)
+          post :create,
+               params: { article: { id: @draft.id, body: "update", published: true } }
+        end
+
+        it "does not update the draft" do
+          @draft.reload
+          aggregate_failures do
+            expect(@draft.body).to eq "draft"
+            expect(@draft).not_to be_published
+          end
+        end
+      end
     end
 
     context "as an admin" do
@@ -563,6 +597,24 @@ RSpec.describe Admin::ArticlesController, type: :controller do
             expect(response).to redirect_to(action: "index")
             expect(article.reload.body).to eq(body)
             expect(other_article.reload.body).not_to eq(body)
+          end
+        end
+      end
+
+      context "with another user's article" do
+        let(:article) { create(:article, body: "another *textile* test") }
+        let(:body) { "not the *same* text" }
+
+        before do
+          put :update,
+              params: { id: article.id,
+                        article: { body: body } }
+        end
+
+        it "does not update the other user's article" do
+          aggregate_failures do
+            expect(response).to redirect_to(action: "index")
+            expect(article.reload.body).not_to eq(body)
           end
         end
       end
