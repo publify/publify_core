@@ -541,5 +541,13 @@ RSpec.describe ArticlesController, type: :controller do
                                                    password: "" } }
       end.to raise_error ActiveRecord::RecordNotFound
     end
+
+    it "handles missing parameters with a bad request response" do
+      create(:article)
+      expect do
+        post :check_password, xhr: true,
+                              params: {}
+      end.to raise_error ActionController::ParameterMissing
+    end
   end
 end
