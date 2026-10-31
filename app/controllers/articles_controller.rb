@@ -67,7 +67,7 @@ class ArticlesController < ContentController
   def check_password
     return unless request.xhr?
 
-    @article = Article.find(params[:article][:id])
+    @article = this_blog.published_articles.find(params[:article][:id])
     if @article.password == params[:article][:password]
       render partial: "articles/full_article_content", locals: { article: @article }
     else

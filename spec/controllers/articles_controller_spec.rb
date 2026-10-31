@@ -500,20 +500,46 @@ RSpec.describe ArticlesController, type: :controller do
 
   describe "#check_password" do
     render_views
-    let!(:article) { create(:article, password: "password") }
+    let(:protected_article) { create(:article, password: "password") }
+    let(:unprotected_article) { create(:article) }
+    let(:draft_article) { create(:unpublished_article) }
 
     it "shows article when given correct password" do
       post :check_password, xhr: true,
-                            params: { article: { id: article.id,
-                                                 password: article.password } }
-      expect(response.body).not_to have_field :article_password
+                            params: { article: { id: protected_article.id,
+                                                 password: protected_article.password } }
+      aggregate_failures do
+        expect(response.body).to have_text protected_article.body
+        expect(response.body).not_to have_field :article_password
+      end
     end
 
     it "shows password form when given incorrect password" do
       post :check_password, xhr: true,
-                            params: { article: { id: article.id,
+                            params: { article: { id: protected_article.id,
                                                  password: "wrong password" } }
-      expect(response.body).to have_field :article_password
+      aggregate_failures do
+        expect(response.body).not_to have_text protected_article.body
+        expect(response.body).to have_field :article_password
+      end
+    end
+
+    it "shows passwordless article when given blank password" do
+      post :check_password, xhr: true,
+                            params: { article: { id: unprotected_article.id,
+                                                 password: "" } }
+      aggregate_failures do
+        expect(response.body).to have_text unprotected_article.body
+        expect(response.body).not_to have_field :article_password
+      end
+    end
+
+    it "does not show passwordless draft article" do
+      expect do
+        post :check_password, xhr: true,
+                              params: { article: { id: draft_article.id,
+                                                   password: "" } }
+      end.to raise_error ActiveRecord::RecordNotFound
     end
   end
 end
