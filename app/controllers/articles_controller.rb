@@ -70,7 +70,10 @@ class ArticlesController < ContentController
     form_params = params.require(:article).permit(:id, :password)
 
     @article = this_blog.published_articles.find(form_params[:id])
-    if @article.password == form_params[:password]
+    expected = @article.password
+    actual = form_params[:password]
+
+    if ActiveSupport::SecurityUtils.secure_compare(expected, actual)
       render partial: "articles/full_article_content", locals: { article: @article }
     else
       render partial: "articles/password_form", locals: { article: @article }
