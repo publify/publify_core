@@ -1,5 +1,14 @@
 # Changelog
 
+## 11.0.2 / 2026-10-31
+
+This release fixes a security issue in the article password checker which could
+expose the contents of unpublished articles.
+
+* Only allow password check for published articles ([#275] by [mvz])
+
+[#275]: https://github.com/publify/publify_core/pull/275
+
 ## 11.0.1 / 2026-10-23
 
 This release fixes a security issue where a user with publisher role can update
