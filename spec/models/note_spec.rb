@@ -224,6 +224,32 @@ RSpec.describe Note, type: :model do
       it { expect(note.twitter_message.length).to eq(140) }
     end
 
+    context "with a message containing codes interpreted by the text filter" do
+      let(:tweet) do
+        "I am **not** a crook"
+      end
+      let(:expected_tweet) do
+        "I am not a crook (#{note.short_link})"
+      end
+
+      it "does not include the text filter codes" do
+        expect(note.twitter_message).to eq(expected_tweet)
+      end
+    end
+
+    context "with a message containing literal HTML encodings" do
+      let(:tweet) do
+        "In HTML, & is encoded as `&amp;`"
+      end
+      let(:expected_tweet) do
+        "In HTML, & is encoded as &amp; (#{note.short_link})"
+      end
+
+      it "contains the bare text representation of the note body" do
+        expect(note.twitter_message).to eq(expected_tweet)
+      end
+    end
+
     context "don't cut word" do
       let(:tweet) do
         "Le #mobprogramming c'est un peu comme faire un dojo sur une journée entière" \
