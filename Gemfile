@@ -12,7 +12,7 @@ group :development, :test do
   gem "puma", "~> 8.0"
   gem "rails-controller-testing", "~> 1.0"
   gem "rake-manifest", "~> 0.2.0"
-  gem "rspec-rails", "~> 7.1"
+  gem "rspec-rails", "~> 8.0"
   gem "rubocop", "~> 1.90"
   gem "rubocop-capybara", "~> 3.0"
   gem "rubocop-factory_bot", "~> 2.28"
